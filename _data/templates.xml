@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+  <template type="public" title="alert_post_questionthreads_best_post" version_id="1000070" version_string="1.0.0"><![CDATA[{{ phrase('questionthreads_alert_best_answer', {
+	'name': username_link($user, false, {'defaultname': $alert.username}),
+	'title': '<a href="' . link('posts', $content) . '" class="fauxBlockLink-blockLink">' . prefix('thread', $content.Thread) . $content.Thread.title . '</a>'
+}) }}]]></template>
+  <template type="public" title="alert_post_questionthreads_remove_best" version_id="1000070" version_string="1.0.0"><![CDATA[{{ phrase('questionthreads_alert_remove_best', {
+	'name': username_link($user, false, {'defaultname': $alert.username}),
+	'title': '<a href="' . link('posts', $content) . '" class="fauxBlockLink-blockLink">' . prefix('thread', $content.Thread) . $content.Thread.title . '</a>'
+}) }}]]></template>
+  <template type="public" title="alert_post_questionthreads_remove_best_a" version_id="1000070" version_string="1.0.0"><![CDATA[{{ phrase('questionthreads_alert_remove_best_a', {
+	'name': username_link($user, false, {'defaultname': $alert.username}),
+	'title': '<a href="' . link('posts', $content) . '" class="fauxBlockLink-blockLink">' . prefix('thread', $content.Thread) . $content.Thread.title . '</a>'
+}) }}]]></template>
+  <template type="public" title="alert_thread_questionthreads_solved" version_id="1000070" version_string="1.0.0"><![CDATA[{{ phrase('questionthreads_alert_solved', {
+	'name': username_link($user, false, {'defaultname': $alert.username}),
+	'title': '<a href="' . link('threads', $content) . '" class="fauxBlockLink-blockLink">' . prefix('thread', $thread) . $content.title . '</a>'
+}) }}]]></template>
+  <template type="public" title="alert_thread_questionthreads_unsolved" version_id="1000070" version_string="1.0.0"><![CDATA[{{ phrase('questionthreads_alert_unsolved', {
+	'name': username_link($user, false, {'defaultname': $alert.username}),
+	'title': '<a href="' . link('threads', $content) . '" class="fauxBlockLink-blockLink">' . prefix('thread', $thread) . $content.title . '</a>'
+}) }}]]></template>
+  <template type="public" title="questionthreads.less" version_id="1000070" version_string="1.0.0"><![CDATA[/* ===================================================================================== */
+/* Indicator */
+/* ===================================================================================== */
+.questionthreads-indicator {
+	display: inline-block;
+	
+	width: 10px;
+	height: 10px;
+	
+	margin-right: 5px;
+	
+	border: 1px solid;
+	
+	/* Shape */
+	& when (@xf-questionthreads_indicatorShape = "circle") {
+		border-radius: 50%;
+	}
+	& when (@xf-questionthreads_indicatorShape = "square") {
+		border-radius: 0;
+	}
+	
+	/* Colors */
+	&.questionthreads-solved {
+		background: @xf-questionthreads_indicatorSolvedColor;
+		border-color: @xf-questionthreads_indicatorSolvedColor - #2C2C2C;
+	}
+	
+	&.questionthreads-unsolved {
+		background: @xf-questionthreads_indicatorUnsolvedColor;
+		border-color: @xf-questionthreads_indicatorUnsolvedColor - #2C2C2C;
+	}
+	
+	/* Sizes */
+	&.questionthreads-big {
+		width: 12px;
+		height: 12px;
+	}
+}
+
+/* ===================================================================================== */
+/* Best answer icon link */
+/* ===================================================================================== */
+a.questionthreads-best-answer-icon-link {
+	font-size: 90%;
+	color: @xf-questionthreads_indicatorSolvedColor - #181818;
+	margin-right: 2px;
+	
+	&:before {
+		.m-faBase();
+		.m-faContent(@fa-var-diamond, 1.1em);
+	}
+	
+	&:hover {
+		color: @xf-questionthreads_indicatorSolvedColor - #2C2C2C;
+	}
+}
+
+/* ===================================================================================== */
+/* Best answer post */
+/* ===================================================================================== */
+.questionthreads-best-answer {
+	/* Message area */
+	&.questionthreads-message {
+		background: @xf-questionthreads_bestAnswerMessageBg;
+	}
+	
+	/* User area */
+	&.questionthreads-user when (@xf-questionthreads_isStylingBestAnswerUserBg = 1) {
+		background: @xf-questionthreads_bestAnswerUserBg;
+	}
+	
+	/* Arrow pointing form message area to user area */
+	&.questionthreads-user .message-userArrow:after {
+		border-right-color: @xf-questionthreads_bestAnswerMessageBg;
+	}
+}
+
+/* Arrow pointing form message area to user area (small layout) */
+@media (max-width: @xf-messageSingleColumnWidth) {
+	.questionthreads-best-answer.questionthreads-user .message-userArrow:after {
+		border-right-color: transparent;
+		border-bottom-color: @xf-questionthreads_bestAnswerMessageBg;
+	}
+}
+
+/* ===================================================================================== */
+/* Solve/Unsolve action button */
+/* ===================================================================================== */
+a.questionthreads-solve-action-button {
+	background: @xf-questionthreads_indicatorSolvedColor - #0D0D0D;
+	border-left-color: @xf-questionthreads_indicatorSolvedColor - #181818;
+	border-bottom-color: @xf-questionthreads_indicatorSolvedColor - #181818;
+	border-right-color: @xf-questionthreads_indicatorSolvedColor - #0F0F0F;
+	border-top-color: @xf-questionthreads_indicatorSolvedColor - #0F0F0F;
+	
+	&:hover, &:focus {
+		background: @xf-questionthreads_indicatorSolvedColor - #232323 !important;
+	}
+}
+
+a.questionthreads-unsolve-action-button {
+	background: @xf-questionthreads_indicatorUnsolvedColor - #0D0D0D;
+	border-left-color: @xf-questionthreads_indicatorUnsolvedColor - #181818;
+	border-bottom-color: @xf-questionthreads_indicatorUnsolvedColor - #181818;
+	border-right-color: @xf-questionthreads_indicatorUnsolvedColor - #0F0F0F;
+	border-top-color: @xf-questionthreads_indicatorUnsolvedColor - #0F0F0F;
+	
+	&:hover, &:focus {
+		background: @xf-questionthreads_indicatorUnsolvedColor - #232323 !important;
+	}
+}
+
+/* ===================================================================================== */
+/* Best answer mark/unmark buttons */
+/* ===================================================================================== */
+a.questionthreads-mark-best {
+	color: @xf-questionthreads_indicatorSolvedColor - #232323;
+}
+
+a.questionthreads-unmark-best {
+	color: @xf-questionthreads_indicatorUnsolvedColor - #232323;
+}]]></template>
+  <template type="admin" title="widget_def_options_questionthreads_unsolved" version_id="1000070" version_string="1.0.0"><![CDATA[<hr class="formRowSep" />
+
+<xf:numberboxrow name="options[limit]" value="{$options.limit}" min="1"
+	label="{{ phrase('maximum_entries') }}" />
+
+<xf:radiorow name="options[style]" value="{{ $options.style ?: 'simple' }}"
+	label="{{ phrase('display_style') }}">
+
+	<xf:option value="simple"
+		label="{{ phrase('simple') }}"
+		hint="{{ phrase('widget_display_simple_explain') }}" />
+	<xf:option value="full"
+		label="{{ phrase('full') }}"
+		hint="{{ phrase('new_threads_display_style_full_explain') }}" />
+	<xf:option value="expanded"
+		label="{{ phrase('expanded') }}"
+		hint="{{ phrase('new_threads_display_style_expanded_explain') }}" />
+</xf:radiorow>
+
+<xf:selectrow name="options[node_ids][]" value="{{ $options.node_ids ?: '' }}" multiple="multiple" size="7"
+	label="{{ phrase('forum_limit') }}"
+	explain="{{ phrase('only_include_threads_in_selected_forums') }}">
+
+	<xf:option value="">{{ phrase('all_forums') }}</xf:option>
+	<xf:foreach loop="$nodeTree.getFlattened(0)" value="$treeEntry">
+		<xf:option value="{$treeEntry.record.node_id}" disabled="{{ $treeEntry.record.node_type_id != 'Forum' }}">
+			{{ repeat('&nbsp;&nbsp;', $treeEntry.depth)|raw }} {$treeEntry.record.title}
+		</xf:option>
+	</xf:foreach>
+</xf:selectrow>]]></template>
+</templates>

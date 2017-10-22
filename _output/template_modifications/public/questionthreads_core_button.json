@@ -1,0 +1,9 @@
+{
+    "template": "core_button.less",
+    "description": "Adding solve/unsolve icons to action buttons",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "&--add          { .m-buttonIcon(@fa-var-plus-square, .79em); }",
+    "replace": "/* Questionthreads icons */\n\n&--questionthreads-question\t\t  { .m-buttonIcon(@fa-var-question, .5em); }\n&--questionthreads-solve          { .m-buttonIcon(@fa-var-check, .79em); }\n&--questionthreads-unsolve        { .m-buttonIcon(@fa-var-times, .79em); }\n\n$0"
+}

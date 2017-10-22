@@ -1,0 +1,13 @@
+{
+    "group_name": "questionThreadsColor",
+    "title": "Indicator shape",
+    "description": "",
+    "property_type": "value",
+    "css_components": [],
+    "value_type": "radio",
+    "value_parameters": "\"circle\"=Circle\n\"square\"=Square",
+    "depends_on": "",
+    "value_group": "indicator",
+    "property_value": "\"circle\"",
+    "display_order": 0
+}

@@ -1,0 +1,1 @@
+Background color for best answer user area (where avatar, username and user info are located).

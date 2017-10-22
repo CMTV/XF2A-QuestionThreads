@@ -1,0 +1,1 @@
+{name} marked you question {title} as solved.

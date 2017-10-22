@@ -1,0 +1,242 @@
+{
+    "permission.forum_questionthreads_solve.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "fdc99e7022e129eb179aeef47df53f44"
+    },
+    "questionthreads_activity_new_thread.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "0292b466fad4f1acaa18be8c82c77f3b"
+    },
+    "questionthreads_activity_reply_thread.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "f53005d43f91fc064a9d5f2d4409db5c"
+    },
+    "questionthreads_alert_best_answer.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "cf413486f071a6edcee565eac3ee580b"
+    },
+    "questionthreads_alert_remove_best.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "f6d38444a5e94838fa8854d47cb4153e"
+    },
+    "questionthreads_alert_remove_best_a.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "40c20eaf728d14719b2504056091fedb"
+    },
+    "questionthreads_alert_solved.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "c931e47133a84da1b1dfd9ae015d70ce"
+    },
+    "questionthreads_alert_unsolved.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "b0ffeef7c3305bb0c6b47fe9de1107bb"
+    },
+    "questionthreads_already_has_best_post.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "c3308b3586be36769627d7eae394404d"
+    },
+    "questionthreads_already_solved.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "a03deb7e819586abed278a0abd64b1af"
+    },
+    "questionthreads_already_unsolved.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "f329bbffeee3e22d2d8693034926a6f3"
+    },
+    "questionthreads_button_solve.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "b937137e112c379c97a75a1c9d7d877c"
+    },
+    "questionthreads_button_unsolve.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "f79f2b14a15ce897193a86d1cb511275"
+    },
+    "questionthreads_first_post_cant_be_best.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "88155a33b5f1885f134eff8ae4de5662"
+    },
+    "questionthreads_is_question.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "1d62e3598e2df69e4e1f0ae2918b4674"
+    },
+    "questionthreads_is_question_explain.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "e1d942e33299ebadcc9ccfc60ff9e480"
+    },
+    "questionthreads_link_to_best_answer.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "0417e2046c98af359e95482970b5c597"
+    },
+    "questionthreads_no_best_post.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "4e9bd7d2f48961e010ffbde605051ab4"
+    },
+    "questionthreads_not_a_question.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "8f8dd20e1722ed5c6affe61080f78384"
+    },
+    "questionthreads_post_question.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "ced9b0806610b5ceb05ee54d9a387819"
+    },
+    "questionthreads_questions.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "6ce3bdc39e544725038e0e87b771db1e"
+    },
+    "questionthreads_questions_forum_hint.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "f2d27a854840c0f8c65fbf19337016c0"
+    },
+    "questionthreads_questions_forum_label.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "b8928a25379bd338448e8eb10033f62d"
+    },
+    "questionthreads_solved_indicator_solved.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "2bed4ed6d6d4b10a818539fb0be36181"
+    },
+    "questionthreads_solved_indicator_unsolved.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "6deb551294514de0a285e1557bcefd8d"
+    },
+    "questionthreads_thread_prompt.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "0fd752f7efb35afff04e222511aeae22"
+    },
+    "style_prop.questionthreads_bestAnswerMessageBg.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "de5cf80dc0bcebb13c8f2b4e5d465c0d"
+    },
+    "style_prop.questionthreads_bestAnswerUserBg.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "6a44cdf04e608d7d8cd44d3dbaf4f82c"
+    },
+    "style_prop.questionthreads_indicatorShape.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "6978635cd5f2bbeb9c970027824413a2"
+    },
+    "style_prop.questionthreads_indicatorSolvedColor.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "bf6ad3d23548048a8ce46d31acc55ceb"
+    },
+    "style_prop.questionthreads_indicatorUnsolvedColor.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "3a12ba7929950376f77e6f78df0dd0a7"
+    },
+    "style_prop.questionthreads_isStylingBestAnswerUserBg.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "4ea8ee566d333b7b343e959b934ef72f"
+    },
+    "style_prop_desc.questionthreads_bestAnswerMessageBg.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "1fdc1115cbe0eb14c3db039fd72b1ca4"
+    },
+    "style_prop_desc.questionthreads_bestAnswerUserBg.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "0b2cd1d7d8e9a4231dc16d7ea5a77135"
+    },
+    "style_prop_desc.questionthreads_indicatorShape.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "style_prop_desc.questionthreads_indicatorSolvedColor.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "75a761005f225e30460d8ca3c748b869"
+    },
+    "style_prop_desc.questionthreads_indicatorUnsolvedColor.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "0674b81513e51439b0971c2d65cb8983"
+    },
+    "style_prop_desc.questionthreads_isStylingBestAnswerUserBg.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "3a20e07dd8efc97cd8901d6e6bd8e696"
+    },
+    "style_prop_group.questionThreadsColor.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "de5fcaa095ddc48dae2e3f97013a6cb7"
+    },
+    "style_prop_group_desc.questionThreadsColor.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "5f97d3d72ca19861491ace6effd58bb8"
+    }
+}

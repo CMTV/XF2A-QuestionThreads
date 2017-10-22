@@ -1,0 +1,9 @@
+{
+    "template": "node_list.less",
+    "description": "Changing node icons for questions only forums",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": ".node--forum &:before,\n\t\t.node--category &:before\n\t\t{\n\t\t\t.m-faContent(@fa-var-comments, 1em);\n\t\t}",
+    "replace": "$0\n\n.node--forum.questionthreads_questions_forum &:before,\n{\n\t.m-faContent(@fa-var-question-circle, 1em);\n}"
+}

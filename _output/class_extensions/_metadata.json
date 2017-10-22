@@ -1,0 +1,23 @@
+{
+    "XF-Admin-Controller-Forum_QuestionThreads-XF-Admin-Controller-Forum.json": {
+        "hash": "bc04b2b1e6e289ef95ffcd0a2e9f123c"
+    },
+    "XF-Entity-Post_QuestionThreads-XF-Entity-Post.json": {
+        "hash": "c7d5fd44fba25f61ab3573c1cdef9d5a"
+    },
+    "XF-Entity-Thread_QuestionThreads-XF-Entity-Thread.json": {
+        "hash": "b1a2ac25f48a248ff75ef82dfa15a33d"
+    },
+    "XF-Pub-Controller-Forum_QuestionThreads-XF-Pub-Controller-Forum.json": {
+        "hash": "61e46bef71e1d93725dcb598595f17d2"
+    },
+    "XF-Pub-Controller-Post_QuestionThreads-XF-Pub-Controller-Post.json": {
+        "hash": "a18c3fac3b4234bffd2196cb92e0dde1"
+    },
+    "XF-Pub-Controller-Thread_QuestionThreads-XF-Pub-Controller-Thread.json": {
+        "hash": "75da1f0d1ea3c422107124c847fbb9ed"
+    },
+    "XF-Service-Thread-Creator_QuestionThreads-XF-Service-Thread-Creator.json": {
+        "hash": "000feb1efe9d2186a9fcae64ffb3313d"
+    }
+}

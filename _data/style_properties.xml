@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style_properties>
+  <style_property property_name="questionthreads_bestAnswerMessageBg" group_name="questionThreadsColor" title="Best answer message background color" description="Best answer post body background color" property_type="value" value_type="color" value_group="bestAnswer" display_order="300">
+    <value>"#DEFFE2"</value>
+  </style_property>
+  <style_property property_name="questionthreads_bestAnswerUserBg" group_name="questionThreadsColor" title="Best answer user area background color" description="Background color for best answer user area (where avatar, username and user info are located)." property_type="value" value_type="color" depends_on="questionthreads_isStylingBestAnswerUserBg" value_group="bestAnswer" display_order="500">
+    <value>"#e9fbea"</value>
+  </style_property>
+  <style_property property_name="questionthreads_indicatorShape" group_name="questionThreadsColor" title="Indicator shape" property_type="value" value_type="radio" value_group="indicator" display_order="0">
+    <value_parameters>"circle"=Circle
+"square"=Square</value_parameters>
+    <value>"\"circle\""</value>
+  </style_property>
+  <style_property property_name="questionthreads_indicatorSolvedColor" group_name="questionThreadsColor" title="Solved indicator color" description="Color for indicator that appears before question title and represents &lt;strong&gt;solved&lt;/strong&gt; questions." property_type="value" value_type="color" value_group="indicator" display_order="100">
+    <value>"#00CD18"</value>
+  </style_property>
+  <style_property property_name="questionthreads_indicatorUnsolvedColor" group_name="questionThreadsColor" title="Unsolved indicator color" description="Color for indicator that appears before question title and represents &lt;strong&gt;unsolved&lt;/strong&gt; questions." property_type="value" value_type="color" value_group="indicator" display_order="200">
+    <value>"#FF0000"</value>
+  </style_property>
+  <style_property property_name="questionthreads_isStylingBestAnswerUserBg" group_name="questionThreadsColor" title="Custom best answer user area background" description="If enabled, allows you to set CSS background property for best answer user area (where avatar, username and user info are located)." property_type="value" value_type="boolean" value_group="bestAnswer" display_order="400">
+    <value>0</value>
+  </style_property>
+</style_properties>

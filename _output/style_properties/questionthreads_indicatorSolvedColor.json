@@ -1,0 +1,13 @@
+{
+    "group_name": "questionThreadsColor",
+    "title": "Solved indicator color",
+    "description": "Color for indicator that appears before question title and represents <strong>solved</strong> questions.",
+    "property_type": "value",
+    "css_components": [],
+    "value_type": "color",
+    "value_parameters": "",
+    "depends_on": "",
+    "value_group": "indicator",
+    "property_value": "#00CD18",
+    "display_order": 100
+}

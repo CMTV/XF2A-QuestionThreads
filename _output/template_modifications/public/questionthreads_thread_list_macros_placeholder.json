@@ -1,0 +1,9 @@
+{
+    "template": "thread_list_macros",
+    "description": "Changing placeholder for fast question creation form",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<xf:prefixinput maxlength=\"{{ max_length('XF:Thread', 'title') }}\"\n\t\t\t\t\t\tplaceholder=\"{$forum.thread_prompt}\"\n\t\t\t\t\t\ttitle=\"{{ phrase('post_new_thread_in_this_forum') }}\"\n\t\t\t\t\t\tprefix-value=\"{$forum.default_prefix_id}\"\n\t\t\t\t\t\ttype=\"thread\"\n\t\t\t\t\t\tprefixes=\"{{ $forum.getUsablePrefixes() }}\"\n\t\t\t\t\t\tdata-xf-init=\"tooltip\"\n\t\t\t\t\t\trows=\"1\"/>",
+    "replace": "<xf:if is=\"$forum.questionthreads_forum\">\n\t<xf:prefixinput maxlength=\"{{ max_length('XF:Thread', 'title') }}\"\n\t\t\t\t\tplaceholder=\"{{ phrase('questionthreads_thread_prompt') }}\"\n\t\t\t\t\ttitle=\"{{ phrase('post_new_thread_in_this_forum') }}\"\n\t\t\t\t\tprefix-value=\"{$forum.default_prefix_id}\"\n\t\t\t\t\ttype=\"thread\"\n\t\t\t\t\tprefixes=\"{{ $forum.getUsablePrefixes() }}\"\n\t\t\t\t\tdata-xf-init=\"tooltip\"\n\t\t\t\t\trows=\"1\"/>\n\t<xf:else />\n\t$0\n</xf:if>"
+}

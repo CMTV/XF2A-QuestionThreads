@@ -1,0 +1,9 @@
+{
+    "template": "thread_list_macros",
+    "description": "Adding style to question thread items",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<xf:css src=\"structured_list.less\" />",
+    "replace": "$0\n<xf:css src=\"questionthreads.less\" />"
+}

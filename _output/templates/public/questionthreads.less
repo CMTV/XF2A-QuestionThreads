@@ -1,0 +1,122 @@
+/* ===================================================================================== */
+/* Indicator */
+/* ===================================================================================== */
+.questionthreads-indicator {
+	display: inline-block;
+	
+	width: 10px;
+	height: 10px;
+	
+	margin-right: 5px;
+	
+	border: 1px solid;
+	
+	/* Shape */
+	& when (@xf-questionthreads_indicatorShape = "circle") {
+		border-radius: 50%;
+	}
+	& when (@xf-questionthreads_indicatorShape = "square") {
+		border-radius: 0;
+	}
+	
+	/* Colors */
+	&.questionthreads-solved {
+		background: @xf-questionthreads_indicatorSolvedColor;
+		border-color: @xf-questionthreads_indicatorSolvedColor - #2C2C2C;
+	}
+	
+	&.questionthreads-unsolved {
+		background: @xf-questionthreads_indicatorUnsolvedColor;
+		border-color: @xf-questionthreads_indicatorUnsolvedColor - #2C2C2C;
+	}
+	
+	/* Sizes */
+	&.questionthreads-big {
+		width: 12px;
+		height: 12px;
+	}
+}
+
+/* ===================================================================================== */
+/* Best answer icon link */
+/* ===================================================================================== */
+a.questionthreads-best-answer-icon-link {
+	font-size: 90%;
+	color: @xf-questionthreads_indicatorSolvedColor - #181818;
+	margin-right: 2px;
+	
+	&:before {
+		.m-faBase();
+		.m-faContent(@fa-var-diamond, 1.1em);
+	}
+	
+	&:hover {
+		color: @xf-questionthreads_indicatorSolvedColor - #2C2C2C;
+	}
+}
+
+/* ===================================================================================== */
+/* Best answer post */
+/* ===================================================================================== */
+.questionthreads-best-answer {
+	/* Message area */
+	&.questionthreads-message {
+		background: @xf-questionthreads_bestAnswerMessageBg;
+	}
+	
+	/* User area */
+	&.questionthreads-user when (@xf-questionthreads_isStylingBestAnswerUserBg = 1) {
+		background: @xf-questionthreads_bestAnswerUserBg;
+	}
+	
+	/* Arrow pointing form message area to user area */
+	&.questionthreads-user .message-userArrow:after {
+		border-right-color: @xf-questionthreads_bestAnswerMessageBg;
+	}
+}
+
+/* Arrow pointing form message area to user area (small layout) */
+@media (max-width: @xf-messageSingleColumnWidth) {
+	.questionthreads-best-answer.questionthreads-user .message-userArrow:after {
+		border-right-color: transparent;
+		border-bottom-color: @xf-questionthreads_bestAnswerMessageBg;
+	}
+}
+
+/* ===================================================================================== */
+/* Solve/Unsolve action button */
+/* ===================================================================================== */
+a.questionthreads-solve-action-button {
+	background: @xf-questionthreads_indicatorSolvedColor - #0D0D0D;
+	border-left-color: @xf-questionthreads_indicatorSolvedColor - #181818;
+	border-bottom-color: @xf-questionthreads_indicatorSolvedColor - #181818;
+	border-right-color: @xf-questionthreads_indicatorSolvedColor - #0F0F0F;
+	border-top-color: @xf-questionthreads_indicatorSolvedColor - #0F0F0F;
+	
+	&:hover, &:focus {
+		background: @xf-questionthreads_indicatorSolvedColor - #232323 !important;
+	}
+}
+
+a.questionthreads-unsolve-action-button {
+	background: @xf-questionthreads_indicatorUnsolvedColor - #0D0D0D;
+	border-left-color: @xf-questionthreads_indicatorUnsolvedColor - #181818;
+	border-bottom-color: @xf-questionthreads_indicatorUnsolvedColor - #181818;
+	border-right-color: @xf-questionthreads_indicatorUnsolvedColor - #0F0F0F;
+	border-top-color: @xf-questionthreads_indicatorUnsolvedColor - #0F0F0F;
+	
+	&:hover, &:focus {
+		background: @xf-questionthreads_indicatorUnsolvedColor - #232323 !important;
+	}
+}
+
+/* ===================================================================================== */
+/* Best answer mark/unmark buttons */
+/* ===================================================================================== */
+a.questionthreads-mark-best {
+	color: @xf-questionthreads_indicatorSolvedColor - #232323;
+}
+
+a.questionthreads-unmark-best {
+	color: @xf-questionthreads_indicatorUnsolvedColor - #232323;
+}

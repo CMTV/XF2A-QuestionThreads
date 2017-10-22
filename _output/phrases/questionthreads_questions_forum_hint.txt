@@ -1,0 +1,1 @@
+If enabled, any new threads posted in this forum will be automatically marked as questions.

@@ -1,0 +1,9 @@
+{
+    "template": "search_result_thread",
+    "description": "Adding solved-indicator and best answer link before thread title in search results page",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<h3 class=\"contentRow-title\">",
+    "replace": "$0\n\n<xf:if is=\"$thread.questionthreads_is_question\">\n\t<xf:if is=\"$thread.questionthreads_is_solved\">\n\t\t<div title=\"{{ phrase('questionthreads_solved_indicator_solved') }}\" class=\"questionthreads-indicator questionthreads-solved\"></div>\n\t<xf:else />\n\t\t<div title=\"{{ phrase('questionthreads_solved_indicator_unsolved') }}\" class=\"questionthreads-indicator questionthreads-unsolved\"></div>\n\t</xf:if>\n\t\n\t<xf:if is=\"$thread.questionthreads_best_post\">\n\t\t<a title=\"{{ phrase('questionthreads_link_to_best_answer') }}\" class=\"questionthreads-best-answer-icon-link\" href=\"{{ link('threads/post', $thread, {'post_id': $thread.questionthreads_best_post}) }}\"></a>\n\t</xf:if>\n</xf:if>"
+}

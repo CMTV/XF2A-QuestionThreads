@@ -1,0 +1,9 @@
+{
+    "template": "forum_post_thread",
+    "description": "Adding \"Is question\" option when creating a new thread",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<xf:macro template=\"helper_thread_options\" name=\"thread_status\" arg-thread=\"{$thread}\" />\n\t\t\t\t</xf:if>",
+    "replace": "<xf:if is=\"!$forum.questionthreads_forum\">\n\t<xf:checkboxrow label=\"{{ phrase('questionthreads_is_question') }}\">\n\t\t<xf:option name=\"questionthreads_is_question\" selected=\"false\">{{ phrase('questionthreads_is_question_explain') }}</xf:option>\n\t</xf:checkboxrow>\n</xf:if>\n\n$0"
+}
