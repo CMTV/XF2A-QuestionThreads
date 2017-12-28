@@ -24,4 +24,5 @@ namespace QuestionThreads\XF\Pub\Controller
 namespace QuestionThreads\XF\Service\Thread
 {
 	class XFCP_Creator extends \XF\Service\Thread\Creator {}
+	class XFCP_Editor extends \XF\Service\Thread\Editor {}
 }

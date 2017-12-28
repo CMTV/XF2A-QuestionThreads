@@ -35,14 +35,24 @@ class Setup extends AbstractSetup
         {
             $table->addColumn('questionthreads_is_question', 'tinyInt')->setDefault(0);
             $table->addColumn('questionthreads_is_solved', 'tinyInt')->setDefault(0);
-            $table->addColumn('questionthreads_best_post', 'int');
+            $table->addColumn('questionthreads_best_post', 'int')->setDefault(0);
         });
+    }
+
+    /**
+     * Removing possible running addon-related running jobs
+     */
+    public function uninstallStep1()
+    {
+        $db = $this->app->db();
+        $query = "DELETE FROM xf_job WHERE `execute_class` LIKE 'QuestionThreads:%'";
+        $db->query($query);
     }
 
     /**
      * Dropping 'questionthreads_forum' column in 'xf_forum' table
      */
-    public function uninstallStep1()
+    public function uninstallStep2()
     {
         $this->schemaManager()->alterTable('xf_forum', function(Alter $table)
         {
@@ -54,11 +64,21 @@ class Setup extends AbstractSetup
      * Dropping 'questionthreads_is_question', 'questionthreads_is_solved' and 'questionthreads_best_post'
      * columns in 'xf_thread' table
      */
-    public function uninstallStep2()
+    public function uninstallStep3()
     {
         $this->schemaManager()->alterTable('xf_thread', function(Alter $table)
         {
             $table->dropColumns(['questionthreads_is_question', 'questionthreads_is_solved', 'questionthreads_best_post']);
         });
+    }
+
+    /**
+     * Removing redundant alerts
+     */
+    public function uninstallStep4()
+    {
+        $db = $this->app->db();
+        $query = "DELETE FROM xf_user_alert WHERE `action` LIKE 'questionthreads\_%'";
+        $db->query($query);
     }
 }

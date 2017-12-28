@@ -1,1 +1,1 @@
-{name} marked your answer to the question {title} as "Best answer"!
+{name} marked the answer to the question {title} as "Best answer".

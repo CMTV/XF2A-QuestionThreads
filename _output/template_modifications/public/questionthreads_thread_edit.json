@@ -1,0 +1,9 @@
+{
+    "template": "thread_edit",
+    "description": "Adding \"Is question\" option when editing existing thread",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<xf:macro template=\"helper_thread_options\" name=\"thread_status\" arg-thread=\"{$thread}\" />",
+    "replace": "$0\n\n<xf:if is=\"!$forum.questionthreads_forum\">\n\t<xf:checkboxrow label=\"{{ phrase('questionthreads_is_question') }}\">\n\t\t<xf:option name=\"questionthreads_is_question\" selected=\"{$thread.questionthreads_is_question}\">{{ phrase('questionthreads_is_question_explain') }}</xf:option>\n\t</xf:checkboxrow>\n</xf:if>"
+}

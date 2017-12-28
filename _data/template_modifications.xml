@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <template_modifications>
-  <modification type="public" template="core_action_bar.less" modification_key="questionthreads_core_action_bar" description="Adding icons for best anwer button" execution_order="10" enabled="1" action="str_replace">
-    <find><![CDATA[&.actionBar-action--like:before { .m-faContent("@{fa-var-thumbs-o-up}\20"); }]]></find>
-    <replace><![CDATA[$0
-&.actionBar-action--best-answer:before { .m-faContent("@{fa-var-diamond}\20"); }
-
-&.actionBar-action--unmark-best-answer:before { .m-faContent("@{fa-var-times}\20"); }]]></replace>
-  </modification>
   <modification type="public" template="core_button.less" modification_key="questionthreads_core_button" description="Adding solve/unsolve icons to action buttons" execution_order="10" enabled="1" action="str_replace">
     <find><![CDATA[&--add          { .m-buttonIcon(@fa-var-plus-square, .79em); }]]></find>
     <replace><![CDATA[/* Questionthreads icons */
@@ -124,15 +117,35 @@ $0]]></replace>
 	$0
 </xf:if>]]></replace>
   </modification>
+  <modification type="public" template="post_edit" modification_key="questionthreads_post_edit_is_question" description="Adding &quot;Is question&quot; option when editing thread first post" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<xf:formrow rowtype="{{ $quickEdit ? 'fullWidth noLabel' : '' }}">
+				<xf:if is="$attachmentData">
+					<xf:macro template="helper_attach_upload" name="upload_block" arg-attachmentData="{$attachmentData}" />
+				</xf:if>
+				<xf:button class="button--link u-jsOnly" data-xf-click="preview-click" icon="preview" />
+			</xf:formrow>]]></find>
+    <replace><![CDATA[$0
+
+<xf:if is="!$forum.questionthreads_forum && $post.isFirstPost()">
+	<xf:formrow rowtype="{{ $quickEdit ? 'fullWidth noLabel' : '' }}">
+		<xf:checkbox>
+			<xf:option name="questionthreads_is_question" selected="{$thread.questionthreads_is_question}"
+					   label="{{ phrase('questionthreads_is_question') }}"
+					   hint="{{ phrase('questionthreads_is_question_explain') }}">
+			</xf:option>
+		</xf:checkbox>
+	</xf:formrow>
+</xf:if>]]></replace>
+  </modification>
   <modification type="public" template="post_macros" modification_key="questionthreads_post_macros" description="Adding &quot;Best answer&quot; and &quot;Not the best answer&quot; buttons" execution_order="10" enabled="1" action="str_replace">
     <find><![CDATA[<div class="actionBar-set actionBar-set--external">]]></find>
     <replace><![CDATA[$0
 
 <xf:if is="$thread.questionthreads_is_question">
 	<xf:if is="$thread.canRemoveBest() AND $post.post_id === $thread.questionthreads_best_post">
-		<a href="{{ link('threads/removeBest', $thread) }}" class="actionBar-action questionthreads-unmark-best actionBar-action--unmark-best-answer">Not the best answer</a>
+		<a href="{{ link('threads/removeBest', $thread) }}" class="actionBar-action questionthreads-unmark-best actionBar-action--unmark-best-answer"><i class="fa fa-times"></i>{{ phrase('questionthreads_button_unbest') }}</a>
 	<xf:elseif is="$post.canMarkBest()" />
-		<a href="{{ link('posts/markBest', $post) }}" class="actionBar-action questionthreads-mark-best actionBar-action--best-answer">Best answer</a>
+		<a href="{{ link('posts/markBest', $post) }}" class="actionBar-action questionthreads-mark-best actionBar-action--best-answer"><i class="{{ property('questionthreads_bestAnswerIcon') }}"></i>{{ phrase('questionthreads_button_best') }}</a>
 	</xf:if>
 </xf:if>]]></replace>
   </modification>
@@ -189,6 +202,16 @@ $0]]></replace>
     <replace><![CDATA[$0
 <xf:css src="questionthreads.less" />]]></replace>
   </modification>
+  <modification type="public" template="thread_edit" modification_key="questionthreads_thread_edit" description="Adding &quot;Is question&quot; option when editing existing thread" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<xf:macro template="helper_thread_options" name="thread_status" arg-thread="{$thread}" />]]></find>
+    <replace><![CDATA[$0
+
+<xf:if is="!$forum.questionthreads_forum">
+	<xf:checkboxrow label="{{ phrase('questionthreads_is_question') }}">
+		<xf:option name="questionthreads_is_question" selected="{$thread.questionthreads_is_question}">{{ phrase('questionthreads_is_question_explain') }}</xf:option>
+	</xf:checkboxrow>
+</xf:if>]]></replace>
+  </modification>
   <modification type="public" template="thread_list_macros" modification_key="questionthreads_thread_list_macros" description="Adding status indicator to question thread items" execution_order="10" enabled="1" action="str_replace">
     <find><![CDATA[<xf:if is="$thread.prefix_id">]]></find>
     <replace><![CDATA[<xf:if is="$thread.questionthreads_is_question">
@@ -199,7 +222,7 @@ $0]]></replace>
 	</xf:if>
 	
 	<xf:if is="$thread.questionthreads_best_post">
-		<a title="{{ phrase('questionthreads_link_to_best_answer') }}" class="questionthreads-best-answer-icon-link" href="{{ link('threads/post', $thread, {'post_id': $thread.questionthreads_best_post}) }}"></a>
+		<a title="{{ phrase('questionthreads_link_to_best_answer') }}" class="questionthreads-best-answer-icon-link" href="{{ link('threads/post', $thread, {'post_id': $thread.questionthreads_best_post}) }}"><i class="{{ property('questionthreads_bestAnswerIcon') }}"></i></a>
 	</xf:if>
 </xf:if>
 $0]]></replace>

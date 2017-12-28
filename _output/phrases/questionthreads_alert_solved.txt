@@ -1,1 +1,1 @@
-{name} marked you question {title} as solved.
+{name} marked the question {title} as solved.

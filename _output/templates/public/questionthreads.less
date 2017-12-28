@@ -45,11 +45,6 @@ a.questionthreads-best-answer-icon-link {
 	color: @xf-questionthreads_indicatorSolvedColor - #181818;
 	margin-right: 2px;
 	
-	&:before {
-		.m-faBase();
-		.m-faContent(@fa-var-diamond, 1.1em);
-	}
-	
 	&:hover {
 		color: @xf-questionthreads_indicatorSolvedColor - #2C2C2C;
 	}
@@ -113,6 +108,12 @@ a.questionthreads-unsolve-action-button {
 /* ===================================================================================== */
 /* Best answer mark/unmark buttons */
 /* ===================================================================================== */
+a.questionthreads-mark-best, a.questionthreads-unmark-best {
+	i {
+		padding-right: 5px;
+	}
+}
+
 a.questionthreads-mark-best {
 	color: @xf-questionthreads_indicatorSolvedColor - #232323;
 }

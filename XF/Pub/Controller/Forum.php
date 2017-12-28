@@ -6,6 +6,7 @@ class Forum extends XFCP_Forum
 {
     /**
      * Automatically create question thread if it was created in questions forum
+     * or checkbox "Is question" is selected
      *
      * @param \XF\Entity\Forum $forum
      * @return \QuestionThreads\XF\Service\Thread\Creator

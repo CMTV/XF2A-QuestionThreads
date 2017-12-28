@@ -1,0 +1,13 @@
+{
+    "group_name": "questionThreadsColor",
+    "title": "Best answer icon",
+    "description": "",
+    "property_type": "value",
+    "css_components": [],
+    "value_type": "template",
+    "value_parameters": "type=scalar\ntemplate=questionthreads_best_answer_icon",
+    "depends_on": "",
+    "value_group": "",
+    "property_value": "fa fa-diamond",
+    "display_order": 600
+}

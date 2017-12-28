@@ -1,0 +1,9 @@
+{
+    "template": "forum_post_thread",
+    "description": "Replacing \"Post Thread\" text with \"Post question\"",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<xf:title>{{ phrase('post_thread') }}</xf:title>",
+    "replace": "<xf:if is=\"$forum.questionthreads_forum\">\n\t<xf:title>{{ phrase('questionthreads_post_question') }}</xf:title>\n<xf:else />\n\t$0\n</xf:if>"
+}

@@ -4,6 +4,10 @@
 	'name': username_link($user, false, {'defaultname': $alert.username}),
 	'title': '<a href="' . link('posts', $content) . '" class="fauxBlockLink-blockLink">' . prefix('thread', $content.Thread) . $content.Thread.title . '</a>'
 }) }}]]></template>
+  <template type="public" title="alert_post_questionthreads_best_post_a" version_id="1000170" version_string="1.0.1"><![CDATA[{{ phrase('questionthreads_alert_best_answer_a', {
+	'name': username_link($user, false, {'defaultname': $alert.username}),
+	'title': '<a href="' . link('posts', $content) . '" class="fauxBlockLink-blockLink">' . prefix('thread', $content.Thread) . $content.Thread.title . '</a>'
+}) }}]]></template>
   <template type="public" title="alert_post_questionthreads_remove_best" version_id="1000070" version_string="1.0.0"><![CDATA[{{ phrase('questionthreads_alert_remove_best', {
 	'name': username_link($user, false, {'defaultname': $alert.username}),
 	'title': '<a href="' . link('posts', $content) . '" class="fauxBlockLink-blockLink">' . prefix('thread', $content.Thread) . $content.Thread.title . '</a>'
@@ -20,7 +24,7 @@
 	'name': username_link($user, false, {'defaultname': $alert.username}),
 	'title': '<a href="' . link('threads', $content) . '" class="fauxBlockLink-blockLink">' . prefix('thread', $thread) . $content.title . '</a>'
 }) }}]]></template>
-  <template type="public" title="questionthreads.less" version_id="1000070" version_string="1.0.0"><![CDATA[/* ===================================================================================== */
+  <template type="public" title="questionthreads.less" version_id="10204071" version_string="1.2.4"><![CDATA[/* ===================================================================================== */
 /* Indicator */
 /* ===================================================================================== */
 .questionthreads-indicator {
@@ -66,11 +70,6 @@ a.questionthreads-best-answer-icon-link {
 	font-size: 90%;
 	color: @xf-questionthreads_indicatorSolvedColor - #181818;
 	margin-right: 2px;
-	
-	&:before {
-		.m-faBase();
-		.m-faContent(@fa-var-diamond, 1.1em);
-	}
 	
 	&:hover {
 		color: @xf-questionthreads_indicatorSolvedColor - #2C2C2C;
@@ -135,6 +134,12 @@ a.questionthreads-unsolve-action-button {
 /* ===================================================================================== */
 /* Best answer mark/unmark buttons */
 /* ===================================================================================== */
+a.questionthreads-mark-best, a.questionthreads-unmark-best {
+	i {
+		padding-right: 5px;
+	}
+}
+
 a.questionthreads-mark-best {
 	color: @xf-questionthreads_indicatorSolvedColor - #232323;
 }
@@ -142,34 +147,138 @@ a.questionthreads-mark-best {
 a.questionthreads-unmark-best {
 	color: @xf-questionthreads_indicatorUnsolvedColor - #232323;
 }]]></template>
-  <template type="admin" title="widget_def_options_questionthreads_unsolved" version_id="1000070" version_string="1.0.0"><![CDATA[<hr class="formRowSep" />
+  <template type="email" title="questionthreads_best_answer" version_id="1000170" version_string="1.0.1"><![CDATA[<mail:subject>
+	{{ phrase('questionthreads_mail_best_answer', {'title': $thread.title}) }}
+</mail:subject>
 
-<xf:numberboxrow name="options[limit]" value="{$options.limit}" min="1"
-	label="{{ phrase('maximum_entries') }}" />
+{{ phrase('questionthreads_mail_body_best_answer', {
+	'actionCaller': username_link_email($actionCaller, $actionCaller.username),
+	'board': '<a href="' . link('canonical:index') . '">' . $xf.options.boardTitle . '</a>'
+}) }}
 
-<xf:radiorow name="options[style]" value="{{ $options.style ?: 'simple' }}"
-	label="{{ phrase('display_style') }}">
+<h2><a href="{{ link('canonical:posts', $post) }}">{{ prefix('thread', $thread, 'escaped') }}{$thread.title}</a></h2>
 
-	<xf:option value="simple"
-		label="{{ phrase('simple') }}"
-		hint="{{ phrase('widget_display_simple_explain') }}" />
-	<xf:option value="full"
-		label="{{ phrase('full') }}"
-		hint="{{ phrase('new_threads_display_style_full_explain') }}" />
-	<xf:option value="expanded"
-		label="{{ phrase('expanded') }}"
-		hint="{{ phrase('new_threads_display_style_expanded_explain') }}" />
-</xf:radiorow>
+<xf:if is="$xf.options.emailWatchedThreadIncludeMessage">
+	<div class="message">{{ bb_code($post.message, 'post', $post.User, [], 'emailHtml')|raw }}</div>
+</xf:if>
 
-<xf:selectrow name="options[node_ids][]" value="{{ $options.node_ids ?: '' }}" multiple="multiple" size="7"
-	label="{{ phrase('forum_limit') }}"
-	explain="{{ phrase('only_include_threads_in_selected_forums') }}">
+<table cellpadding="10" cellspacing="0" border="0" width="100%" class="linkBar">
+	<tr>
+		<td>
+			<a href="{{ link('canonical:threads/unread', $thread, {'new': 1}) }}" class="button">{{ phrase('questionthreads_view_this_question') }}</a>
+		</td>
+		<td align="{{ $xf.isRtl ? 'left' : 'right' }}">
+			<a href="{{ link('canonical:watched/threads') }}" class="buttonFake">{{ phrase('watched_threads') }}</a>
+		</td>
+	</tr>
+</table>
 
-	<xf:option value="">{{ phrase('all_forums') }}</xf:option>
-	<xf:foreach loop="$nodeTree.getFlattened(0)" value="$treeEntry">
-		<xf:option value="{$treeEntry.record.node_id}" disabled="{{ $treeEntry.record.node_type_id != 'Forum' }}">
-			{{ repeat('&nbsp;&nbsp;', $treeEntry.depth)|raw }} {$treeEntry.record.title}
-		</xf:option>
-	</xf:foreach>
-</xf:selectrow>]]></template>
+{{ phrase('watched_thread_email_html_footer', {
+		'thread': '<a href="' . link('canonical:threads', $thread) . '">' . $thread.title . '</a>',
+		'board': $xf.options.boardTitle,
+		'disable_this_link': link('canonical:email-stop/content', $xf.toUser, {'t': 'thread', 'id': $thread.thread_id}),
+		'disable_all_link': link('canonical:email-stop/all', $xf.toUser)
+}) }}]]></template>
+  <template type="email" title="questionthreads_best_answer_a" version_id="1000170" version_string="1.0.1"><![CDATA[<mail:subject>
+	{{ phrase('questionthreads_mail_best_answer_a', {'title': $thread.title}) }}
+</mail:subject>
+
+{{ phrase('questionthreads_mail_body_best_answer_a', {
+	'actionCaller': username_link_email($actionCaller, $actionCaller.username),
+	'board': '<a href="' . link('canonical:index') . '">' . $xf.options.boardTitle . '</a>'
+}) }}
+
+<h2><a href="{{ link('canonical:posts', $post) }}">{{ prefix('thread', $thread, 'escaped') }}{$thread.title}</a></h2>
+
+<xf:if is="$xf.options.emailWatchedThreadIncludeMessage">
+	<div class="message">{{ bb_code($post.message, 'post', $post.User, [], 'emailHtml')|raw }}</div>
+</xf:if>
+
+<table cellpadding="10" cellspacing="0" border="0" width="100%" class="linkBar">
+	<tr>
+		<td>
+			<a href="{{ link('canonical:threads/unread', $thread, {'new': 1}) }}" class="button">{{ phrase('questionthreads_view_this_question') }}</a>
+		</td>
+		<td align="{{ $xf.isRtl ? 'left' : 'right' }}">
+			<a href="{{ link('canonical:watched/threads') }}" class="buttonFake">{{ phrase('watched_threads') }}</a>
+		</td>
+	</tr>
+</table>
+
+{{ phrase('watched_thread_email_html_footer', {
+		'thread': '<a href="' . link('canonical:threads', $thread) . '">' . $thread.title . '</a>',
+		'board': $xf.options.boardTitle,
+		'disable_this_link': link('canonical:email-stop/content', $xf.toUser, {'t': 'thread', 'id': $thread.thread_id}),
+		'disable_all_link': link('canonical:email-stop/all', $xf.toUser)
+}) }}]]></template>
+  <template type="admin" title="questionthreads_best_answer_icon" version_id="10204071" version_string="1.2.4"><![CDATA[<xf:js src="questionthreads/vendor/iconpicker/jquery.fonticonpicker.min.js" addon="QuestionThreads" />
+<xf:js src="questionthreads/iconpicker_config.js" addon="QuestionThreads" />
+<xf:css src="questionthreads_iconpicker.css" />
+
+<xf:formrow label="{$titleHtml}" hint="{$hintHtml}">
+	<input type="text" class="trigger_change" id="questionthreads_best_answer_icon" name="{$formBaseKey}" value="{$property.property_value}" />
+</xf:formrow>]]></template>
+  <template type="admin" title="questionthreads_iconpicker.css" version_id="1000170" version_string="1.0.1"><![CDATA[/*<xf:set var="$iconpickerPath" value="styles/fonts/questionthreads/iconpicker" />*/
+/* fontIconPicker main CSS file {@link https://github.com/micc83/fontIconPicker} */
+.icons-selector .selected-icon i:before, .icons-selector .fip-box i:before {font-family: "FontAwesome";}.icons-selector *{margin:0;padding:0;border:0;font:inherit;vertical-align:baseline;font-family:HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif}.icons-selector,.icons-selector *,.icons-selector :after,.icons-selector :before,.icons-selector:after,.icons-selector:before{-webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box;}.icons-selector{display:inline-block;vertical-align:middle;text-align:left}.icons-selector .selector{width:100px;height:40px}.icons-selector .selector-button{width:39px;height:100%;display:block;text-align:center;cursor:pointer;float:left}.icons-selector .selector-button i{line-height:38px;text-align:center}.icons-selector .selected-icon{display:block;width:60px;height:100%;float:left;text-align:center}.icons-selector .selected-icon i{line-height:40px;font-size:18px;cursor:default}.icons-selector .selector-popup{position:absolute;z-index:10000;background-color:#fefefe;padding:5px;height:auto;width:342px;margin-top:-1px}.icons-selector .selector-category select,.icons-selector .selector-search input[type=text]{border:0;line-height:20px;padding:10px 2.5%;width:100%;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;margin-bottom:5px;font-size:12px;display:block}.icons-selector .selector-category select{height:40px}.icons-selector .selector-category select option{padding:10px}.icons-selector input::-webkit-input-placeholder{text-transform:uppercase}.icons-selector input:-moz-placeholder{text-transform:uppercase}.icons-selector input::-moz-placeholder{text-transform:uppercase}.icons-selector input:-ms-input-placeholder{text-transform:uppercase}.icons-selector .selector-search{position:relative}.icons-selector .selector-search i{position:absolute;right:10px;top:7px}.icons-selector .fip-icons-container{width:100%;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;padding:5px}.icons-selector .fip-icons-container .loading{font-size:24px;margin:0 auto;padding:20px 0;text-align:center;width:100%}.icons-selector .fip-box{display:inline-block;margin:2px;width:60px;line-height:42px;text-align:center;cursor:pointer;vertical-align:top;height:40px}.icons-selector .selector-footer{line-height:12px;padding:5px 5px 0;text-align:center}.icons-selector .selector-footer,.icons-selector .selector-footer i{font-size:14px}.icons-selector .selector-arrows{float:right}.icons-selector .selector-pages{font-size:11px;float:left}.icons-selector .selector-arrows i{cursor:pointer}.icons-selector .selector-footer em{font-style:italic}.icons-selector .icons-picker-error i:before{color:#eee}@font-face{font-family:iconpicker;src:url({$iconpickerPath}/iconpicker.eot?90190138);src:url({$iconpickerPath}/iconpicker.eot?90190138#iefix) format('embedded-opentype'),url({$iconpickerPath}/iconpicker.woff?90190138) format('woff'),url({$iconpickerPath}/iconpicker.ttf?90190138) format('truetype'),url({$iconpickerPath}/iconpicker.svg?90190138#iconpicker) format('svg');font-weight:400;font-style:normal}.icons-selector [class*=" fip-icon-"]:before,.icons-selector [class^=fip-icon-]:before{font-family:iconpicker;font-style:normal;font-weight:400;speak:none;display:inline-block;text-decoration:inherit;width:1em;margin-right:.2em;text-align:center;font-variant:normal;text-transform:none;line-height:1em;margin-left:.2em}.icons-selector .fip-icon-search:before{content:'\e812';cursor:default}.icons-selector .fip-icon-cancel:before{content:'\e814';cursor:pointer}.icons-selector .fip-icon-block:before{content:'\e84e';color:#fed0d0}.icons-selector .fip-icon-down-dir:before{content:'\e800'}.icons-selector .fip-icon-up-dir:before{content:'\e813'}.icons-selector .fip-icon-left-dir:before{content:'\e801'}.icons-selector .fip-icon-right-dir:before{content:'\e802'}.icons-selector .fip-icon-spin3:before{content:'\e815'}.icons-selector .fip-icon-spin3{-moz-animation:spin 2s infinite linear;-o-animation:spin 2s infinite linear;-webkit-animation:spin 2s infinite linear;animation:spin 2s infinite linear;display:inline-block}@-moz-keyframes spin{0%{-moz-transform:rotate(0deg);-o-transform:rotate(0deg);-webkit-transform:rotate(0deg);transform:rotate(0deg)}100%{-moz-transform:rotate(359deg);-o-transform:rotate(359deg);-webkit-transform:rotate(359deg);transform:rotate(359deg)}}@-webkit-keyframes spin{0%{-moz-transform:rotate(0deg);-o-transform:rotate(0deg);-webkit-transform:rotate(0deg);transform:rotate(0deg)}100%{-moz-transform:rotate(359deg);-o-transform:rotate(359deg);-webkit-transform:rotate(359deg);transform:rotate(359deg)}}@-o-keyframes spin{0%{-moz-transform:rotate(0deg);-o-transform:rotate(0deg);-webkit-transform:rotate(0deg);transform:rotate(0deg)}100%{-moz-transform:rotate(359deg);-o-transform:rotate(359deg);-webkit-transform:rotate(359deg);transform:rotate(359deg)}}@-ms-keyframes spin{0%{-moz-transform:rotate(0deg);-o-transform:rotate(0deg);-webkit-transform:rotate(0deg);transform:rotate(0deg)}100%{-moz-transform:rotate(359deg);-o-transform:rotate(359deg);-webkit-transform:rotate(359deg);transform:rotate(359deg)}}@keyframes spin{0%{-moz-transform:rotate(0deg);-o-transform:rotate(0deg);-webkit-transform:rotate(0deg);transform:rotate(0deg)}100%{-moz-transform:rotate(359deg);-o-transform:rotate(359deg);-webkit-transform:rotate(359deg);transform:rotate(359deg)}}
+/* Grey Theme file for fontIconPicker {@link https://github.com/micc83/fontIconPicker} */
+.fip-grey.icons-selector{font-size:16px}.fip-grey.icons-selector .selector{border:1px solid #EDEDED;background-color:#fff}.fip-grey.icons-selector .selector-button{background-color:#F4F4F4;border-left:1px solid #E1E1E1}.fip-grey.icons-selector .selector-button:hover{background-color:#f1f1f1}.fip-grey.icons-selector .selector-button:hover i{color:#999}.fip-grey.icons-selector .selector-button i{color:#aaa;text-shadow:0 1px 0 #FFF}.fip-grey.icons-selector .selected-icon i{color:#404040}.fip-grey.icons-selector .selector-popup{-moz-box-shadow:0 1px 1px rgba(0,0,0,.04);-webkit-box-shadow:0 1px 1px rgba(0,0,0,.04);box-shadow:0 1px 1px rgba(0,0,0,.04);border:1px solid #E5E5E5}.fip-grey.icons-selector .selector-category select,.fip-grey.icons-selector .selector-search input[type=text]{border:1px solid #EDEDED;color:#404040;-moz-box-shadow:none;-webkit-box-shadow:none;box-shadow:none;outline:0}.fip-grey.icons-selector input::-webkit-input-placeholder{color:#ddd}.fip-grey.icons-selector input:-moz-placeholder{color:#ddd}.fip-grey.icons-selector input::-moz-placeholder{color:#ddd}.fip-grey.icons-selector input:-ms-input-placeholder{color:#ddd!important}.fip-grey.icons-selector .selector-search i{color:#eee}.fip-grey.icons-selector .fip-icons-container{background-color:#fff;border:1px solid #EDEDED}.fip-grey.icons-selector .fip-icons-container .loading{color:#eee}.fip-grey.icons-selector .fip-box{border:1px solid #EFEFEF}.fip-grey.icons-selector .fip-box:hover{background-color:#f6f6f6}.fip-grey.icons-selector .selector-footer,.fip-grey.icons-selector .selector-footer i{color:#ddd}.fip-grey.icons-selector .selector-arrows i:hover{color:#777}.fip-grey.icons-selector span.current-icon,.fip-grey.icons-selector span.current-icon:hover{background-color:#2EA2CC;color:#fff;border:1px solid #298CBA}.fip-grey.icons-selector .icons-picker-error i:before{color:#eee}
+/* fontIconPicker Dark Grey Theme {@link https://github.com/micc83/fontIconPicker} */
+.fip-darkgrey.icons-selector{font-size:16px}.fip-darkgrey.icons-selector .selector{border:0 none;background-color:#fff;width:102px}.fip-darkgrey.icons-selector .selector-button{background-color:#eee;border:1px solid #ccc;border-radius:0 4px 4px 0;background-image:-webkit-gradient(linear,0 0,0 100%,from(#eee),to(#ddd));background-image:-webkit-linear-gradient(#eee,#ddd);background-image:-moz-linear-gradient(#eee,#ddd);background-image:-o-linear-gradient(#eee,#ddd);background-image:linear-gradient(#eee,#ddd);-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;width:41px}.fip-darkgrey.icons-selector .selector-button:hover{background-color:#f1f1f1;background-image:-webkit-gradient(linear,0 0,0 100%,from(#f1f1f1),to(#ddd));background-image:-webkit-linear-gradient(#f1f1f1,#ddd);background-image:-moz-linear-gradient(#f1f1f1,#ddd);background-image:-o-linear-gradient(#f1f1f1,#ddd);background-image:linear-gradient(#f1f1f1,#ddd)}.fip-darkgrey.icons-selector .selector-button:active{background-color:#fff;background-image:-webkit-gradient(linear,0 0,0 100%,from(#f1f1f1),to(#eee));background-image:-webkit-linear-gradient(#f1f1f1,#eee);background-image:-moz-linear-gradient(#f1f1f1,#eee);background-image:-o-linear-gradient(#f1f1f1,#eee);background-image:linear-gradient(#f1f1f1,#eee)}.fip-darkgrey.icons-selector .selector-button:hover i{color:#999}.fip-darkgrey.icons-selector .selector-button i{color:#aaa;text-shadow:0 1px 0 #FFF}.fip-darkgrey.icons-selector .selected-icon{border:1px solid #ccc;border-right:0 none;-webkit-box-shadow:inset -1px 0 2px #ddd;-moz-box-shadow:inset -1px 0 2px #ddd;box-shadow:inset -1px 0 2px #ddd;border-radius:4px 0 0 4px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}.fip-darkgrey.icons-selector .selected-icon i{color:#404040}.fip-darkgrey.icons-selector .selector-popup{-moz-box-shadow:0 1px 1px rgba(0,0,0,.04);-webkit-box-shadow:0 1px 1px rgba(0,0,0,.04);box-shadow:0 1px 1px rgba(0,0,0,.04);border:1px solid #ccc;border-radius:4px}.fip-darkgrey.icons-selector .selector-category select,.fip-darkgrey.icons-selector .selector-search input[type=text]{border:1px solid #ddd;color:#404040;-moz-box-shadow:none;-webkit-box-shadow:none;box-shadow:none;outline:0;border-radius:4px}.fip-darkgrey.icons-selector .selector-category select:focus,.fip-darkgrey.icons-selector .selector-search input[type=text]:focus{border-color:#ccc;-webkit-box-shadow:0 0 2px #ccc;-moz-box-shadow:0 0 2px #ccc;box-shadow:0 0 2px #ccc}.fip-darkgrey.icons-selector input::-webkit-input-placeholder{color:#ccc}.fip-darkgrey.icons-selector input:-moz-placeholder{color:#ccc}.fip-darkgrey.icons-selector input::-moz-placeholder{color:#ccc}.fip-darkgrey.icons-selector input:-ms-input-placeholder{color:#ccc!important}.fip-darkgrey.icons-selector .selector-search i{color:#ccc}.fip-darkgrey.icons-selector .fip-icons-container{background-color:#fff;border:1px solid #ccc;border-radius:4px}.fip-darkgrey.icons-selector .fip-icons-container .loading{color:#ddd}.fip-darkgrey.icons-selector .fip-box{border:1px solid #ddd;border-radius:2px}.fip-darkgrey.icons-selector .fip-box:hover{background-color:#eee;border-color:#ccc;-webkit-box-shadow:0 0 2px #aaa,0 0 2px #fff inset;-moz-box-shadow:0 0 2px #aaa,0 0 2px #fff inset;box-shadow:0 0 2px #aaa,0 0 2px #fff inset;font-size:1.6em;text-shadow:0 0 1px #fff}.fip-darkgrey.icons-selector .selector-footer,.fip-darkgrey.icons-selector .selector-footer i{color:#666}.fip-darkgrey.icons-selector .selector-arrows i:hover{color:#999}.fip-darkgrey.icons-selector span.current-icon,.fip-darkgrey.icons-selector span.current-icon:hover{background-color:#2EA2CC;color:#fff;border:1px solid #298CBA;-webkit-box-shadow:0 0 2px #298CBA;-moz-box-shadow:0 0 2px #298CBA;box-shadow:0 0 2px #298CBA}.fip-darkgrey.icons-selector span.current-icon i,.fip-darkgrey.icons-selector span.current-icon:hover i{color:#fff;text-shadow:0 0 1px #666}.fip-darkgrey.icons-selector .icons-picker-error i:before{color:#eee}.fip-darkgrey.icons-selector .fip-box,.fip-darkgrey.icons-selector .selector-button,.fip-darkgrey.icons-selector .selector-category select,.fip-darkgrey.icons-selector .selector-search input[type=text]{-webkit-transition:all 300ms ease-in-out;-moz-transition:all 300ms ease-in-out;-ms-transition:all 300ms ease-in-out;-o-transition:all 300ms ease-in-out;transition:all 300ms ease-in-out}]]></template>
+  <template type="email" title="questionthreads_solved" version_id="1000170" version_string="1.0.1"><![CDATA[<mail:subject>
+	{{ phrase('questionthreads_mail_solved', {'title': $thread.title}) }}
+</mail:subject>
+
+{{ phrase('questionthreads_mail_body_solved', {
+	'actionCaller': username_link_email($actionCaller, $actionCaller.username),
+	'board': '<a href="' . link('canonical:index') . '">' . $xf.options.boardTitle . '</a>'
+}) }}
+
+<h2><a href="{{ link('canonical:posts', $post) }}">{{ prefix('thread', $thread, 'escaped') }}{$thread.title}</a></h2>
+
+<table cellpadding="10" cellspacing="0" border="0" width="100%" class="linkBar">
+	<tr>
+		<td>
+			<a href="{{ link('canonical:threads/unread', $thread, {'new': 1}) }}" class="button">{{ phrase('questionthreads_view_this_question') }}</a>
+		</td>
+		<td align="{{ $xf.isRtl ? 'left' : 'right' }}">
+			<a href="{{ link('canonical:watched/threads') }}" class="buttonFake">{{ phrase('watched_threads') }}</a>
+		</td>
+	</tr>
+</table>
+
+{{ phrase('watched_thread_email_html_footer', {
+		'thread': '<a href="' . link('canonical:threads', $thread) . '">' . $thread.title . '</a>',
+		'board': $xf.options.boardTitle,
+		'disable_this_link': link('canonical:email-stop/content', $xf.toUser, {'t': 'thread', 'id': $thread.thread_id}),
+		'disable_all_link': link('canonical:email-stop/all', $xf.toUser)
+}) }}]]></template>
+  <template type="email" title="questionthreads_unsolved" version_id="1000170" version_string="1.0.1"><![CDATA[<mail:subject>
+	{{ phrase('questionthreads_mail_unsolved', {'title': $thread.title}) }}
+</mail:subject>
+
+{{ phrase('questionthreads_mail_body_unsolved', {
+	'actionCaller': username_link_email($actionCaller, $actionCaller.username),
+	'board': '<a href="' . link('canonical:index') . '">' . $xf.options.boardTitle . '</a>'
+}) }}
+
+<h2><a href="{{ link('canonical:posts', $post) }}">{{ prefix('thread', $thread, 'escaped') }}{$thread.title}</a></h2>
+
+<table cellpadding="10" cellspacing="0" border="0" width="100%" class="linkBar">
+	<tr>
+		<td>
+			<a href="{{ link('canonical:threads/unread', $thread, {'new': 1}) }}" class="button">{{ phrase('questionthreads_view_this_question') }}</a>
+		</td>
+		<td align="{{ $xf.isRtl ? 'left' : 'right' }}">
+			<a href="{{ link('canonical:watched/threads') }}" class="buttonFake">{{ phrase('watched_threads') }}</a>
+		</td>
+	</tr>
+</table>
+
+{{ phrase('watched_thread_email_html_footer', {
+		'thread': '<a href="' . link('canonical:threads', $thread) . '">' . $thread.title . '</a>',
+		'board': $xf.options.boardTitle,
+		'disable_this_link': link('canonical:email-stop/content', $xf.toUser, {'t': 'thread', 'id': $thread.thread_id}),
+		'disable_all_link': link('canonical:email-stop/all', $xf.toUser)
+}) }}]]></template>
 </templates>

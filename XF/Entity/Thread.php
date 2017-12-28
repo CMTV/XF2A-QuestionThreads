@@ -2,6 +2,7 @@
 
 namespace QuestionThreads\XF\Entity;
 
+use QuestionThreads\NotificationHelper;
 use XF\Entity\User;
 use XF\Repository\UserAlert;
 
@@ -129,12 +130,13 @@ class Thread extends XFCP_Thread
         $this->questionthreads_is_solved = true;
         $this->save();
 
-        /* Sending an alert to question author if his question was marked as solved by someone else */
-        $visitor = \XF::visitor();
-        if($visitor->user_id !== $this->user_id)
-        {
-            $this->alertSolved($visitor);
-        }
+        $jobParams = [
+            'thread_id' => $this->thread_id,
+            'actionCaller_id' => \XF::visitor()->user_id,
+            'alertType' => NotificationHelper::THREAD_SOLVED
+        ];
+        \XF::app()->jobManager()->enqueueUnique('solvedAlerting_' . time(), 'QuestionThreads:Alerter', $jobParams);
+        \XF::app()->jobManager()->enqueueUnique('solvedEmailing_' . time(), 'QuestionThreads:Emailer', $jobParams);
     }
 
     /**
@@ -146,12 +148,13 @@ class Thread extends XFCP_Thread
         $this->questionthreads_best_post = 0;
         $this->save();
 
-        /* Sending an alert to question author if his question was marked as unsolved by someone else */
-        $visitor = \XF::visitor();
-        if($visitor->user_id !== $this->user_id)
-        {
-            $this->alertUnsolved($visitor);
-        }
+        $jobParams = [
+            'thread_id' => $this->thread_id,
+            'actionCaller_id' => \XF::visitor()->user_id,
+            'alertType' => NotificationHelper::THREAD_UNSOLVED
+        ];
+        \XF::app()->jobManager()->enqueueUnique('unsolvedAlerting_' . time(), 'QuestionThreads:Alerter', $jobParams);
+        \XF::app()->jobManager()->enqueueUnique('unsolvedEmailing_' . time(), 'QuestionThreads:Emailer', $jobParams);
     }
 
     /**
@@ -159,83 +162,17 @@ class Thread extends XFCP_Thread
      */
     public function removeBest()
     {
-        /* Sending an alert to best answer author saying that his answer is no longer the best one */
-        $visitor = \XF::visitor();
-        /** @var \XF\Entity\Post $bestAnswer */
-        $bestAnswer = \XF::finder('XF:Post')->where('post_id', $this->questionthreads_best_post)->fetchOne();
-        if($visitor->user_id !== $bestAnswer->user_id)
-        {
-            /** @var \XF\Entity\User $bestAnswerPoster */
-            $bestAnswerPoster = \XF::finder('XF:User')->where('user_id', $bestAnswer->user_id)->fetchOne();
-            $this->alertRemoveBestAnswerPoster($bestAnswerPoster, $visitor);
-        }
-
-        /* Sending an alert to question author saying that best answer mark was removed */
-        if($visitor->user_id !== $this->user_id)
-        {
-            $this->alertQuestionAuthorRemoveBestAnswer();
-        }
+        $jobParams = [
+            'thread_id' => $this->thread_id,
+            'actionCaller_id' => \XF::visitor()->user_id,
+            'bestPost_id' => $this->questionthreads_best_post,
+            'alertType' => NotificationHelper::THREAD_BEST_ANSWER_REMOVED
+        ];
+        \XF::app()->jobManager()->enqueueUnique('bestRemovedAlerting_' . time(), 'QuestionThreads:Alerter', $jobParams);
+        \XF::app()->jobManager()->enqueueUnique('bestRemovedEmailing_' . time(), 'QuestionThreads:Emailer', $jobParams);
 
         /* Removing best answer mark */
         $this->questionthreads_best_post = 0;
         $this->save();
-    }
-
-    /**
-     * Send an alert to question author if his question was marked as solved by someone else
-     *
-     * @param User $solver User who marked question as solved
-     */
-    public function alertSolved(User $solver)
-    {
-        /** @var User $questionAuthor */
-        $questionAuthor = \XF::finder('XF:User')->where('user_id', $this->user_id)->fetchOne();
-
-        /** @var UserAlert $alertRep */
-        $alertRep = \XF::app()->repository('XF:UserAlert');
-        $alertRep->alert($questionAuthor, $solver->user_id, $solver->username, 'thread', $this->thread_id, 'questionthreads_solved');
-    }
-
-    /**
-     * Send an alert to question author if his question was marked as unsolved by someone else
-     *
-     * @param User $unsolver
-     */
-    public function alertUnsolved(User $unsolver)
-    {
-        /** @var User $questionAuthor */
-        $questionAuthor = \XF::finder('XF:User')->where('user_id', $this->user_id)->fetchOne();
-
-        /** @var UserAlert $alertRep */
-        $alertRep = \XF::app()->repository('XF:UserAlert');
-        $alertRep->alert($questionAuthor, $unsolver->user_id, $unsolver->username, 'thread', $this->thread_id, 'questionthreads_unsolved');
-
-    }
-
-    /**
-     * Alerting user that his answer is no longer the best one
-     *
-     * @param User $bestAnswerPoster
-     * @param User $actionCaller
-     */
-    public function alertRemoveBestAnswerPoster(User $bestAnswerPoster, User $actionCaller)
-    {
-        /** @var UserAlert $alertRep */
-        $alertRep = \XF::app()->repository('XF:UserAlert');
-        $alertRep->alert($bestAnswerPoster, $actionCaller->user_id, $actionCaller->username, 'post', $this->questionthreads_best_post, 'questionthreads_remove_best');
-    }
-
-    /**
-     * Alerting question author that best answer mark was removed by someone else
-     */
-    public function alertQuestionAuthorRemoveBestAnswer()
-    {
-        $actionCaller = \XF::visitor();
-        /** @var \XF\Entity\User $questionAuthor */
-        $questionAuthor = \XF::finder('XF:User')->where('user_id', $this->user_id)->fetchOne();
-
-        /** @var UserAlert $alertRep */
-        $alertRep = \XF::app()->repository('XF:UserAlert');
-        $alertRep->alert($questionAuthor, $actionCaller->user_id, $actionCaller->username, 'post', $this->questionthreads_best_post, 'questionthreads_remove_best_a');
     }
 }

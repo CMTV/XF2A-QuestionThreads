@@ -19,33 +19,39 @@
     },
     "questionthreads_alert_best_answer.txt": {
         "global_cache": false,
-        "version_id": 1000070,
-        "version_string": "1.0.0",
+        "version_id": 1000170,
+        "version_string": "1.0.1",
+        "hash": "53aba543e8355ae6272199f9d7a53bc2"
+    },
+    "questionthreads_alert_best_answer_a.txt": {
+        "global_cache": false,
+        "version_id": 1000170,
+        "version_string": "1.0.1",
         "hash": "cf413486f071a6edcee565eac3ee580b"
     },
     "questionthreads_alert_remove_best.txt": {
         "global_cache": false,
-        "version_id": 1000070,
-        "version_string": "1.0.0",
-        "hash": "f6d38444a5e94838fa8854d47cb4153e"
+        "version_id": 1000170,
+        "version_string": "1.0.1",
+        "hash": "9b835b3542217a035e32ab19c9de1545"
     },
     "questionthreads_alert_remove_best_a.txt": {
         "global_cache": false,
-        "version_id": 1000070,
-        "version_string": "1.0.0",
-        "hash": "40c20eaf728d14719b2504056091fedb"
+        "version_id": 1000170,
+        "version_string": "1.0.1",
+        "hash": "0eb10ffc43d5cb2df2d3f30c9bcb53d3"
     },
     "questionthreads_alert_solved.txt": {
         "global_cache": false,
-        "version_id": 1000070,
-        "version_string": "1.0.0",
-        "hash": "c931e47133a84da1b1dfd9ae015d70ce"
+        "version_id": 1000170,
+        "version_string": "1.0.1",
+        "hash": "aeee6589cb0e2073a73d665f781de63e"
     },
     "questionthreads_alert_unsolved.txt": {
         "global_cache": false,
-        "version_id": 1000070,
-        "version_string": "1.0.0",
-        "hash": "b0ffeef7c3305bb0c6b47fe9de1107bb"
+        "version_id": 1000170,
+        "version_string": "1.0.1",
+        "hash": "3d021beb357145e906e83254a705d66d"
     },
     "questionthreads_already_has_best_post.txt": {
         "global_cache": false,
@@ -65,17 +71,35 @@
         "version_string": "1.0.0",
         "hash": "f329bbffeee3e22d2d8693034926a6f3"
     },
+    "questionthreads_button_best.txt": {
+        "global_cache": false,
+        "version_id": 1020070,
+        "version_string": "1.2.0",
+        "hash": "e90538f72bf93fdc74583bb6a2a4141b"
+    },
     "questionthreads_button_solve.txt": {
         "global_cache": false,
         "version_id": 1000070,
         "version_string": "1.0.0",
         "hash": "b937137e112c379c97a75a1c9d7d877c"
     },
+    "questionthreads_button_unbest.txt": {
+        "global_cache": false,
+        "version_id": 1020070,
+        "version_string": "1.2.0",
+        "hash": "b3239c8b740d9d3f2b73ce68ee49e55b"
+    },
     "questionthreads_button_unsolve.txt": {
         "global_cache": false,
         "version_id": 1000070,
         "version_string": "1.0.0",
         "hash": "f79f2b14a15ce897193a86d1cb511275"
+    },
+    "questionthreads_converting_to_questions.txt": {
+        "global_cache": false,
+        "version_id": 1020070,
+        "version_string": "1.2.0",
+        "hash": "866699a0642b1b9871cc6d02c8b24912"
     },
     "questionthreads_first_post_cant_be_best.txt": {
         "global_cache": false,
@@ -101,6 +125,54 @@
         "version_string": "1.0.0",
         "hash": "0417e2046c98af359e95482970b5c597"
     },
+    "questionthreads_mail_best_answer.txt": {
+        "global_cache": false,
+        "version_id": 1000170,
+        "version_string": "1.0.1",
+        "hash": "88df2a686fda6a981c5158de0e1ed5a1"
+    },
+    "questionthreads_mail_best_answer_a.txt": {
+        "global_cache": false,
+        "version_id": 1000170,
+        "version_string": "1.0.1",
+        "hash": "c80a61faa51a05b9efb0d6ca8e5b0b89"
+    },
+    "questionthreads_mail_body_best_answer.txt": {
+        "global_cache": false,
+        "version_id": 1000170,
+        "version_string": "1.0.1",
+        "hash": "e3476d5c250fb934fbac09bd9550fbff"
+    },
+    "questionthreads_mail_body_best_answer_a.txt": {
+        "global_cache": false,
+        "version_id": 1000170,
+        "version_string": "1.0.1",
+        "hash": "44582ef22dfac6835ed74ce7f2d72885"
+    },
+    "questionthreads_mail_body_solved.txt": {
+        "global_cache": false,
+        "version_id": 1000170,
+        "version_string": "1.0.1",
+        "hash": "96f2ca4579d65f6a50b9adc45848bc0c"
+    },
+    "questionthreads_mail_body_unsolved.txt": {
+        "global_cache": false,
+        "version_id": 1000170,
+        "version_string": "1.0.1",
+        "hash": "d83bd67463dce8d83a6e5f5661ba2a90"
+    },
+    "questionthreads_mail_solved.txt": {
+        "global_cache": false,
+        "version_id": 1000170,
+        "version_string": "1.0.1",
+        "hash": "8a2a1058ff893dcbd9e8b59841a62fc5"
+    },
+    "questionthreads_mail_unsolved.txt": {
+        "global_cache": false,
+        "version_id": 1000170,
+        "version_string": "1.0.1",
+        "hash": "31f8b95f9156e73abebd0aee3c01c575"
+    },
     "questionthreads_no_best_post.txt": {
         "global_cache": false,
         "version_id": 1000070,
@@ -115,8 +187,8 @@
     },
     "questionthreads_post_question.txt": {
         "global_cache": false,
-        "version_id": 1000070,
-        "version_string": "1.0.0",
+        "version_id": 10204071,
+        "version_string": "1.2.4",
         "hash": "ced9b0806610b5ceb05ee54d9a387819"
     },
     "questionthreads_questions.txt": {
@@ -155,6 +227,18 @@
         "version_string": "1.0.0",
         "hash": "0fd752f7efb35afff04e222511aeae22"
     },
+    "questionthreads_view_this_question.txt": {
+        "global_cache": false,
+        "version_id": 1000170,
+        "version_string": "1.0.1",
+        "hash": "4d368c39c6b66e73b3fc2c6eae2e61bf"
+    },
+    "style_prop.questionthreads_bestAnswerIcon.txt": {
+        "global_cache": false,
+        "version_id": 1000070,
+        "version_string": "1.0.0",
+        "hash": "955d5aafb06422d2afb2a3dc9d404fda"
+    },
     "style_prop.questionthreads_bestAnswerMessageBg.txt": {
         "global_cache": false,
         "version_id": 1000070,
@@ -190,6 +274,12 @@
         "version_id": 1000070,
         "version_string": "1.0.0",
         "hash": "4ea8ee566d333b7b343e959b934ef72f"
+    },
+    "style_prop_desc.questionthreads_bestAnswerIcon.txt": {
+        "global_cache": false,
+        "version_id": 10204071,
+        "version_string": "1.2.4",
+        "hash": "d41d8cd98f00b204e9800998ecf8427e"
     },
     "style_prop_desc.questionthreads_bestAnswerMessageBg.txt": {
         "global_cache": false,

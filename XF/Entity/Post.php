@@ -2,6 +2,7 @@
 
 namespace QuestionThreads\XF\Entity;
 
+use QuestionThreads\NotificationHelper;
 use XF\Entity\User;
 use XF\Repository\UserAlert;
 
@@ -66,27 +67,18 @@ class Post extends XFCP_Post
         $thread->questionthreads_best_post = $this->post_id;
         $thread->save();
 
-        /* Sending an alert to best answer author */
-        $visitor = \XF::visitor();
-        /** @var \XF\Entity\User $bestAnswerPoster */
-        $bestAnswerPoster = \XF::finder('XF:User')->where('user_id', $this->user_id)->fetchOne();
-        if($visitor->user_id !== $this->user_id)
-        {
+        $jobParams = [
+            'thread_id' => $this->thread_id,
+            'actionCaller_id' => \XF::visitor()->user_id,
+            'alertType' => NotificationHelper::POST_BEST_ANSWER
+        ];
+        \XF::app()->jobManager()->enqueueUnique('bestMarkedAlerting_' . time(), 'QuestionThreads:Alerter', $jobParams);
 
-            $this->alertBestAnswerPoster($bestAnswerPoster, $visitor);
-        }
-    }
+        /*$this->app()->mailer()->newMail()
+            ->setToUser($user)
+            ->setTemplate($template, $params)
+            ->queue();*/
 
-    /**
-     * Send an alert to user who wrote the best answer
-     *
-     * @param User $bestAnswerPoster User who wrote the best answer
-     * @param User $solver User who marked the answer as best
-     */
-    public function alertBestAnswerPoster(User $bestAnswerPoster, User $solver)
-    {
-        /** @var UserAlert $alertRep */
-        $alertRep = \XF::app()->repository('XF:UserAlert');
-        $alertRep->alert($bestAnswerPoster, $solver->user_id, $solver->username, 'post', $this->Thread->questionthreads_best_post, 'questionthreads_best_post');
+        \XF::app()->jobManager()->enqueueUnique('bestMarkedEmailing_' . time(), 'QuestionThreads:Emailer', $jobParams);
     }
 }

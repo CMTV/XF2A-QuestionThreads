@@ -1,1 +1,1 @@
-{name} marked your question {title} as unsolved.
+{name} marked the question {title} as unsolved.

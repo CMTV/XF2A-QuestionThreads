@@ -21,5 +21,23 @@ class Forum extends XFCP_Forum
         {
             $data->questionthreads_forum = $this->filter('questionthreads_forum', 'bool');
         });
+
+        $finder = \Xf::finder('XF:Forum');
+        $forum = $finder->where('node_id', $node->node_id)->fetchOne();
+
+        if($forum)
+        {
+            if(
+                !$forum->questionthreads_forum
+                &&
+                $this->filter('questionthreads_forum', 'bool')
+            )
+            {
+                $jobParams = [
+                    'forum_id' => $data->node_id
+                ];
+                \XF::app()->jobManager()->enqueueUnique('convertingThreads_' . time(), 'QuestionThreads:QuestionsForumConverter', $jobParams);
+            }
+        }
     }
 }

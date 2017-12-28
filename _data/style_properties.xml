@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <style_properties>
+  <style_property property_name="questionthreads_bestAnswerIcon" group_name="questionThreadsColor" title="Best answer icon" property_type="value" value_type="template" display_order="600">
+    <value_parameters>type=scalar
+template=questionthreads_best_answer_icon</value_parameters>
+    <value>"fa fa-diamond"</value>
+  </style_property>
   <style_property property_name="questionthreads_bestAnswerMessageBg" group_name="questionThreadsColor" title="Best answer message background color" description="Best answer post body background color" property_type="value" value_type="color" value_group="bestAnswer" display_order="300">
     <value>"#DEFFE2"</value>
   </style_property>

@@ -3,35 +3,50 @@
   <phrase title="permission.forum_questionthreads_solve" version_id="1000070" version_string="1.0.0"><![CDATA[Mark questions as "Solved"]]></phrase>
   <phrase title="questionthreads_activity_new_thread" version_id="1000070" version_string="1.0.0"><![CDATA[{username} posted the question {threadTitle} in {forumTitle}.]]></phrase>
   <phrase title="questionthreads_activity_reply_thread" version_id="1000070" version_string="1.0.0"><![CDATA[{username} replied to the question {threadTitle}.]]></phrase>
-  <phrase title="questionthreads_alert_best_answer" version_id="1000070" version_string="1.0.0"><![CDATA[{name} marked your answer to the question {title} as "Best answer"!]]></phrase>
-  <phrase title="questionthreads_alert_remove_best" version_id="1000070" version_string="1.0.0"><![CDATA[{name} removed "Best answer" mark from your answer in question {title}.]]></phrase>
-  <phrase title="questionthreads_alert_remove_best_a" version_id="1000070" version_string="1.0.0"><![CDATA[{name} removed "Best answer" mark from answer in your question {title}.]]></phrase>
-  <phrase title="questionthreads_alert_solved" version_id="1000070" version_string="1.0.0"><![CDATA[{name} marked you question {title} as solved.]]></phrase>
-  <phrase title="questionthreads_alert_unsolved" version_id="1000070" version_string="1.0.0"><![CDATA[{name} marked your question {title} as unsolved.]]></phrase>
+  <phrase title="questionthreads_alert_best_answer" version_id="1000170" version_string="1.0.1"><![CDATA[{name} marked the answer to the question {title} as "Best answer".]]></phrase>
+  <phrase title="questionthreads_alert_best_answer_a" version_id="1000170" version_string="1.0.1"><![CDATA[{name} marked your answer to the question {title} as "Best answer"!]]></phrase>
+  <phrase title="questionthreads_alert_remove_best" version_id="1000170" version_string="1.0.1"><![CDATA[{name} removed "Best answer" mark from post in the question {title}.]]></phrase>
+  <phrase title="questionthreads_alert_remove_best_a" version_id="1000170" version_string="1.0.1"><![CDATA[{name} removed "Best answer" mark from your answer in the question {title}.]]></phrase>
+  <phrase title="questionthreads_alert_solved" version_id="1000170" version_string="1.0.1"><![CDATA[{name} marked the question {title} as solved.]]></phrase>
+  <phrase title="questionthreads_alert_unsolved" version_id="1000170" version_string="1.0.1"><![CDATA[{name} marked the question {title} as unsolved.]]></phrase>
   <phrase title="questionthreads_already_has_best_post" version_id="1000070" version_string="1.0.0"><![CDATA[This question already has best post!]]></phrase>
   <phrase title="questionthreads_already_solved" version_id="1000070" version_string="1.0.0"><![CDATA[This question is already solved!]]></phrase>
   <phrase title="questionthreads_already_unsolved" version_id="1000070" version_string="1.0.0"><![CDATA[This question is not solved yet!]]></phrase>
+  <phrase title="questionthreads_button_best" version_id="1020070" version_string="1.2.0"><![CDATA[Best answer]]></phrase>
   <phrase title="questionthreads_button_solve" version_id="1000070" version_string="1.0.0"><![CDATA[Mark solved]]></phrase>
+  <phrase title="questionthreads_button_unbest" version_id="1020070" version_string="1.2.0"><![CDATA[Not the best answer]]></phrase>
   <phrase title="questionthreads_button_unsolve" version_id="1000070" version_string="1.0.0"><![CDATA[Mark unsolved]]></phrase>
+  <phrase title="questionthreads_converting_to_questions" version_id="1020070" version_string="1.2.0"><![CDATA[QuestionThreads: Converting threads to questions... {convertedNumber} converted.]]></phrase>
   <phrase title="questionthreads_first_post_cant_be_best" version_id="1000070" version_string="1.0.0"><![CDATA[First post in question can't be its best answer!]]></phrase>
   <phrase title="questionthreads_is_question" version_id="1000070" version_string="1.0.0"><![CDATA[Is question]]></phrase>
   <phrase title="questionthreads_is_question_explain" version_id="1000070" version_string="1.0.0"><![CDATA[This thread is a question]]></phrase>
   <phrase title="questionthreads_link_to_best_answer" version_id="1000070" version_string="1.0.0"><![CDATA[Go to best answer]]></phrase>
+  <phrase title="questionthreads_mail_best_answer" version_id="1000170" version_string="1.0.1"><![CDATA[{title} - Best answer]]></phrase>
+  <phrase title="questionthreads_mail_best_answer_a" version_id="1000170" version_string="1.0.1"><![CDATA[{title} - Your answer is the best!]]></phrase>
+  <phrase title="questionthreads_mail_body_best_answer" version_id="1000170" version_string="1.0.1"><![CDATA[<p>{actionCaller} marked reply in question you are watching as best answer at {board}.</p>]]></phrase>
+  <phrase title="questionthreads_mail_body_best_answer_a" version_id="1000170" version_string="1.0.1"><![CDATA[<p>{actionCaller} marked your reply in question you are watching as best answer at {board}.</p>]]></phrase>
+  <phrase title="questionthreads_mail_body_solved" version_id="1000170" version_string="1.0.1"><![CDATA[<p>{actionCaller} marked question you are watching as solved at {board}.</p>]]></phrase>
+  <phrase title="questionthreads_mail_body_unsolved" version_id="1000170" version_string="1.0.1"><![CDATA[<p>{actionCaller} marked question you are watching as unsolved at {board}.</p>]]></phrase>
+  <phrase title="questionthreads_mail_solved" version_id="1000170" version_string="1.0.1"><![CDATA[{title} - Question is solved]]></phrase>
+  <phrase title="questionthreads_mail_unsolved" version_id="1000170" version_string="1.0.1"><![CDATA[{title} - Question is unsolved]]></phrase>
   <phrase title="questionthreads_no_best_post" version_id="1000070" version_string="1.0.0"><![CDATA[There is no best answer in this question!]]></phrase>
   <phrase title="questionthreads_not_a_question" version_id="1000070" version_string="1.0.0"><![CDATA[This thread is not a question!]]></phrase>
-  <phrase title="questionthreads_post_question" version_id="1000070" version_string="1.0.0"><![CDATA[Post question]]></phrase>
+  <phrase title="questionthreads_post_question" version_id="10204071" version_string="1.2.4"><![CDATA[Post question]]></phrase>
   <phrase title="questionthreads_questions" version_id="1000070" version_string="1.0.0"><![CDATA[Questions]]></phrase>
   <phrase title="questionthreads_questions_forum_hint" version_id="1000070" version_string="1.0.0"><![CDATA[If enabled, any new threads posted in this forum will be automatically marked as questions.]]></phrase>
   <phrase title="questionthreads_questions_forum_label" version_id="1000070" version_string="1.0.0"><![CDATA[This forum is for questions only]]></phrase>
   <phrase title="questionthreads_solved_indicator_solved" version_id="1000070" version_string="1.0.0"><![CDATA[Solved]]></phrase>
   <phrase title="questionthreads_solved_indicator_unsolved" version_id="1000070" version_string="1.0.0"><![CDATA[Not solved]]></phrase>
   <phrase title="questionthreads_thread_prompt" version_id="1000070" version_string="1.0.0"><![CDATA[Question title...]]></phrase>
+  <phrase title="questionthreads_view_this_question" version_id="1000170" version_string="1.0.1"><![CDATA[View this question]]></phrase>
+  <phrase title="style_prop.questionthreads_bestAnswerIcon" version_id="1000070" version_string="1.0.0"><![CDATA[Best answer icon]]></phrase>
   <phrase title="style_prop.questionthreads_bestAnswerMessageBg" version_id="1000070" version_string="1.0.0"><![CDATA[Best answer message background color]]></phrase>
   <phrase title="style_prop.questionthreads_bestAnswerUserBg" version_id="1000070" version_string="1.0.0"><![CDATA[Best answer user area background color]]></phrase>
   <phrase title="style_prop.questionthreads_indicatorShape" version_id="1000070" version_string="1.0.0"><![CDATA[Indicator shape]]></phrase>
   <phrase title="style_prop.questionthreads_indicatorSolvedColor" version_id="1000070" version_string="1.0.0"><![CDATA[Solved indicator color]]></phrase>
   <phrase title="style_prop.questionthreads_indicatorUnsolvedColor" version_id="1000070" version_string="1.0.0"><![CDATA[Unsolved indicator color]]></phrase>
   <phrase title="style_prop.questionthreads_isStylingBestAnswerUserBg" version_id="1000070" version_string="1.0.0"><![CDATA[Custom best answer user area background]]></phrase>
+  <phrase title="style_prop_desc.questionthreads_bestAnswerIcon" version_id="10204071" version_string="1.2.4"><![CDATA[]]></phrase>
   <phrase title="style_prop_desc.questionthreads_bestAnswerMessageBg" version_id="1000070" version_string="1.0.0"><![CDATA[Best answer post body background color]]></phrase>
   <phrase title="style_prop_desc.questionthreads_bestAnswerUserBg" version_id="1000070" version_string="1.0.0"><![CDATA[Background color for best answer user area (where avatar, username and user info are located).]]></phrase>
   <phrase title="style_prop_desc.questionthreads_indicatorShape" version_id="1000070" version_string="1.0.0"><![CDATA[]]></phrase>

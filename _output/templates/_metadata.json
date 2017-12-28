@@ -1,13 +1,43 @@
 {
-    "admin/widget_def_options_questionthreads_unsolved.html": {
-        "version_id": 1000070,
-        "version_string": "1.0.0",
-        "hash": "daf25bc490c6fbd53e2f62e48f8f1bab"
+    "admin/questionthreads_best_answer_icon.html": {
+        "version_id": 10204071,
+        "version_string": "1.2.4",
+        "hash": "802dbee871176bfba96d03fab7f5fadc"
+    },
+    "admin/questionthreads_iconpicker.css": {
+        "version_id": 1000170,
+        "version_string": "1.0.1",
+        "hash": "56c457cfc1c47770ff852170679cc5a8"
+    },
+    "email/questionthreads_best_answer.html": {
+        "version_id": 1000170,
+        "version_string": "1.0.1",
+        "hash": "13a97263d138cc3cbeadd77f83214e22"
+    },
+    "email/questionthreads_best_answer_a.html": {
+        "version_id": 1000170,
+        "version_string": "1.0.1",
+        "hash": "1da9b97924539fc4fc530fad512f3a9d"
+    },
+    "email/questionthreads_solved.html": {
+        "version_id": 1000170,
+        "version_string": "1.0.1",
+        "hash": "358590241c671f4ecf2856fcfa26ac5d"
+    },
+    "email/questionthreads_unsolved.html": {
+        "version_id": 1000170,
+        "version_string": "1.0.1",
+        "hash": "3726c07b39dd69484092faa6af4f13bb"
     },
     "public/alert_post_questionthreads_best_post.html": {
         "version_id": 1000070,
         "version_string": "1.0.0",
         "hash": "bf3d7e277179b9ddf303e4a6ab95b183"
+    },
+    "public/alert_post_questionthreads_best_post_a.html": {
+        "version_id": 1000170,
+        "version_string": "1.0.1",
+        "hash": "f8cb47997f69f55fd74a5558ae5cf147"
     },
     "public/alert_post_questionthreads_remove_best.html": {
         "version_id": 1000070,
@@ -30,8 +60,8 @@
         "hash": "225510ce71d22c80094eb0fc5e0897a5"
     },
     "public/questionthreads.less": {
-        "version_id": 1000070,
-        "version_string": "1.0.0",
-        "hash": "7e113ccb3e37611b1c7be3b2196cfb30"
+        "version_id": 10204071,
+        "version_string": "1.2.4",
+        "hash": "4188ae9c27b0907555db623233c7ff43"
     }
 }

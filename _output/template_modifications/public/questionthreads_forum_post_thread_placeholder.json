@@ -1,0 +1,9 @@
+{
+    "template": "forum_post_thread",
+    "description": "Replacing thread title placeholder with custom \"Question title\" text",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<xf:prefixinputrow\n\t\t\t\tlabel=\"{{ phrase('title') }}\"\n\t\t\t\tprefixes=\"{$prefixes}\"\n\t\t\t\ttype=\"thread\"\n\t\t\t\tprefix-value=\"{{ $forum.draft_thread.prefix_id ?: ($thread.prefix_id ?: $forum.default_prefix_id) }}\"\n\t\t\t\ttextbox-value=\"{{ $thread.title ?: $forum.draft_thread.title }}\"\n\t\t\t\ttextbox-class=\"input--title\"\n\t\t\t\tplaceholder=\"{$forum.thread_prompt}\"\n\t\t\t\trowtype=\"fullWidth noLabel\"\n\t\t\t\tautofocus=\"autofocus\"\n\t\t\t\tmaxlength=\"{{ max_length('XF:Thread', 'title') }}\" />",
+    "replace": "<xf:if is=\"$forum.questionthreads_forum\">\n\t<xf:prefixinputrow\n\t\t\t\tlabel=\"{{ phrase('title') }}\"\n\t\t\t\tprefixes=\"{$prefixes}\"\n\t\t\t\ttype=\"thread\"\n\t\t\t\tprefix-value=\"{{ $forum.draft_thread.prefix_id ?: ($thread.prefix_id ?: $forum.default_prefix_id) }}\"\n\t\t\t\ttextbox-value=\"{{ $thread.title ?: $forum.draft_thread.title }}\"\n\t\t\t\ttextbox-class=\"input--title\"\n\t\t\t\tplaceholder=\"{{ phrase('questionthreads_thread_prompt') }}\"\n\t\t\t\trowtype=\"fullWidth noLabel\"\n\t\t\t\tautofocus=\"autofocus\"\n\t\t\t\tmaxlength=\"{{ max_length('XF:Thread', 'title') }}\" />\n<xf:else />\n\t$0\n</xf:if>"
+}

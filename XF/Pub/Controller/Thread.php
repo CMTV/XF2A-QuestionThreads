@@ -2,6 +2,8 @@
 
 namespace QuestionThreads\XF\Pub\Controller;
 
+use QuestionThreads\XF\Service\Thread\Editor;
+use XF\Mvc\Entity\Entity;
 use XF\Mvc\ParameterBag;
 
 class Thread extends XFCP_Thread
@@ -102,5 +104,24 @@ class Thread extends XFCP_Thread
                 throw $this->exception($this->error($error));
             }
         }
+    }
+
+    /**
+     * Convert thread to question is checkbox "Is question" is selected
+     *
+     * @param \XF\Entity\Thread $thread
+     * @return Editor
+     */
+    public function setupThreadEdit(\XF\Entity\Thread $thread)
+    {
+        /** @var Editor $editor */
+        $editor = parent::setupThreadEdit($thread);
+
+        if($this->filter('questionthreads_is_question', 'bool') || $thread->Forum->questionthreads_forum)
+        {
+            $editor->isQuestionThread = true;
+        }
+
+        return $editor;
     }
 }
