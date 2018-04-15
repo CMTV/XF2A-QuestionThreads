@@ -1,4 +1,14 @@
 <?php
+/**
+ * Question Threads
+ *
+ * You CAN use/change/share this code.
+ * Enjoy!
+ *
+ * Written by CMTV
+ * Date: 06.03.2018
+ * Time: 14:47
+ */
 
 namespace QuestionThreads\XF\Admin\Controller;
 
@@ -6,37 +16,28 @@ use XF\Mvc\FormAction;
 
 class Forum extends XFCP_Forum
 {
-    /**
-     * Extending forum save process allowing marking forum as "questions forum"
-     *
-     * @param FormAction $form
-     * @param \XF\Entity\Node $node
-     * @param \XF\Entity\AbstractNode $data
-     */
     protected function saveTypeData(FormAction $form, \XF\Entity\Node $node, \XF\Entity\AbstractNode $data)
     {
         parent::saveTypeData($form, $node, $data);
 
         $form->setup(function() use ($data)
         {
-            $data->questionthreads_forum = $this->filter('questionthreads_forum', 'bool');
+            $data->QT_type = $this->filter('QT_type', 'str');
         });
 
-        $finder = \Xf::finder('XF:Forum');
-        $forum = $finder->where('node_id', $node->node_id)->fetchOne();
-
-        if($forum)
+        if($this->filter('QT_convert_threads', 'bool'))
         {
-            if(
-                !$forum->questionthreads_forum
-                &&
-                $this->filter('questionthreads_forum', 'bool')
-            )
+            /** @var \QuestionThreads\Repository\Forum $forumRepo */
+            $forumRepo = $this->repository('QuestionThreads:Forum');
+
+            switch($this->filter('QT_type', 'str'))
             {
-                $jobParams = [
-                    'forum_id' => $data->node_id
-                ];
-                \XF::app()->jobManager()->enqueueUnique('convertingThreads_' . time(), 'QuestionThreads:QuestionsForumConverter', $jobParams);
+                case \QuestionThreads\XF\Entity\Forum::QT_THREADS_ONLY:
+                    $forumRepo->convertToThreadsOnly($data);
+                    break;
+                case \QuestionThreads\XF\Entity\Forum::QT_QUESTIONS_ONLY:
+                    $forumRepo->convertToQuestionsOnly($data);
+                    break;
             }
         }
     }

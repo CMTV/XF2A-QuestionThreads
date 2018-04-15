@@ -1,0 +1,1 @@
+A user who answered at least once in 10 questions and has 5 best answers will have a ratio of 0.5.

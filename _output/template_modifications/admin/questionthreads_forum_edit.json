@@ -1,9 +1,0 @@
-{
-    "template": "forum_edit",
-    "description": "Adding an option to mark forum as questions only",
-    "execution_order": 10,
-    "enabled": true,
-    "action": "str_replace",
-    "find": "<xf:option name=\"allow_posting\"",
-    "replace": "<xf:option name=\"questionthreads_forum\" selected=\"$forum.questionthreads_forum\"\n    label=\"{{ phrase('questionthreads_questions_forum_label') }}\"\n    hint=\"{{ phrase('questionthreads_questions_forum_hint') }}\" />\n$0"
-}

@@ -1,0 +1,8 @@
+<xf:if is="{{ $thread->canEditType() }}">
+	<xf:formrow rowtype="{{ $quickEdit ? 'fullWidth' : '' }}" label="{{ phrase('type') }}">
+		<xf:radio name="QT_question" value="{$thread.QT_question}">
+			<xf:option value="0" label="{{ phrase('thread') }}" />
+			<xf:option value="1" label="{{ phrase('question') }}" />
+		</xf:radio>
+	</xf:formrow>
+</xf:if>

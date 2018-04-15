@@ -1,0 +1,9 @@
+{
+    "template": "tag_view",
+    "description": "Including QuestionThreads.less",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<xf:title page=\"{$page}\">{$tag.tag}</xf:title>",
+    "replace": "$0\n\n<xf:css src=\"QuestionThreads.less\" />"
+}

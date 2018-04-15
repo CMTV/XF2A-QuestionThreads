@@ -1,9 +1,0 @@
-{
-    "template": "forum_view",
-    "description": "Replacing \"Post Thread\" text with \"Post question\"",
-    "execution_order": 10,
-    "enabled": true,
-    "action": "str_replace",
-    "find": "<xf:button href=\"{{ link('forums/post-thread', $forum) }}\" class=\"button--cta\" icon=\"write\">\n\t\t{{ phrase('post_thread') }}\n\t</xf:button>",
-    "replace": "<xf:if is=\"$forum->questionthreads_forum\">\n\t<xf:button href=\"{{ link('forums/post-thread', $forum) }}\" class=\"button--cta\" icon=\"questionthreads-question\">\n\t\t{{ phrase('questionthreads_post_question') }}\n\t</xf:button>\n<xf:else />\n\t$0\n</xf:if>"
-}

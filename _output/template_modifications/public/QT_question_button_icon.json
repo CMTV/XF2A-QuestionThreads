@@ -1,0 +1,9 @@
+{
+    "template": "core_button.less",
+    "description": "Adding question icon to a list of icons for buttons",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "&--add          { .m-buttonIcon(@fa-var-plus-square, .79em); }",
+    "replace": "$0\n\n&--QT_question          { .m-buttonIcon(@fa-var-question, .45em); }"
+}

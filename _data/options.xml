@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<options>
+  <option option_id="QT_useIconForQuestionsOnly" edit_format="onoff" data_type="boolean">
+    <default_value>1</default_value>
+    <relation group_id="questionThreads" display_order="20"/>
+  </option>
+  <option option_id="QT_useQuestionPrompt" edit_format="onoff" data_type="boolean">
+    <default_value>1</default_value>
+    <relation group_id="questionThreads" display_order="10"/>
+  </option>
+</options>

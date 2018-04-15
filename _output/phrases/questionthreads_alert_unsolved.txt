@@ -1,1 +1,0 @@
-{name} marked the question {title} as unsolved.

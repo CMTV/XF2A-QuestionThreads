@@ -1,0 +1,9 @@
+{
+    "template": "forum_post_thread",
+    "description": "\"Post question\" button near \"Post thread\"",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<xf:if is=\"!$xf.visitor.user_id\">",
+    "replace": "<xf:include template=\"QT_forum_post_thread_is_question\" />\n\n$0"
+}

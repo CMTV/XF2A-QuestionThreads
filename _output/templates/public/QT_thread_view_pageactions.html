@@ -1,0 +1,13 @@
+<xf:pageaction if="$thread.QT_question">
+	<xf:if is="{{ !$thread.QT_solved && $thread->canMarkSolved() }}">
+		<xf:button href="{{ link('threads/markSolved', $thread) }}" class="QT_pageaction_solved" icon="confirm">
+			{{ phrase('QT_mark_solved') }}
+		</xf:button>
+	</xf:if>
+	
+	<xf:if is="{{ $thread.QT_solved && $thread->canMarkUnsolved() }}">
+		<xf:button href="{{ link('threads/markUnsolved', $thread) }}" class="QT_pageaction_unsolved" icon="cancel">
+			{{ phrase('QT_mark_unsolved') }}
+		</xf:button>
+	</xf:if>
+</xf:pageaction>

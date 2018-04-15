@@ -1,1 +1,0 @@
-<p>{actionCaller} marked your reply in question you are watching as best answer at {board}.</p>

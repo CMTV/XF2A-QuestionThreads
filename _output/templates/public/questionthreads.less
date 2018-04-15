@@ -1,123 +1,187 @@
-/* ===================================================================================== */
-/* Indicator */
-/* ===================================================================================== */
-.questionthreads-indicator {
-	display: inline-block;
+///////////////////
+/////////////////// Question mark
+///////////////////
+
+.QT_question_mark
+{
+	margin-right: 3px;
+
+	.contentRow & 
+	{
+		margin-right: 1px;
+	}
 	
+	.xf-QT_question_mark_general_css();
+}
+
+.QT_question_mark_shape
+{
+	display: inline-block;
+
 	width: 10px;
 	height: 10px;
-	
-	margin-right: 5px;
-	
-	border: 1px solid;
-	
-	/* Shape */
-	& when (@xf-questionthreads_indicatorShape = "circle") {
-		border-radius: 50%;
+
+	&.QT_solved
+	{
+		background: @xf-QT_shape_solved_color;
+		border-color: xf-intensify(@xf-QT_shape_solved_color, 10%);
 	}
-	& when (@xf-questionthreads_indicatorShape = "square") {
-		border-radius: 0;
+
+	&.QT_unsolved
+	{
+		background: @xf-QT_shape_unsolved_color;
+		border-color: xf-intensify(@xf-QT_shape_unsolved_color, 10%);
 	}
-	
-	/* Colors */
-	&.questionthreads-solved {
-		background: @xf-questionthreads_indicatorSolvedColor;
-		border-color: @xf-questionthreads_indicatorSolvedColor - #2C2C2C;
-	}
-	
-	&.questionthreads-unsolved {
-		background: @xf-questionthreads_indicatorUnsolvedColor;
-		border-color: @xf-questionthreads_indicatorUnsolvedColor - #2C2C2C;
-	}
-	
-	/* Sizes */
-	&.questionthreads-big {
-		width: 12px;
-		height: 12px;
-	}
+
+	.xf-QT_question_mark_shape_css();
 }
 
-/* ===================================================================================== */
-/* Best answer icon link */
-/* ===================================================================================== */
-a.questionthreads-best-answer-icon-link {
+.QT_question_mark_icon
+{
+	&.QT_solved
+	{
+		color: @xf-QT_shape_solved_color;
+	}
+
+	&.QT_unsolved
+	{
+		color: @xf-QT_shape_unsolved_color;
+	}
+
+	.xf-QT_question_mark_icon_css();
+}
+
+.QT_question_mark_image
+{
+	.xf-QT_question_mark_image_css();
+}
+
+///////////////////
+/////////////////// Best answer mark
+///////////////////
+
+.QT_best_answer_mark
+{
+	.xf-QT_best_answer_mark_general_css();
+}
+
+.QT_best_answer_link
+{
+	&:hover
+	{
+		text-decoration: none;
+	}
+
+	.contentRow &
+	{
+		padding-right: 0px;
+	}
+	
+	.xf-QT_best_answer_link_css();
+}
+
+.QT_best_answer_mark_icon
+{
+	color: @xf-QT_best_answer_mark_color;
 	font-size: 90%;
-	color: @xf-questionthreads_indicatorSolvedColor - #181818;
-	margin-right: 2px;
+
+	&:hover
+	{
+		color: xf-intensify(@xf-QT_best_answer_mark_color, 7%);
+	}
+
+	.xf-QT_best_answer_mark_icon_css();
+}
+
+.QT_best_answer_mark_image
+{
+	.QT_best_answer_action &
+	{
+		vertical-align: bottom;
+		vertical-align: text-bottom;
+	}
+
+	.xf-QT_best_answer_mark_image_css();
+}
+
+.message-QT_best_answer
+{
+	.xf-QT_best_answer_indicator_css();
+}
+
+///////////////////
+/////////////////// Best answer
+///////////////////
+
+.QT_best_answer
+{
+	&.QT_message_background
+	{
+		.message-cell--main
+		{
+			background: @xf-QT_best_answer_message_background_color;
+		}
+
+		.message-userArrow:after
+		{
+			border-right-color: @xf-QT_best_answer_message_background_color;
+		}
+
+		@media (max-width: @xf-messageSingleColumnWidth) {
+			.message-userArrow:after
+			{
+				border-right-color: transparent;
+				border-bottom-color: @xf-QT_best_answer_message_background_color !important;
+			}
+		}
+	}
+
+	&.QT_user_block_background
+	{
+		.message-cell--user
+		{
+			background: @xf-QT_best_answer_user_block_background_color;
+		}
+	}
+
+	.xf-QT_best_answer_message_css();
+}
+
+///////////////////
+/////////////////// Select/Unselect best answer buttons
+///////////////////
+
+.QT_best_answer_action
+{
+	&.QT_select
+	{
+		color: @xf-QT_best_answer_mark_color;
+	}
 	
-	&:hover {
-		color: @xf-questionthreads_indicatorSolvedColor - #2C2C2C;
+	&.QT_unselect
+	{
+		color: @xf-QT_shape_unsolved_color;
 	}
 }
 
-/* ===================================================================================== */
-/* Best answer post */
-/* ===================================================================================== */
-.questionthreads-best-answer {
-	/* Message area */
-	&.questionthreads-message {
-		background: @xf-questionthreads_bestAnswerMessageBg;
-	}
-	
-	/* User area */
-	&.questionthreads-user when (@xf-questionthreads_isStylingBestAnswerUserBg = 1) {
-		background: @xf-questionthreads_bestAnswerUserBg;
-	}
-	
-	/* Arrow pointing form message area to user area */
-	&.questionthreads-user .message-userArrow:after {
-		border-right-color: @xf-questionthreads_bestAnswerMessageBg;
-	}
+///////////////////
+/////////////////// Solved/Unsolved pageaction buttons
+///////////////////
+
+.button.QT_pageaction_solved
+{
+	.xf-buttonCta();
+
+	background: @xf-QT_shape_solved_color;
+
+	.m-buttonBlockColorVariationSimple(xf-default(@xf-QT_shape_solved_color, transparent));
 }
 
-/* Arrow pointing form message area to user area (small layout) */
-@media (max-width: @xf-messageSingleColumnWidth) {
-	.questionthreads-best-answer.questionthreads-user .message-userArrow:after {
-		border-right-color: transparent;
-		border-bottom-color: @xf-questionthreads_bestAnswerMessageBg;
-	}
-}
+.button.QT_pageaction_unsolved
+{
+	.xf-buttonCta();
 
-/* ===================================================================================== */
-/* Solve/Unsolve action button */
-/* ===================================================================================== */
-a.questionthreads-solve-action-button {
-	background: @xf-questionthreads_indicatorSolvedColor - #0D0D0D;
-	border-left-color: @xf-questionthreads_indicatorSolvedColor - #181818;
-	border-bottom-color: @xf-questionthreads_indicatorSolvedColor - #181818;
-	border-right-color: @xf-questionthreads_indicatorSolvedColor - #0F0F0F;
-	border-top-color: @xf-questionthreads_indicatorSolvedColor - #0F0F0F;
-	
-	&:hover, &:focus {
-		background: @xf-questionthreads_indicatorSolvedColor - #232323 !important;
-	}
-}
+	background: @xf-QT_shape_unsolved_color;
 
-a.questionthreads-unsolve-action-button {
-	background: @xf-questionthreads_indicatorUnsolvedColor - #0D0D0D;
-	border-left-color: @xf-questionthreads_indicatorUnsolvedColor - #181818;
-	border-bottom-color: @xf-questionthreads_indicatorUnsolvedColor - #181818;
-	border-right-color: @xf-questionthreads_indicatorUnsolvedColor - #0F0F0F;
-	border-top-color: @xf-questionthreads_indicatorUnsolvedColor - #0F0F0F;
-	
-	&:hover, &:focus {
-		background: @xf-questionthreads_indicatorUnsolvedColor - #232323 !important;
-	}
-}
-
-/* ===================================================================================== */
-/* Best answer mark/unmark buttons */
-/* ===================================================================================== */
-a.questionthreads-mark-best, a.questionthreads-unmark-best {
-	i {
-		padding-right: 5px;
-	}
-}
-
-a.questionthreads-mark-best {
-	color: @xf-questionthreads_indicatorSolvedColor - #232323;
-}
-
-a.questionthreads-unmark-best {
-	color: @xf-questionthreads_indicatorUnsolvedColor - #232323;
+	.m-buttonBlockColorVariationSimple(xf-default(@xf-QT_shape_unsolved_color, transparent));
 }

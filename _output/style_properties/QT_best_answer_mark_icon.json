@@ -1,0 +1,13 @@
+{
+    "group_name": "questionThreads",
+    "title": "Best answer mark icon",
+    "description": "Put FontAwesome icon code in this field. <a href=\"https://fontawesome.com/v4.7.0/icons/\" target=\"_blank\">List of available icons</a>.",
+    "property_type": "value",
+    "css_components": [],
+    "value_type": "string",
+    "value_parameters": "",
+    "depends_on": "",
+    "value_group": "bestAnswerMark",
+    "property_value": "fa-diamond",
+    "display_order": 530
+}

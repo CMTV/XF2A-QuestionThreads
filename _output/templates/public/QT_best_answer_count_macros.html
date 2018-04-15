@@ -1,0 +1,40 @@
+<xf:macro name="member_macros" arg-user="!">
+	<xf:set var="$_QT_property" value="{{ property('QT_total_best_answers_positions') }}" />
+
+	<!--[QT:stat_pairs:above_best_answers]-->
+	<xf:if is="{{ $_QT_property.member_profile_page }}">
+		<dl class="pairs pairs--rows pairs--rows--centered">
+			<dt>{{ phrase('QT_best_answers') }}</dt>
+			<dd>
+				<a href="{{ link('members/bestAnswers', $user) }}" class="fauxBlockLink-linkRow u-concealed">
+					{$user.QT_best_answer_count|number}
+				</a>
+			</dd>
+		</dl>
+	</xf:if>
+</xf:macro>
+
+<xf:macro name="message_macros" arg-extras="!" arg-user="!">
+	<xf:if is="$extras.QT_best_answer_count">
+		<dl class="pairs pairs--justified">
+			<dt>{{ phrase('QT_best_answers') }}</dt>
+			<dd>{$user.QT_best_answer_count|number}</dd>
+		</dl>
+	</xf:if>
+</xf:macro>
+
+<xf:macro name="account_visitor_menu">
+	<xf:set var="$_QT_property" value="{{ property('QT_total_best_answers_positions') }}" />
+
+	<!--[QT:stat_pairs:above_best_answers]-->
+	<xf:if is="{{ $_QT_property.member_account_menu }}">
+		<dl class="pairs pairs--justified fauxBlockLink">
+			<dt>{{ phrase('QT_best_answers') }}</dt>
+			<dd>
+				<a href="{{ link('members/bestAnswers', $xf.visitor) }}" class="fauxBlockLink-linkRow u-concealed">
+					{$xf.visitor.QT_best_answer_count|number}
+				</a>
+			</dd>
+		</dl>
+	</xf:if>
+</xf:macro>

@@ -1,0 +1,1 @@
+Usually a small token attached to the message block indicating that this message is the best answer

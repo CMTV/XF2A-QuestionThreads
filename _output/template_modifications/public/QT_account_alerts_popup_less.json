@@ -1,0 +1,9 @@
+{
+    "template": "account_alerts_popup",
+    "description": "Including QuestionThreads.less",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<xf:if is=\"$alerts is not empty\">",
+    "replace": "<xf:css src=\"QuestionThreads.less\" />\n\n$0"
+}

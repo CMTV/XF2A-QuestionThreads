@@ -1,9 +1,0 @@
-{
-    "event_id": "entity_structure",
-    "execute_order": 10,
-    "callback_class": "QuestionThreads\\ExtendEntities",
-    "callback_method": "extendThreadEntityStructure",
-    "active": true,
-    "hint": "XF\\Entity\\Thread",
-    "description": "Adding 'questionthreads_is_question', 'questionthreads_is_solved' and 'questionthreads_best_post' columns to thread entity structure"
-}

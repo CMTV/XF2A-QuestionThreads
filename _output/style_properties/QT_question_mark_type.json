@@ -1,0 +1,13 @@
+{
+    "group_name": "questionThreads",
+    "title": "Question mark type",
+    "description": "",
+    "property_type": "value",
+    "css_components": [],
+    "value_type": "radio",
+    "value_parameters": "shape={{ phrase('QT_shape') }}\nicon={{ phrase('QT_icon') }}\nimage={{ phrase('image') }}",
+    "depends_on": "",
+    "value_group": "questionMarkType",
+    "property_value": "shape",
+    "display_order": 10
+}

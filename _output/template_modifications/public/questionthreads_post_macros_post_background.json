@@ -1,9 +1,0 @@
-{
-    "template": "post_macros",
-    "description": "Changing best answer message background",
-    "execution_order": 10,
-    "enabled": true,
-    "action": "str_replace",
-    "find": "<div class=\"message-cell message-cell--main\">",
-    "replace": "<xf:if is=\"$post.post_id === $thread.questionthreads_best_post\">\n\t<div class=\"message-cell message-cell--main questionthreads-best-answer questionthreads-message\">\n<xf:else />\n\t$0\n</xf:if>"
-}

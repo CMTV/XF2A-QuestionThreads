@@ -1,0 +1,9 @@
+{
+    "template": "search_result_thread",
+    "description": "Adding question mark and best answer icons before thread title",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<h3 class=\"contentRow-title\">",
+    "replace": "$0\n\n<xf:include template=\"QT_search_result_thread_question_additions\" />"
+}

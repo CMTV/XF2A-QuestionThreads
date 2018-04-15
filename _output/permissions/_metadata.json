@@ -1,5 +1,38 @@
 {
-    "forum-questionthreads_solve.json": {
-        "hash": "8b62ab8bc1ebb5fa552dda6aa21175a4"
+    "forum-QT_createQuestion.json": {
+        "hash": "a174533a9e2e5b815e1471f801340161"
+    },
+    "forum-QT_editAnyThreadType.json": {
+        "hash": "7cefb756860f7955b7eaa1e47b1952b2"
+    },
+    "forum-QT_editOwnThreadType.json": {
+        "hash": "f6c4c1c5f4859116a975e8a3897c9ce4"
+    },
+    "forum-QT_markAnySolved.json": {
+        "hash": "dc6eea26989de42a4746df2939357284"
+    },
+    "forum-QT_markAnyUnsolved.json": {
+        "hash": "0ba2381d4c63b05ec6611884cd18d84f"
+    },
+    "forum-QT_markOwnSolved.json": {
+        "hash": "f13bfba05879bdb14a97cdd9f64b624d"
+    },
+    "forum-QT_markOwnUnsolved.json": {
+        "hash": "d3bf0c445b68dbeb5218f98fcf3b2199"
+    },
+    "forum-QT_selectBestAnswerAny.json": {
+        "hash": "ff76f8f3ae33f0f1584bfab883f02825"
+    },
+    "forum-QT_selectBestAnswerOwn.json": {
+        "hash": "8fc2471d81926cad75c9042c214e57ee"
+    },
+    "forum-QT_selectBestAnswerOwn_.json": {
+        "hash": "a27a9bc36c4a497c503ca49dd922c68b"
+    },
+    "forum-QT_unselectBestAnswerAny.json": {
+        "hash": "341f113d3fe6697cde9e83578c4bfd6a"
+    },
+    "forum-QT_unselectBestAnswerOwn.json": {
+        "hash": "a8fdbd02ba846c314f8eb42fe0e6a34d"
     }
 }

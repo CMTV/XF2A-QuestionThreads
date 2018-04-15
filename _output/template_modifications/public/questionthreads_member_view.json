@@ -1,9 +1,0 @@
-{
-    "template": "member_view",
-    "description": "Adding style to member view",
-    "execution_order": 10,
-    "enabled": true,
-    "action": "str_replace",
-    "find": "<h2 class=\"block-tabHeader block-tabHeader--memberTabs tabs hScroller\"",
-    "replace": "<xf:css src=\"questionthreads.less\"/>\n\n$0"
-}

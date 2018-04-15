@@ -1,14 +1,16 @@
 {
     "legacy_addon_id": "",
     "title": "Question Threads",
-    "description": "Create questions and mark best answers.",
-    "version_id": 1020570,
-    "version_string": "1.2.5",
+    "description": "This addon allows users to create question threads, mark them solved and choose the best answers.",
+    "version_id": 2000270,
+    "version_string": "2.0.2",
     "dev": "CMTV",
-    "dev_url": "https://xenforo.com/community/resources/authors/cmtv.162075/",
+    "dev_url": "https://xenforo.com/community/members/cmtv.162075/",
     "faq_url": "",
-    "support_url": "",
-    "extra_urls": [],
+    "support_url": "https://xenforo.com/community/threads/question-threads.136052/",
+    "extra_urls": {
+        "My addons": "https://xenforo.com/community/resources/authors/cmtv.162075/"
+    },
     "require": [],
     "icon": "fa-question-circle"
 }

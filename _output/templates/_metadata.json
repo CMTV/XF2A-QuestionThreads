@@ -1,67 +1,122 @@
 {
-    "admin/questionthreads_best_answer_icon.html": {
-        "version_id": 10204071,
-        "version_string": "1.2.4",
-        "hash": "802dbee871176bfba96d03fab7f5fadc"
+    "admin/QT_forum_type.html": {
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "555ea7f032444bda147ed3f7257c9964"
     },
-    "admin/questionthreads_iconpicker.css": {
-        "version_id": 1000170,
-        "version_string": "1.0.1",
-        "hash": "56c457cfc1c47770ff852170679cc5a8"
+    "admin/QT_helper_criteria.html": {
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "d327cb3a4af96610a1a6d65d71671262"
     },
-    "email/questionthreads_best_answer.html": {
-        "version_id": 1000170,
-        "version_string": "1.0.1",
-        "hash": "13a97263d138cc3cbeadd77f83214e22"
+    "admin/QT_style_property_template_totalBestAnswersPositions.html": {
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "ff8db54806aa1a430951d717f3b0dca4"
     },
-    "email/questionthreads_best_answer_a.html": {
-        "version_id": 1000170,
-        "version_string": "1.0.1",
-        "hash": "1da9b97924539fc4fc530fad512f3a9d"
+    "admin/QT_tools_rebuild.html": {
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "320fe0aa430a340f101c2525a8c795f3"
     },
-    "email/questionthreads_solved.html": {
-        "version_id": 1000170,
-        "version_string": "1.0.1",
-        "hash": "358590241c671f4ecf2856fcfa26ac5d"
+    "email/QT_best_answer_selected.html": {
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "0ee77dc9b4308d59c21ff1adb818483d"
     },
-    "email/questionthreads_unsolved.html": {
-        "version_id": 1000170,
-        "version_string": "1.0.1",
-        "hash": "3726c07b39dd69484092faa6af4f13bb"
+    "email/QT_email_macros.html": {
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "581fe0c95e6a0c6c635274223eeb4622"
     },
-    "public/alert_post_questionthreads_best_post.html": {
-        "version_id": 1000070,
-        "version_string": "1.0.0",
-        "hash": "bf3d7e277179b9ddf303e4a6ab95b183"
+    "email/QT_question_solved.html": {
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "67284ebe73d8459c65f27b1b6985f616"
     },
-    "public/alert_post_questionthreads_best_post_a.html": {
-        "version_id": 1000170,
-        "version_string": "1.0.1",
-        "hash": "f8cb47997f69f55fd74a5558ae5cf147"
+    "public/QT_best_answer_count_macros.html": {
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "0a44428a4c59299e51dc275dcfda3b86"
     },
-    "public/alert_post_questionthreads_remove_best.html": {
-        "version_id": 1000070,
-        "version_string": "1.0.0",
-        "hash": "53dd8f973db688a75d65fc9e623b1824"
+    "public/QT_forum_post_thread_is_question.html": {
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "49827fe5cc53928ff80cd205af0605f1"
     },
-    "public/alert_post_questionthreads_remove_best_a.html": {
-        "version_id": 1000070,
-        "version_string": "1.0.0",
-        "hash": "fa9a0efeef0254960f2ca6708da4af68"
+    "public/QT_macros.html": {
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "f24bd30354afe428163bd6d0f5927733"
     },
-    "public/alert_thread_questionthreads_solved.html": {
-        "version_id": 1000070,
-        "version_string": "1.0.0",
-        "hash": "8861cd5f984ecbfd41de90c3821b932c"
+    "public/QT_member_best_answers.html": {
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "ae729e71775ddae7a79ef03c49e271bf"
     },
-    "public/alert_thread_questionthreads_unsolved.html": {
-        "version_id": 1000070,
-        "version_string": "1.0.0",
-        "hash": "225510ce71d22c80094eb0fc5e0897a5"
+    "public/QT_member_macros_best_answer_count.html": {
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "a2ae56442ca46bf5ab8efd4208ab213f"
     },
-    "public/questionthreads.less": {
-        "version_id": 10204071,
-        "version_string": "1.2.4",
-        "hash": "4188ae9c27b0907555db623233c7ff43"
+    "public/QT_post_edit_thread_type_switcher.html": {
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "0692715f037ec2a6280f57ab12819b8b"
+    },
+    "public/QT_post_macros_best_answer.html": {
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "a693176043d78ca86fa6e463c0a2a9a9"
+    },
+    "public/QT_post_macros_best_answer_indicator.html": {
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "8ade3404031e76aa6da2735190538beb"
+    },
+    "public/QT_search_result_post_best_answer.html": {
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "883e4a83a1becd112d71966776bc9ef2"
+    },
+    "public/QT_search_result_thread_question_additions.html": {
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "b6fef244ab593ccceb5a14aedfe47dcf"
+    },
+    "public/QT_thread_edit_type_switcher.html": {
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "fa25e9125a71c6da36227f77d986b523"
+    },
+    "public/QT_thread_list_macros_question_additions.html": {
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "b6fef244ab593ccceb5a14aedfe47dcf"
+    },
+    "public/QT_thread_view_pageactions.html": {
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "46eccccc89bf68dd2d34e2d3fc31a265"
+    },
+    "public/QT_thread_view_question_mark.html": {
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "da2d6287c113e6d336e75514c6ea9ef7"
+    },
+    "public/QuestionThreads.less": {
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "f1694e5c47a770776ef034b8d9527f15"
+    },
+    "public/alert_post_QT_best_answer_selected.html": {
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "71c95deb1fe3600f29610aaa44364b41"
+    },
+    "public/alert_thread_QT_solved.html": {
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "7620e07327e80d7205775eb67427fe0d"
     }
 }

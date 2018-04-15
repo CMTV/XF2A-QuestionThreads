@@ -1,178 +1,206 @@
 <?php
+/**
+ * Question Threads
+ *
+ * You CAN use/change/share this code.
+ * Enjoy!
+ *
+ * Written by CMTV
+ * Date: 07.03.2018
+ * Time: 15:44
+ */
 
 namespace QuestionThreads\XF\Entity;
 
-use QuestionThreads\NotificationHelper;
-use XF\Entity\User;
-use XF\Repository\UserAlert;
+use QuestionThreads\Repository\BestAnswer;
+use XF\Mvc\Entity\Structure;
 
+/**
+ * COLUMNS
+ * @property bool QT_question
+ * @property bool QT_solved
+ * @property int QT_best_answer_id
+ */
 class Thread extends XFCP_Thread
 {
-    /**
-     * Can current thread be solved
-     *
-     * @param null $error
-     * @return bool
-     */
-    public function canSolve(&$error = null)
+    public static function getStructure(Structure $structure)
+    {
+        $structure = parent::getStructure($structure);
+
+        $structure->columns['QT_question'] = [
+            'type' => self::BOOL,
+            'default' => false
+        ];
+        $structure->columns['QT_solved'] = [
+            'type' => self::BOOL,
+            'default' => false
+        ];
+        $structure->columns['QT_best_answer_id'] = [
+            'type' => self::UINT,
+            'default' => 0
+        ];
+
+        return $structure;
+    }
+
+    protected function _postDelete()
+    {
+        if($this->QT_best_answer_id)
+        {
+            $bestAnswer = $this->finder('QuestionThreads:BestAnswer')->where(['post_id' => $this->QT_best_answer_id])->fetchOne();
+
+            if($bestAnswer)
+            {
+                $bestAnswer->delete();
+            }
+        }
+
+        parent::_postDelete();
+    }
+
+    protected function threadHidden($hardDelete = false)
+    {
+        if($this->QT_best_answer_id)
+        {
+            /** @var \QuestionThreads\Entity\BestAnswer $bestAnswer */
+            $bestAnswer = $this->finder('QuestionThreads:BestAnswer')->where(['post_id' => $this->QT_best_answer_id])->fetchOne();
+
+            if($bestAnswer)
+            {
+                $bestAnswer->fastUpdate('is_counted', 0);
+
+                /** @var BestAnswer $bestAnswerRepo */
+                $bestAnswerRepo = $this->repository('QuestionThreads:BestAnswer');
+                $bestAnswerRepo->adjustBestAnswers($bestAnswer->BestAnswerPoster);
+            }
+        }
+
+        parent::threadHidden($hardDelete);
+    }
+
+    protected function threadMadeVisible()
+    {
+        if($this->QT_question && $this->QT_best_answer_id)
+        {
+            /** @var \QuestionThreads\Entity\BestAnswer $bestAnswer */
+            $bestAnswer = $this->finder('QuestionThreads:BestAnswer')->where(['post_id' => $this->QT_best_answer_id])->fetchOne();
+
+            if($bestAnswer)
+            {
+                $bestAnswer->fastUpdate('is_counted', 1);
+
+                /** @var BestAnswer $bestAnswerRepo */
+                $bestAnswerRepo = $this->repository('QuestionThreads:BestAnswer');
+                $bestAnswerRepo->adjustBestAnswers($bestAnswer->BestAnswerPoster);
+            }
+        }
+
+        parent::threadMadeVisible();
+    }
+
+    public function canEditType()
     {
         $visitor = \XF::visitor();
 
-        /* If this thread is question thread */
-        if(!$this->questionthreads_is_question)
-        {
-            $error = \XF::phrase('questionthreads_not_a_question');
-            return false;
-        }
-
-        /* Question is already solved */
-        if($this->questionthreads_is_solved)
-        {
-            $error = \XF::phrase('questionthreads_already_solved');
-            return false;
-        }
-
-        /* Visitor and question author are the same */
-        if ($visitor->user_id === $this->user_id)
+        if($visitor->hasPermission('forum', 'QT_editAnyThreadType'))
         {
             return true;
         }
 
-        /* Visitor has permission */
-        if($visitor->hasPermission('forum', 'questionthreads_solve'))
+        if(
+            $visitor->hasPermission('forum', 'QT_editOwnThreadType')
+            && $this->user_id === $visitor->user_id
+            && $this->Forum->QT_type === Forum::QT_THREADS_QUESTIONS
+        )
         {
             return true;
         }
-        else
-        {
-            $error = 403;
-            return false;
-        }
+
+        return false;
     }
 
-    /**
-     * Can current thread be unsolved
-     *
-     * @param null $error
-     * @return bool
-     */
-    public function canUnsolve(&$error = null)
+    public function canMarkSolved()
     {
         $visitor = \XF::visitor();
 
-        /* If this thread is question thread */
-        if(!$this->questionthreads_is_question)
-        {
-            $error = \XF::phrase('questionthreads_not_a_question');
-            return false;
-        }
-
-        /* Question is already unsolved */
-        if(!$this->questionthreads_is_solved)
-        {
-            $error = \XF::phrase('questionthreads_already_unsolved');
-            return false;
-        }
-
-        /* Visitor has permission */
-        if($visitor->hasPermission('forum', 'questionthreads_solve'))
+        if($visitor->hasPermission('forum', 'QT_markAnySolved'))
         {
             return true;
         }
-        else
+
+        if(
+            $visitor->hasPermission('forum', 'QT_markOwnSolved')
+            && $this->user_id === $visitor->user_id
+        )
         {
-            $error = 403;
-            return false;
+            return true;
         }
+
+        return false;
     }
 
-    /**
-     * Can remove "Best answer" mark from answer
-     *
-     * @param null $error
-     * @return bool
-     */
-    public function canRemoveBest(&$error = null)
+    public function canMarkUnsolved()
     {
         $visitor = \XF::visitor();
 
-        /* If this thread is question thread */
-        if(!$this->questionthreads_is_question)
-        {
-            $error = \XF::phrase('questionthreads_not_a_question');
-            return false;
-        }
-
-        /* If there current question already has best answer */
-        if(!$this->questionthreads_best_post)
-        {
-            $error = \XF::phrase('questionthreads_no_best_post');
-            return false;
-        }
-
-        /* Visitor has permission */
-        if($visitor->hasPermission('forum', 'questionthreads_solve'))
+        if($visitor->hasPermission('forum', 'QT_markAnyUnsolved'))
         {
             return true;
         }
-        else
+
+        if(
+            $visitor->hasPermission('forum', 'QT_markOwnUnsolved')
+            && $this->user_id === $visitor->user_id
+        )
         {
-            $error = 403;
-            return false;
+            return true;
         }
+
+        return false;
     }
 
-    /**
-     * Marking current thread as solved
-     */
-    public function solve()
+    public function canSelectBestAnswer(Post $post = null)
     {
-        $this->questionthreads_is_solved = true;
-        $this->save();
+        $visitor = \XF::visitor();
 
-        $jobParams = [
-            'thread_id' => $this->thread_id,
-            'actionCaller_id' => \XF::visitor()->user_id,
-            'alertType' => NotificationHelper::THREAD_SOLVED
-        ];
-        \XF::app()->jobManager()->enqueueUnique('solvedAlerting_' . time(), 'QuestionThreads:Alerter', $jobParams);
-        \XF::app()->jobManager()->enqueueUnique('solvedEmailing_' . time(), 'QuestionThreads:Emailer', $jobParams);
+        if($visitor->hasPermission('forum', 'QT_selectBestAnswerAny'))
+        {
+            return true;
+        }
+
+        if(
+            $visitor->hasPermission('forum', 'QT_selectBestAnswerOwn')
+            && $this->user_id === $visitor->user_id
+        )
+        {
+            if ($post && $post->user_id === $visitor->user_id)
+            {
+                return $visitor->hasPermission('forum', 'QT_selectBestAnswerOwn_');
+            }
+
+            return true;
+        }
+
+        return false;
     }
 
-    /**
-     * Marking current thread as unsolved
-     */
-    public function unsolve()
+    public function canUnselectBestAnswer()
     {
-        $this->questionthreads_is_solved = false;
-        $this->questionthreads_best_post = 0;
-        $this->save();
+        $visitor = \XF::visitor();
 
-        $jobParams = [
-            'thread_id' => $this->thread_id,
-            'actionCaller_id' => \XF::visitor()->user_id,
-            'alertType' => NotificationHelper::THREAD_UNSOLVED
-        ];
-        \XF::app()->jobManager()->enqueueUnique('unsolvedAlerting_' . time(), 'QuestionThreads:Alerter', $jobParams);
-        \XF::app()->jobManager()->enqueueUnique('unsolvedEmailing_' . time(), 'QuestionThreads:Emailer', $jobParams);
-    }
+        if($visitor->hasPermission('forum', 'QT_unselectBestAnswerAny'))
+        {
+            return true;
+        }
 
-    /**
-     * Removing "Best answer" mark from answer
-     */
-    public function removeBest()
-    {
-        $jobParams = [
-            'thread_id' => $this->thread_id,
-            'actionCaller_id' => \XF::visitor()->user_id,
-            'bestPost_id' => $this->questionthreads_best_post,
-            'alertType' => NotificationHelper::THREAD_BEST_ANSWER_REMOVED
-        ];
-        \XF::app()->jobManager()->enqueueUnique('bestRemovedAlerting_' . time(), 'QuestionThreads:Alerter', $jobParams);
-        \XF::app()->jobManager()->enqueueUnique('bestRemovedEmailing_' . time(), 'QuestionThreads:Emailer', $jobParams);
+        if(
+            $visitor->hasPermission('forum', 'QT_unselectBestAnswerOwn')
+            && $this->user_id === $visitor->user_id
+        )
+        {
+            return true;
+        }
 
-        /* Removing best answer mark */
-        $this->questionthreads_best_post = 0;
-        $this->save();
+        return false;
     }
 }

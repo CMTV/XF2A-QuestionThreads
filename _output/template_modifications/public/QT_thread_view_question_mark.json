@@ -1,0 +1,9 @@
+{
+    "template": "thread_view",
+    "description": "Adding question mark before thread title",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "preg_replace",
+    "find": "/(<xf:h1>)(.+)(<\\/xf:h1>)/",
+    "replace": "<xf:css src=\"QuestionThreads.less\" />\n\n$1<xf:include template=\"QT_thread_view_question_mark\" />$2$3"
+}

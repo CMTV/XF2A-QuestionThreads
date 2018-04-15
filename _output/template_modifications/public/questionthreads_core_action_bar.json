@@ -1,9 +1,0 @@
-{
-    "template": "core_action_bar.less",
-    "description": "Adding icons for best anwer button",
-    "execution_order": 10,
-    "enabled": true,
-    "action": "str_replace",
-    "find": "&.actionBar-action--like:before { .m-faContent(\"@{fa-var-thumbs-o-up}\\20\"); }",
-    "replace": "$0\n&.actionBar-action--best-answer:before { .m-faContent(\"@{fa-var-diamond}\\20\"); }\n\n&.actionBar-action--unmark-best-answer:before { .m-faContent(\"@{fa-var-times}\\20\"); }"
-}

@@ -1,0 +1,13 @@
+{
+    "group_name": "questionThreads",
+    "title": "Best answer mark color",
+    "description": "This property defines the color of best answer mark icon.",
+    "property_type": "value",
+    "css_components": [],
+    "value_type": "color",
+    "value_parameters": "",
+    "depends_on": "",
+    "value_group": "bestAnswerMark",
+    "property_value": "#00b500",
+    "display_order": 510
+}

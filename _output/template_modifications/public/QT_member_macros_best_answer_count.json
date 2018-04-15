@@ -1,0 +1,9 @@
+{
+    "template": "member_macros",
+    "description": "Adding best answer count",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<!--[XF:stat_pairs:above_likes]-->",
+    "replace": "<xf:macro template=\"QT_best_answer_count_macros\" name=\"member_macros\" arg-user=\"{$user}\" />\n\n$0"
+}

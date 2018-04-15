@@ -1,0 +1,9 @@
+{
+    "template": "member_view",
+    "description": "Including QuestionThreads.less",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<xf:title page=\"{$page}\">{$user.username}</xf:title>",
+    "replace": "<xf:css src=\"QuestionThreads.less\" />\n\n$0"
+}

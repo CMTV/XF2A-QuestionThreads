@@ -1,1 +1,0 @@
-{name} removed "Best answer" mark from post in the question {title}.

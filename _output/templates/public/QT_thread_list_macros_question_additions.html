@@ -1,0 +1,9 @@
+<xf:if is="$thread.QT_question">
+	<!-- Question mark -->
+	<xf:macro template="QT_macros" name="question_mark" arg-thread="{$thread}" />
+	
+	<!-- Best answer icon -->
+	<xf:if is="$thread.QT_best_answer_id">
+		<xf:macro template="QT_macros" name="best_answer_mark" arg-thread="{$thread}" />
+	</xf:if>
+</xf:if>

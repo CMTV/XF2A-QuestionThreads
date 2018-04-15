@@ -1,9 +1,0 @@
-{
-    "template": "news_feed_item_post_insert",
-    "description": "Replacing \"thread\" with \"question\" for question threads in news feed",
-    "execution_order": 10,
-    "enabled": true,
-    "action": "str_replace",
-    "find": "{{ phrase('news_feed_post_insert', {\n\t\t'username': username_link($user, false, {'defaultname': $newsFeed.username}),\n\t\t'threadTitle': '<a href=\"' . link('posts', $content) . '\">' . prefix('thread', $content.Thread) . $content.Thread.title . '</a>'\n\t}) }}",
-    "replace": "<xf:if is=\"$content.Thread.questionthreads_is_question\">\n\t{{ phrase('questionthreads_activity_reply_thread', {\n\t\t'username': username_link($user, false, {'defaultname': $newsFeed.username}),\n\t\t'threadTitle': '<a href=\"' . link('posts', $content) . '\">' . prefix('thread', $content.Thread) . $content.Thread.title . '</a>'\n\t}) }}\n<xf:else />\n\t$0\n</xf:if>"
-}

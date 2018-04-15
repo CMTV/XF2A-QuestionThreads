@@ -1,84 +1,82 @@
 <?php
+/**
+ * Question Threads
+ *
+ * You CAN use/change/share this code.
+ * Enjoy!
+ *
+ * Written by CMTV
+ * Date: 14.03.2018
+ * Time: 9:46
+ */
 
 namespace QuestionThreads\XF\Entity;
 
-use QuestionThreads\NotificationHelper;
-use XF\Entity\User;
-use XF\Repository\UserAlert;
+use QuestionThreads\Entity\BestAnswer;
 
 class Post extends XFCP_Post
 {
-    /**
-     * Can mark current post as best answer
-     *
-     * @param null $error
-     * @return bool
-     */
-    public function canMarkBest(&$error = null)
+    protected function _postDelete()
     {
-        $visitor = \XF::visitor();
+        /** @var Thread $thread */
         $thread = $this->Thread;
 
-        /* If this thread is question thread */
-        if(!$thread->questionthreads_is_question)
+        if($thread->QT_best_answer_id === $this->post_id)
         {
-            $error = \XF::phrase('questionthreads_not_a_question');
-            return false;
+            $bestAnswer = $this->finder('QuestionThreads:BestAnswer')->where(['post_id' => $thread->QT_best_answer_id])->fetchOne();
+
+            if($bestAnswer)
+            {
+                $bestAnswer->delete();
+            }
         }
 
-        /* If first post in thread */
-        if($thread->first_post_id === $this->post_id)
-        {
-            $error = \XF::phrase('questionthreads_first_post_cant_be_best');
-            return false;
-        }
-
-        /* If there current question already has best answer */
-        if($thread->questionthreads_best_post !== 0)
-        {
-            $error = \XF::phrase('questionthreads_already_has_best_post');
-            return false;
-        }
-
-        /* Visitor and question author are the same */
-        if($thread->user_id === $visitor->user_id)
-        {
-            return true;
-        }
-
-        /* Visitor has permission */
-        if($visitor->hasPermission('forum', 'questionthreads_solve'))
-        {
-            return true;
-        }
-        else
-        {
-            $error = 403;
-            return false;
-        }
+        parent::_postDelete();
     }
 
-    /**
-     * Marking current post as best answer for this question
-     */
-    public function markBest()
+    protected function postHidden($hardDelete = false)
     {
+        /** @var Thread $thread */
         $thread = $this->Thread;
-        $thread->questionthreads_best_post = $this->post_id;
-        $thread->save();
 
-        $jobParams = [
-            'thread_id' => $this->thread_id,
-            'actionCaller_id' => \XF::visitor()->user_id,
-            'alertType' => NotificationHelper::POST_BEST_ANSWER
-        ];
-        \XF::app()->jobManager()->enqueueUnique('bestMarkedAlerting_' . time(), 'QuestionThreads:Alerter', $jobParams);
+        if($thread->QT_best_answer_id === $this->post_id)
+        {
+            /** @var BestAnswer $bestAnswer */
+            $bestAnswer = $this->finder('QuestionThreads:BestAnswer')->where(['post_id' => $thread->QT_best_answer_id])->fetchOne();
 
-        /*$this->app()->mailer()->newMail()
-            ->setToUser($user)
-            ->setTemplate($template, $params)
-            ->queue();*/
+            if($bestAnswer)
+            {
+                $bestAnswer->fastUpdate('is_counted', 0);
 
-        \XF::app()->jobManager()->enqueueUnique('bestMarkedEmailing_' . time(), 'QuestionThreads:Emailer', $jobParams);
+                /** @var \QuestionThreads\Repository\BestAnswer $bestAnswerRepo */
+                $bestAnswerRepo = $this->repository('QuestionThreads:BestAnswer');
+                $bestAnswerRepo->adjustBestAnswers($bestAnswer->BestAnswerPoster);
+            }
+        }
+
+        parent::postHidden($hardDelete);
+    }
+
+    protected function postMadeVisible()
+    {
+        /** @var Thread $thread */
+        $thread = $this->Thread;
+
+        if($thread->QT_question && ($thread->QT_best_answer_id === $this->post_id))
+        {
+            /** @var BestAnswer $bestAnswer */
+            $bestAnswer = $this->finder('QuestionThreads:BestAnswer')->where(['post_id' => $thread->QT_best_answer_id])->fetchOne();
+
+            if($bestAnswer)
+            {
+                $bestAnswer->fastUpdate('is_counted', 1);
+
+                /** @var \QuestionThreads\Repository\BestAnswer $bestAnswerRepo */
+                $bestAnswerRepo = $this->repository('QuestionThreads:BestAnswer');
+                $bestAnswerRepo->adjustBestAnswers($bestAnswer->BestAnswerPoster);
+            }
+        }
+
+        parent::postMadeVisible();
     }
 }

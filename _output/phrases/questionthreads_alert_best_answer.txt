@@ -1,1 +1,0 @@
-{name} marked the answer to the question {title} as "Best answer".

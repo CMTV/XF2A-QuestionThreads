@@ -1,0 +1,9 @@
+{
+    "template": "node_list",
+    "description": "Adding questions only forum node icon",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "nodeIcon--{$node.NodeType.node_type_id}",
+    "replace": "{{ ($node.NodeType.node_type_id === 'Forum' && $node->getData()->QT_type === 'questions_only') ? 'nodeIcon--QT_questions_only_forum' : '' }} $0"
+}

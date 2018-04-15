@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <style_property_groups>
-  <style_property_group group_name="questionThreadsColor" title="Question threads colors" description="Colors for &quot;Question threads&quot; addon" display_order="0"/>
+  <style_property_group group_name="questionThreads" title="Question Threads" description="Customize Question Threads addon to fit your needs" display_order="1010"/>
 </style_property_groups>

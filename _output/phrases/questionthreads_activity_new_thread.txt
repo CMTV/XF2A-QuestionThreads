@@ -1,1 +1,0 @@
-{username} posted the question {threadTitle} in {forumTitle}.

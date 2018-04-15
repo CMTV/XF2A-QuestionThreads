@@ -1,0 +1,21 @@
+{
+    "group_name": "questionThreads",
+    "title": "Question mark [Shape]",
+    "description": "",
+    "property_type": "css",
+    "css_components": [
+        "border",
+        "border_radius",
+        "border_width_simple",
+        "extra"
+    ],
+    "value_type": "",
+    "value_parameters": "",
+    "depends_on": "",
+    "value_group": "",
+    "property_value": {
+        "border-width": "1px",
+        "border-radius": "50%"
+    },
+    "display_order": 20
+}

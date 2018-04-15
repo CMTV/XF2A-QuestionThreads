@@ -1,23 +1,80 @@
 {
-    "questionthreads_bestAnswerIcon.json": {
-        "hash": "0ab178541e75715ce6ea6136d00630cb"
+    "QT_best_answer_custom_user_block.json": {
+        "hash": "84ad7aff4a7f33164d636e8b2b33d2e9"
     },
-    "questionthreads_bestAnswerMessageBg.json": {
-        "hash": "79c31619e84b07a93844bceb8987b0f6"
+    "QT_best_answer_indicator_css.json": {
+        "hash": "68b33006b72884c2b3ea287ca9c7ee59"
     },
-    "questionthreads_bestAnswerUserBg.json": {
-        "hash": "7d65a6fb02eff441834bf9f27c888d76"
+    "QT_best_answer_link_css.json": {
+        "hash": "ba97dc832d707aa3b5aa26727dce70fe"
     },
-    "questionthreads_indicatorShape.json": {
-        "hash": "723f9367f2cce2bba828cc6b815f611d"
+    "QT_best_answer_mark_color.json": {
+        "hash": "d86b118d3b295d207b57c768f49d2d23"
     },
-    "questionthreads_indicatorSolvedColor.json": {
-        "hash": "4853ed489b54fd85bf1d79dd3130b6f3"
+    "QT_best_answer_mark_general_css.json": {
+        "hash": "1e36026a1c921d6dca69e586e1410313"
     },
-    "questionthreads_indicatorUnsolvedColor.json": {
-        "hash": "def7731990bc2c6b72ce54e5878c3125"
+    "QT_best_answer_mark_icon.json": {
+        "hash": "9c6f3be9b51e66b58ebd6f5004559e63"
     },
-    "questionthreads_isStylingBestAnswerUserBg.json": {
-        "hash": "4cc3445fa088037131e4f480d9302db2"
+    "QT_best_answer_mark_icon_css.json": {
+        "hash": "2bead24d027b3ae3f15ce43ae98da120"
+    },
+    "QT_best_answer_mark_image.json": {
+        "hash": "b9d1e55ed8b3638f93d745f5e5fd05c1"
+    },
+    "QT_best_answer_mark_image_css.json": {
+        "hash": "2497fe46bb5e8fbfda34ef9022029be4"
+    },
+    "QT_best_answer_mark_type.json": {
+        "hash": "e5cae37d6666c011047284ebc18ebd59"
+    },
+    "QT_best_answer_message_background_color.json": {
+        "hash": "c75a4e5a7dc4b440b224c2eb327583ee"
+    },
+    "QT_best_answer_message_css.json": {
+        "hash": "ca3deb9592ff9e5e4076fb89f741b128"
+    },
+    "QT_best_answer_message_type.json": {
+        "hash": "90964d19d8cf771f8d7df5bc546416f4"
+    },
+    "QT_best_answer_user_block_background_color.json": {
+        "hash": "fb18372fd601f9bf53be1c29d8d7b669"
+    },
+    "QT_icon_solved.json": {
+        "hash": "1455baaf66b838990f034fdd1a911fed"
+    },
+    "QT_icon_unsolved.json": {
+        "hash": "67e76860e80a9a464de811240f94bb49"
+    },
+    "QT_image_solved.json": {
+        "hash": "1d7fbf0c0d9056075221c7ca1b84264b"
+    },
+    "QT_image_unsolved.json": {
+        "hash": "176dbb2910fa607b22dff3fd31bd08d1"
+    },
+    "QT_question_mark_general_css.json": {
+        "hash": "e349e20825bee3a15c9e1e5c017da1cd"
+    },
+    "QT_question_mark_icon_css.json": {
+        "hash": "7af193ff7602ec9c3aaf88b305b7b441"
+    },
+    "QT_question_mark_image_css.json": {
+        "hash": "e4ca2f6479d8a8f6aa1bea08832703a1"
+    },
+    "QT_question_mark_shape_css.json": {
+        "hash": "e5872d95cca76449b557aae8fcfdaded"
+    },
+    "QT_question_mark_type.json": {
+        "hash": "03e0ef5c7db80b63f1ec4b3e53a9b65c"
+    },
+    "QT_shape_solved_color.json": {
+        "hash": "a06287a9217113d805a48b4cfee1eb39"
+    },
+    "QT_shape_unsolved_color.json": {
+        "hash": "2905b3151da0678800e3cda47cfb0d2f"
+    },
+    "QT_total_best_answers_positions.json": {
+        "hash": "1950f78454473c09b2c4262b162fc730"
     }
 }

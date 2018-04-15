@@ -1,1 +1,0 @@
-Color for indicator that appears before question title and represents <strong>solved</strong> questions.

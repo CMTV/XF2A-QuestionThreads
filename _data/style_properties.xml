@@ -1,28 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
 <style_properties>
-  <style_property property_name="questionthreads_bestAnswerIcon" group_name="questionThreadsColor" title="Best answer icon" property_type="value" value_type="template" display_order="600">
-    <value_parameters>type=scalar
-template=questionthreads_best_answer_icon</value_parameters>
-    <value>"fa fa-diamond"</value>
+  <style_property property_name="QT_best_answer_custom_user_block" group_name="questionThreads" title="Custom best answer user block background" description="If enabled, allows you to set CSS background property for best answer user block (where avatar, username and user info are located)." property_type="value" value_type="boolean" value_group="bestAnswerMessage" display_order="620">
+    <value>0</value>
   </style_property>
-  <style_property property_name="questionthreads_bestAnswerMessageBg" group_name="questionThreadsColor" title="Best answer message background color" description="Best answer post body background color" property_type="value" value_type="color" value_group="bestAnswer" display_order="300">
+  <style_property property_name="QT_best_answer_indicator_css" group_name="questionThreads" title="Best answer message indicator" description="Usually a small token attached to the message block indicating that this message is the best answer" property_type="css" display_order="140" css_components="text,background,border,border_radius,padding,extra">
+    <value>{
+    "font-size": "90%",
+    "color": "contrast(@xf-paletteAccent2)",
+    "background-color": "@xf-QT_best_answer_mark_color",
+    "border-radius": "@xf-borderRadiusSmall",
+    "padding-top": "1px",
+    "padding-right": "4px",
+    "padding-bottom": "1px",
+    "padding-left": "4px"
+}</value>
+  </style_property>
+  <style_property property_name="QT_best_answer_link_css" group_name="questionThreads" title="Best answer link" property_type="css" display_order="130" css_components="background,border,border_radius,padding,extra">
+    <value>{
+    "padding-right": "3px"
+}</value>
+  </style_property>
+  <style_property property_name="QT_best_answer_mark_color" group_name="questionThreads" title="Best answer mark color" description="This property defines the color of best answer mark icon." property_type="value" value_type="color" value_group="bestAnswerMark" display_order="510">
+    <value>"#00b500"</value>
+  </style_property>
+  <style_property property_name="QT_best_answer_mark_general_css" group_name="questionThreads" title="Best answer mark" description="Type CSS code that will be included to best answer mark regardless its type" property_type="css" display_order="100" css_components="background,border,border_radius,padding,extra">
+    <value>[]</value>
+  </style_property>
+  <style_property property_name="QT_best_answer_mark_icon" group_name="questionThreads" title="Best answer mark icon" description="Put FontAwesome icon code in this field. &lt;a href=&quot;https://fontawesome.com/v4.7.0/icons/&quot; target=&quot;_blank&quot;&gt;List of available icons&lt;/a&gt;." property_type="value" value_type="string" value_group="bestAnswerMark" display_order="530">
+    <value>"fa-diamond"</value>
+  </style_property>
+  <style_property property_name="QT_best_answer_mark_icon_css" group_name="questionThreads" title="Best answer mark [Icon]" property_type="css" display_order="110" css_components="extra">
+    <value>[]</value>
+  </style_property>
+  <style_property property_name="QT_best_answer_mark_image" group_name="questionThreads" title="Best answer mark image" property_type="value" value_type="string" value_group="bestAnswerMark" display_order="540">
+    <value>""</value>
+  </style_property>
+  <style_property property_name="QT_best_answer_mark_image_css" group_name="questionThreads" title="Best answer mark [Image]" property_type="css" display_order="120" css_components="extra">
+    <value>[]</value>
+  </style_property>
+  <style_property property_name="QT_best_answer_mark_type" group_name="questionThreads" title="Best answer mark type" property_type="value" value_type="radio" value_group="bestAnswerMark" display_order="500">
+    <value_parameters>icon={{ phrase('QT_icon') }}
+image={{ phrase('image') }}</value_parameters>
+    <value>"icon"</value>
+  </style_property>
+  <style_property property_name="QT_best_answer_message_background_color" group_name="questionThreads" title="Best answer message background color" property_type="value" value_type="color" value_group="bestAnswerMessage" display_order="610">
     <value>"#DEFFE2"</value>
   </style_property>
-  <style_property property_name="questionthreads_bestAnswerUserBg" group_name="questionThreadsColor" title="Best answer user area background color" description="Background color for best answer user area (where avatar, username and user info are located)." property_type="value" value_type="color" depends_on="questionthreads_isStylingBestAnswerUserBg" value_group="bestAnswer" display_order="500">
-    <value>"#e9fbea"</value>
+  <style_property property_name="QT_best_answer_message_css" group_name="questionThreads" title="Best answer message" property_type="css" display_order="150" css_components="text,background,border,border_radius,padding,extra">
+    <value>[]</value>
   </style_property>
-  <style_property property_name="questionthreads_indicatorShape" group_name="questionThreadsColor" title="Indicator shape" property_type="value" value_type="radio" value_group="indicator" display_order="0">
-    <value_parameters>"circle"=Circle
-"square"=Square</value_parameters>
-    <value>"\"circle\""</value>
+  <style_property property_name="QT_best_answer_message_type" group_name="questionThreads" title="Best answer message" description="Choose how best answer will differ from any other messages in thread." property_type="value" value_type="radio" value_group="bestAnswerMessage" display_order="600">
+    <value_parameters>messageBackground={{ phrase('QT_message_background') }}
+indicator={{ phrase('QT_indicator') }}</value_parameters>
+    <value>"messageBackground"</value>
   </style_property>
-  <style_property property_name="questionthreads_indicatorSolvedColor" group_name="questionThreadsColor" title="Solved indicator color" description="Color for indicator that appears before question title and represents &lt;strong&gt;solved&lt;/strong&gt; questions." property_type="value" value_type="color" value_group="indicator" display_order="100">
+  <style_property property_name="QT_best_answer_user_block_background_color" group_name="questionThreads" title="Best answer user block background color" property_type="value" value_type="color" depends_on="QT_best_answer_custom_user_block" value_group="bestAnswerMessage" display_order="630">
+    <value>"#D1FFD6"</value>
+  </style_property>
+  <style_property property_name="QT_icon_solved" group_name="questionThreads" title="Question mark solved icon" description="Put FontAwesome icon code in this field. &lt;a href=&quot;https://fontawesome.com/v4.7.0/icons/&quot; target=&quot;_blank&quot;&gt;List of available icons&lt;/a&gt;." property_type="value" value_type="string" value_group="questionMarkIcon" display_order="200">
+    <value>"fa-question-circle-o"</value>
+  </style_property>
+  <style_property property_name="QT_icon_unsolved" group_name="questionThreads" title="Question mark unsolved icon" description="Put FontAwesome icon code in this field. &lt;a href=&quot;https://fontawesome.com/v4.7.0/icons/&quot; target=&quot;_blank&quot;&gt;List of available icons&lt;/a&gt;." property_type="value" value_type="string" value_group="questionMarkIcon" display_order="210">
+    <value>"fa-question-circle-o"</value>
+  </style_property>
+  <style_property property_name="QT_image_solved" group_name="questionThreads" title="Question mark solved image" property_type="value" value_type="string" value_group="questionMarkImage" display_order="300">
+    <value>""</value>
+  </style_property>
+  <style_property property_name="QT_image_unsolved" group_name="questionThreads" title="Question mark unsolved image" property_type="value" value_type="string" value_group="questionMarkImage" display_order="310">
+    <value>""</value>
+  </style_property>
+  <style_property property_name="QT_question_mark_general_css" group_name="questionThreads" title="Question mark" description="Type CSS code that will be included to question mark regardless its type" property_type="css" display_order="10" css_components="background,border,border_radius,padding,extra">
+    <value>[]</value>
+  </style_property>
+  <style_property property_name="QT_question_mark_icon_css" group_name="questionThreads" title="Question mark [Icon]" property_type="css" display_order="30" css_components="extra">
+    <value>[]</value>
+  </style_property>
+  <style_property property_name="QT_question_mark_image_css" group_name="questionThreads" title="Question mark [Image]" property_type="css" display_order="40" css_components="extra">
+    <value>{
+    "extra": "/* Use \"image-rendering: pixelated\" for pixelart images */"
+}</value>
+  </style_property>
+  <style_property property_name="QT_question_mark_shape_css" group_name="questionThreads" title="Question mark [Shape]" property_type="css" display_order="20" css_components="border,border_radius,border_width_simple,extra">
+    <value>{
+    "border-width": "1px",
+    "border-radius": "50%"
+}</value>
+  </style_property>
+  <style_property property_name="QT_question_mark_type" group_name="questionThreads" title="Question mark type" property_type="value" value_type="radio" value_group="questionMarkType" display_order="10">
+    <value_parameters>shape={{ phrase('QT_shape') }}
+icon={{ phrase('QT_icon') }}
+image={{ phrase('image') }}</value_parameters>
+    <value>"shape"</value>
+  </style_property>
+  <style_property property_name="QT_shape_solved_color" group_name="questionThreads" title="Question mark solved color" description="This property defines the color of solved question mark shape and icon as well." property_type="value" value_type="color" depends_on="QT_question_mark_type" value_group="questionMarkShape" display_order="100">
     <value>"#00CD18"</value>
   </style_property>
-  <style_property property_name="questionthreads_indicatorUnsolvedColor" group_name="questionThreadsColor" title="Unsolved indicator color" description="Color for indicator that appears before question title and represents &lt;strong&gt;unsolved&lt;/strong&gt; questions." property_type="value" value_type="color" value_group="indicator" display_order="200">
-    <value>"#FF0000"</value>
+  <style_property property_name="QT_shape_unsolved_color" group_name="questionThreads" title="Question mark unsolved color" description="This property defines the color of unsolved question mark shape and icon as well." property_type="value" value_type="color" value_group="questionMarkShape" display_order="110">
+    <value>"rgb(255, 0, 0)"</value>
   </style_property>
-  <style_property property_name="questionthreads_isStylingBestAnswerUserBg" group_name="questionThreadsColor" title="Custom best answer user area background" description="If enabled, allows you to set CSS background property for best answer user area (where avatar, username and user info are located)." property_type="value" value_type="boolean" value_group="bestAnswer" display_order="400">
-    <value>0</value>
+  <style_property property_name="QT_total_best_answers_positions" group_name="questionThreads" title="Show total best answers" description="Choose where the total best answers number will be displaying" property_type="value" value_type="template" display_order="0">
+    <value_parameters>template=QT_style_property_template_totalBestAnswersPositions
+type=array</value_parameters>
+    <value>{
+    "member_profile_page": "1",
+    "member_account_menu": "1"
+}</value>
   </style_property>
 </style_properties>

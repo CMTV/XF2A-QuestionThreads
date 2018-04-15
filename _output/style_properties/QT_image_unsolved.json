@@ -1,0 +1,13 @@
+{
+    "group_name": "questionThreads",
+    "title": "Question mark unsolved image",
+    "description": "",
+    "property_type": "value",
+    "css_components": [],
+    "value_type": "string",
+    "value_parameters": "",
+    "depends_on": "",
+    "value_group": "questionMarkImage",
+    "property_value": "",
+    "display_order": 310
+}

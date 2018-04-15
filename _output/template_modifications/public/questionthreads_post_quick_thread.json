@@ -1,9 +1,0 @@
-{
-    "template": "forum_post_quick_thread",
-    "description": "Replacing \"Post Thread\" text with \"Post question\"",
-    "execution_order": 10,
-    "enabled": true,
-    "action": "str_replace",
-    "find": "<xf:submitrow rowtype=\"simple verySimple\" submit=\"{{ phrase('post_thread') }}\" icon=\"write\">\n\t\t\t<xf:html>\n\t\t\t\t<xf:button type=\"submit\" formnovalidate=\"formnovalidate\" name=\"more-options\" value=\"1\"\n\t\t\t\t\ttitle=\"{{ phrase('show_full_post_thread_editor') }}\"\n\t\t\t\t\tdata-prevent-ajax=\"true\"\n\t\t\t\t\tdata-xf-init=\"tooltip\">{{ phrase('more_options...') }}</xf:button>\n\n\t\t\t\t<xf:button type=\"reset\" icon=\"cancel\" class=\"button--iconOnly\"\n\t\t\t\t\ttitle=\"{{ phrase('cancel') }}\"\n\t\t\t\t\tdata-xf-init=\"tooltip\"/>\n\t\t\t</xf:html>\n\t\t</xf:submitrow>",
-    "replace": "<xf:if is=\"$forum.questionthreads_forum\">\n\t<xf:submitrow rowtype=\"simple verySimple\" submit=\"{{ phrase('questionthreads_post_question') }}\" icon=\"questionthreads-question\">\n\t\t<xf:html>\n\t\t\t<xf:button type=\"submit\" formnovalidate=\"formnovalidate\" name=\"more-options\" value=\"1\"\n\t\t\t\ttitle=\"{{ phrase('show_full_post_thread_editor') }}\"\n\t\t\t\tdata-prevent-ajax=\"true\"\n\t\t\t\tdata-xf-init=\"tooltip\">{{ phrase('more_options...') }}</xf:button>\n\n\t\t\t<xf:button type=\"reset\" icon=\"cancel\" class=\"button--iconOnly\"\n\t\t\t\ttitle=\"{{ phrase('cancel') }}\"\n\t\t\t\tdata-xf-init=\"tooltip\"/>\n\t\t</xf:html>\n\t</xf:submitrow>\n<xf:else />\n\t$0\n</xf:if>"
-}

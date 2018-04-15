@@ -1,0 +1,9 @@
+{
+    "template": "post_macros",
+    "description": "Adding best answer indicator",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<div class=\"message-attribution-opposite\">",
+    "replace": "$0\n\n<xf:include template=\"QT_post_macros_best_answer_indicator\" />"
+}

@@ -1,0 +1,1 @@
+If enabled, allows you to set CSS background property for best answer user block (where avatar, username and user info are located).

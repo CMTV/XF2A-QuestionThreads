@@ -1,0 +1,14 @@
+{
+    "criteria": [],
+    "sort_order": "username",
+    "sort_direction": "desc",
+    "permission_limit": "",
+    "callback_class": "QuestionThreads\\MemberStat\\BestAnswers",
+    "callback_method": "getBestAnswerUsers",
+    "show_value": true,
+    "overview_display": true,
+    "active": true,
+    "user_limit": 20,
+    "display_order": 15,
+    "cache_lifetime": 0
+}

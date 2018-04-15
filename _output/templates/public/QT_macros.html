@@ -1,0 +1,60 @@
+<xf:macro name="question_mark" arg-thread="!" arg-forceState="{{ false }}">
+	<xf:if is="$forceState">
+		<xf:set var="$thread.QT_solved" value="$forceState" />
+	</xf:if>
+	
+	<!-- Shape -->
+	<xf:if is="{{ property('QT_question_mark_type') === 'shape' }}">
+		<span class="QT_question_mark QT_question_mark_shape {{ ($thread.QT_solved) ? 'QT_solved' : 'QT_unsolved' }}"
+			  title="{{ ($thread.QT_solved) ? phrase('QT_solved') : phrase('QT_unsolved') }}"></span>
+	</xf:if>
+
+	<!-- Icon -->
+	<xf:if is="{{ property('QT_question_mark_type') === 'icon' }}">
+		<xf:if is="$thread.QT_solved">
+			<i class="fa {{ property('QT_icon_solved') }} QT_question_mark QT_question_mark_icon QT_solved" title="{{ phrase('QT_solved') }}"></i>
+			<xf:else />
+			<i class="fa {{ property('QT_icon_unsolved') }} QT_question_mark QT_question_mark_icon QT_unsolved" title="{{ phrase('QT_unsolved') }}"></i>
+		</xf:if>
+	</xf:if>
+
+	<!-- Image -->
+	<xf:if is="{{ property('QT_question_mark_type') === 'image' }}">
+		<img class="QT_question_mark QT_question_mark_image {{ ($thread.QT_solved) ? 'QT_solved' : 'QT_unsolved' }}"
+			 src="{{ ($thread.QT_solved) ? property('QT_image_solved') : property('QT_image_unsolved') }}"
+			 title="{{ ($thread.QT_solved) ? phrase('QT_solved') : phrase('QT_unsolved') }}">
+	</xf:if>
+</xf:macro>
+
+<xf:macro name="best_answer_mark" arg-thread="!">
+	<a href="{{ link('threads/bestAnswer', $thread) }}" class="QT_best_answer_link" title="{{ phrase('QT_best_answer') }}">
+		<!-- Icon -->
+		<xf:if is="{{ property('QT_best_answer_mark_type') === 'icon' }}">
+			<i class="fa {{ property('QT_best_answer_mark_icon') }} QT_best_answer_mark QT_best_answer_mark_icon"></i>
+		</xf:if>
+
+		<!-- Image -->
+		<xf:if is="{{ property('QT_best_answer_mark_type') === 'image' }}">
+			<img class="QT_best_answer_mark QT_best_answer_mark_image"
+				 src="{{ property('QT_best_answer_mark_image') }}">
+		</xf:if>
+	</a>
+</xf:macro>
+
+<xf:macro name="best_answer_indicator">
+	<span class="message-QT_best_answer">{{ phrase('QT_best_answer') }}</span>
+</xf:macro>
+
+<xf:macro name="best_answer_classes">
+	<xf:set var="$_QT_classes" value="QT_best_answer" />
+
+	<xf:if is="{{ property('QT_best_answer_message_type') === 'messageBackground' }}">
+		<xf:set var="$_QT_classes" value="{{ {$_QT_classes} . ' QT_message_background' }}" />
+	</xf:if>
+
+	<xf:if is="{{ property('QT_best_answer_custom_user_block') }}">
+		<xf:set var="$_QT_classes" value="{{ {$_QT_classes} . ' QT_user_block_background' }}" />
+	</xf:if>
+	
+	{$_QT_classes}
+</xf:macro>

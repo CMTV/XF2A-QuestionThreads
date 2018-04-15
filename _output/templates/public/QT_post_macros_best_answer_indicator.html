@@ -1,0 +1,7 @@
+<xf:if is="$thread.QT_question">
+	<xf:if is="{{ $thread.QT_best_answer_id === $post.post_id }}">
+		<xf:if is="{{ property('QT_best_answer_message_type') === 'indicator' }}">
+			<xf:macro template="QT_macros" name="best_answer_indicator" />
+		</xf:if>
+	</xf:if>
+</xf:if>

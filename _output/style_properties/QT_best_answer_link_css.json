@@ -1,0 +1,21 @@
+{
+    "group_name": "questionThreads",
+    "title": "Best answer link",
+    "description": "",
+    "property_type": "css",
+    "css_components": [
+        "background",
+        "border",
+        "border_radius",
+        "padding",
+        "extra"
+    ],
+    "value_type": "",
+    "value_parameters": "",
+    "depends_on": "",
+    "value_group": "",
+    "property_value": {
+        "padding-right": "3px"
+    },
+    "display_order": 130
+}

@@ -1,0 +1,1 @@
+<p>{sender} marked your answer as best answer of question you are watching at {board}.</p>

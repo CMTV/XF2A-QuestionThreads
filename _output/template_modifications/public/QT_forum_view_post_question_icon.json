@@ -1,0 +1,9 @@
+{
+    "template": "forum_view",
+    "description": "Changing post thread button icon",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "preg_replace",
+    "find": "/(<xf:button.+icon=\")(.+)(\">)/",
+    "replace": "$1{{ ($forum->QT_type === 'questions_only') ? 'QT_question' : '$2' }}$3"
+}

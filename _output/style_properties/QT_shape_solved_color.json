@@ -1,0 +1,13 @@
+{
+    "group_name": "questionThreads",
+    "title": "Question mark solved color",
+    "description": "This property defines the color of solved question mark shape and icon as well.",
+    "property_type": "value",
+    "css_components": [],
+    "value_type": "color",
+    "value_parameters": "",
+    "depends_on": "QT_question_mark_type",
+    "value_group": "questionMarkShape",
+    "property_value": "#00CD18",
+    "display_order": 100
+}

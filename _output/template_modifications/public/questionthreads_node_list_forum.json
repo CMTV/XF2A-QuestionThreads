@@ -1,9 +1,0 @@
-{
-    "template": "node_list_forum",
-    "description": "Adding special class for questions only forums",
-    "execution_order": 10,
-    "enabled": true,
-    "action": "str_replace",
-    "find": "\t<div class=\"node node--id{$node.node_id} node--depth{$depth} node--forum {{ $extras.hasNew ? 'node--unread' : 'node--read' }}\">",
-    "replace": "<xf:if is=\"$node->getData().questionthreads_forum\">\n\t\t<div class=\"node node--id{$node.node_id} node--depth{$depth} questionthreads_questions_forum node--forum {{ $extras.hasNew ? 'node--unread' : 'node--read' }}\">\n<xf:else />\n\t$0\n</xf:if>"
-}

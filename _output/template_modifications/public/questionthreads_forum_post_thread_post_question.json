@@ -1,9 +1,0 @@
-{
-    "template": "forum_post_thread",
-    "description": "Replacing \"Post Thread\" text with \"Post question\"",
-    "execution_order": 10,
-    "enabled": true,
-    "action": "str_replace",
-    "find": "<xf:submitrow submit=\"{{ phrase('post_thread') }}\" icon=\"write\" sticky=\"true\">\n\t\t\t<xf:html>\n\t\t\t\t<xf:button class=\"u-jsOnly\" data-xf-click=\"preview-click\" icon=\"preview\" />\n\t\t\t</xf:html>\n\t\t</xf:submitrow>",
-    "replace": "<xf:if is=\"$forum.questionthreads_forum\">\n\t<xf:submitrow submit=\"{{ phrase('questionthreads_post_question') }}\" icon=\"questionthreads-question\" sticky=\"true\">\n\t\t\t<xf:html>\n\t\t\t\t<xf:button class=\"u-jsOnly\" data-xf-click=\"preview-click\" icon=\"preview\" />\n\t\t\t</xf:html>\n\t\t</xf:submitrow>\n<xf:else />\n\t$0\n</xf:if>"
-}

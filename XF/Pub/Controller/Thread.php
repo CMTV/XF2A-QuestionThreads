@@ -1,125 +1,112 @@
 <?php
+/**
+ * Question Threads
+ *
+ * You CAN use/change/share this code.
+ * Enjoy!
+ *
+ * Written by CMTV
+ * Date: 10.03.2018
+ * Time: 14:24
+ */
 
 namespace QuestionThreads\XF\Pub\Controller;
 
-use QuestionThreads\XF\Service\Thread\Editor;
-use XF\Mvc\Entity\Entity;
+use QuestionThreads\Repository\BestAnswer;
 use XF\Mvc\ParameterBag;
+use XF\Service\Thread\Editor;
 
 class Thread extends XFCP_Thread
 {
-    /**
-     * Mark current thread as solved
-     *
-     * @param ParameterBag $pb
-     *
-     * @return \XF\Mvc\Reply\Redirect
-     *
-     * @throws \XF\Mvc\Reply\Exception
-     */
-    public function actionSolve(ParameterBag $pb)
+    public function actionBestAnswer(ParameterBag $params)
     {
         /** @var \QuestionThreads\XF\Entity\Thread $thread */
-        $thread = $this->assertViewableThread($pb->thread_id);
+        $thread = $this->assertViewableThread($params->thread_id);
 
-        if($thread->canSolve($error))
+        if($thread->QT_best_answer_id)
         {
-            $thread->solve();
-            return $this->redirectPermanently($this->buildLink('threads', $thread), ['page' => $pb->page]);
+            $bestAnswer = $this->finder('XF:Post')->whereId($thread->QT_best_answer_id)->fetchOne();
+
+            return $this->redirect($this->plugin('XF:Thread')->getPostLink($bestAnswer));
         }
         else
         {
-            if($error === 403)
-            {
-                throw $this->exception($this->noPermission());
-            }
-            else if($error)
-            {
-                throw $this->exception($this->error($error));
-            }
+            return $this->redirect($this->buildLink('threads', $thread));
         }
     }
 
-    /**
-     * Mark current thread as unsolved
-     *
-     * @param ParameterBag $pb
-     *
-     * @return \XF\Mvc\Reply\Redirect
-     *
-     * @throws \XF\Mvc\Reply\Exception
-     */
-    public function actionUnsolve(ParameterBag $pb)
+    public function actionMarkSolved(ParameterBag $params)
     {
         /** @var \QuestionThreads\XF\Entity\Thread $thread */
-        $thread = $this->assertViewableThread($pb->thread_id);
+        $thread = $this->assertViewableThread($params->thread_id);
 
-        if($thread->canUnsolve($error))
+        if(!$thread->canMarkSolved())
         {
-            $thread->unsolve();
-            return $this->redirectPermanently($this->buildLink('threads', $thread), ['page' => $pb->page]);
+            return $this->noPermission();
         }
-        else
-        {
-            if($error === 403)
-            {
-                throw $this->exception($this->noPermission());
-            }
-            else if($error)
-            {
-                throw $this->exception($this->error($error));
-            }
-        }
+
+        $thread->fastUpdate('QT_solved', true);
+
+        // Alerting watchers
+        $data = [
+            'thread_id' => $thread->thread_id,
+            'post_id' => $thread->first_post_id,
+            'sender' => \XF::visitor()->user_id,
+            'contentType' => 'thread',
+            'contentId' => $thread->thread_id,
+            'action' => 'QT_solved',
+            'email_template' => 'QT_question_solved'
+        ];
+
+        $this->app()->jobManager()->enqueue('QuestionThreads:AlertWatchers', $data);
+
+        return $this->redirect($this->buildLink('threads', $thread), \XF::phrase('QT_question_marked_solved'));
     }
 
-    /**
-     * Remove best answer mark
-     *
-     * @param ParameterBag $bg
-     * @return \XF\Mvc\Reply\Redirect
-     *
-     * @throws \XF\Mvc\Reply\Exception
-     */
-    public function actionRemoveBest(ParameterBag $bg)
+    public function actionMarkUnsolved(ParameterBag $params)
     {
         /** @var \QuestionThreads\XF\Entity\Thread $thread */
-        $thread = $this->assertViewableThread($bg->thread_id);
+        $thread = $this->assertViewableThread($params->thread_id);
 
-        if($thread->canRemoveBest($error))
+        $thread->fastUpdate('QT_solved', false);
+
+        if($thread->QT_best_answer_id)
         {
-            $bestAnswer = \XF::finder('XF:Post')->where('post_id', $thread->questionthreads_best_post)->fetchOne();
+            $bestAnswer = $this->finder('XF:Post')->whereId($thread->QT_best_answer_id)->fetchOne();
 
-            $thread->removeBest();
+            /** @var BestAnswer $bestAnswersRepo */
+            $bestAnswersRepo = $this->repository('QuestionThreads:BestAnswer');
+            $bestAnswersRepo->unselectBestAnswer($bestAnswer);
+        }
 
-            return $this->redirect($this->buildLink('posts', $bestAnswer));
-        }
-        else
-        {
-            if($error === 403)
-            {
-                throw $this->exception($this->noPermission());
-            }
-            else if($error)
-            {
-                throw $this->exception($this->error($error));
-            }
-        }
+        return $this->redirect($this->buildLink('threads', $thread), \XF::phrase('QT_question_marked_unsolved'));
     }
 
-    /**
-     * Convert thread to question is checkbox "Is question" is selected
-     *
-     * @param \XF\Entity\Thread $thread
-     * @return Editor
-     */
-    public function setupThreadEdit(\XF\Entity\Thread $thread)
+    protected function setupThreadEdit(\XF\Entity\Thread $thread)
     {
         /** @var Editor $editor */
         $editor = parent::setupThreadEdit($thread);
 
-        if($this->filter('questionthreads_is_question', 'bool') || $thread->Forum->questionthreads_forum)
+        /** @var \QuestionThreads\XF\Entity\Thread $thread */
+        $thread = $editor->getThread();
+
+        if($thread->canEditType())
         {
-            $editor->isQuestionThread = true;
+            if($thread->QT_question && !$this->filter('QT_question', 'bool'))
+            {
+                /** @var \QuestionThreads\Repository\Thread $threadRepo */
+                $threadRepo = $this->repository('QuestionThreads:Thread');
+                $threadRepo->convertQuestionToThread($thread);
+            }
+
+            if(!$thread->QT_question && $this->filter('QT_question', 'bool'))
+            {
+                /** @var \QuestionThreads\Repository\Thread $threadRepo */
+                $threadRepo = $this->repository('QuestionThreads:Thread');
+                $threadRepo->convertThreadToQuestion($thread);
+            }
+
+            $thread->QT_question = $this->filter('QT_question', 'bool');
         }
 
         return $editor;

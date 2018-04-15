@@ -1,9 +1,0 @@
-{
-    "event_id": "entity_structure",
-    "execute_order": 10,
-    "callback_class": "QuestionThreads\\ExtendEntities",
-    "callback_method": "extendForumEntityStructure",
-    "active": true,
-    "hint": "XF\\Entity\\Forum",
-    "description": "Adding 'questionthreads_forum' column to forum entity structure"
-}

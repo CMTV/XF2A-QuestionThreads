@@ -1,9 +1,0 @@
-{
-    "template": "post_edit",
-    "description": "Adding \"Is question\" option when editing thread first post",
-    "execution_order": 10,
-    "enabled": true,
-    "action": "str_replace",
-    "find": "<xf:formrow rowtype=\"{{ $quickEdit ? 'fullWidth noLabel' : '' }}\">\n\t\t\t\t<xf:if is=\"$attachmentData\">\n\t\t\t\t\t<xf:macro template=\"helper_attach_upload\" name=\"upload_block\" arg-attachmentData=\"{$attachmentData}\" />\n\t\t\t\t</xf:if>\n\t\t\t\t<xf:button class=\"button--link u-jsOnly\" data-xf-click=\"preview-click\" icon=\"preview\" />\n\t\t\t</xf:formrow>",
-    "replace": "$0\n\n<xf:if is=\"!$forum.questionthreads_forum && $post.isFirstPost()\">\n\t<xf:formrow rowtype=\"{{ $quickEdit ? 'fullWidth noLabel' : '' }}\">\n\t\t<xf:checkbox>\n\t\t\t<xf:option name=\"questionthreads_is_question\" selected=\"{$thread.questionthreads_is_question}\"\n\t\t\t\t\t   label=\"{{ phrase('questionthreads_is_question') }}\"\n\t\t\t\t\t   hint=\"{{ phrase('questionthreads_is_question_explain') }}\">\n\t\t\t</xf:option>\n\t\t</xf:checkbox>\n\t</xf:formrow>\n</xf:if>"
-}

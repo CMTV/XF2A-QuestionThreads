@@ -2,25 +2,34 @@
     "XF-Admin-Controller-Forum_QuestionThreads-XF-Admin-Controller-Forum.json": {
         "hash": "bc04b2b1e6e289ef95ffcd0a2e9f123c"
     },
+    "XF-Criteria-User_QuestionThreads-XF-Criteria-User.json": {
+        "hash": "be5046662a3d46dbcc9efd98b47afc46"
+    },
+    "XF-Entity-Forum_QuestionThreads-XF-Entity-Forum.json": {
+        "hash": "a69573322f353c7f60c7c7c50c54da4d"
+    },
     "XF-Entity-Post_QuestionThreads-XF-Entity-Post.json": {
         "hash": "c7d5fd44fba25f61ab3573c1cdef9d5a"
     },
     "XF-Entity-Thread_QuestionThreads-XF-Entity-Thread.json": {
         "hash": "b1a2ac25f48a248ff75ef82dfa15a33d"
     },
+    "XF-Entity-User_QuestionThreads-XF-Entity-User.json": {
+        "hash": "6eedbfcffc849ef485c1e93e94bc678f"
+    },
+    "XF-InlineMod-Thread-Merge_QuestionThreads-XF-InlineMod-Thread-Merge.json": {
+        "hash": "05da043d68df3624771a0f6bbe752d5e"
+    },
     "XF-Pub-Controller-Forum_QuestionThreads-XF-Pub-Controller-Forum.json": {
         "hash": "61e46bef71e1d93725dcb598595f17d2"
+    },
+    "XF-Pub-Controller-Member_QuestionThreads-XF-Pub-Controller-Member.json": {
+        "hash": "25ba2a338947eef3c71dd1dbca763d24"
     },
     "XF-Pub-Controller-Post_QuestionThreads-XF-Pub-Controller-Post.json": {
         "hash": "a18c3fac3b4234bffd2196cb92e0dde1"
     },
     "XF-Pub-Controller-Thread_QuestionThreads-XF-Pub-Controller-Thread.json": {
         "hash": "75da1f0d1ea3c422107124c847fbb9ed"
-    },
-    "XF-Service-Thread-Creator_QuestionThreads-XF-Service-Thread-Creator.json": {
-        "hash": "000feb1efe9d2186a9fcae64ffb3313d"
-    },
-    "XF-Service-Thread-Editor_QuestionThreads-XF-Service-Thread-Editor.json": {
-        "hash": "c811fef42538c5bf0a3e58a1a1c57101"
     }
 }

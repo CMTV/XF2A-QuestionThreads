@@ -1,9 +1,0 @@
-{
-    "template": "search_results",
-    "description": "Adding style to search results page",
-    "execution_order": 10,
-    "enabled": true,
-    "action": "str_replace",
-    "find": "<xf:css src=\"search_results.less\" />",
-    "replace": "$0\n<xf:css src=\"questionthreads.less\" />"
-}

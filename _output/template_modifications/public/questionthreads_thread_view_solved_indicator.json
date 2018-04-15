@@ -1,9 +1,0 @@
-{
-    "template": "thread_view",
-    "description": "Adding solved-indicator before question title in \"thread_view\" template",
-    "execution_order": 10,
-    "enabled": true,
-    "action": "str_replace",
-    "find": "<xf:h1>",
-    "replace": "<xf:css src=\"questionthreads.less\"/>\n$0\n<xf:if is=\"$thread.questionthreads_is_question\">\n\t<xf:if is=\"$thread.questionthreads_is_solved\">\n\t\t<div title=\"{{ phrase('questionthreads_solved_indicator_solved') }}\" class=\"questionthreads-indicator questionthreads-solved questionthreads-big\"></div>\n\t<xf:else />\n\t\t<div title=\"{{ phrase('questionthreads_solved_indicator_unsolved') }}\" class=\"questionthreads-indicator questionthreads-unsolved questionthreads-big\"></div>\n\t</xf:if>\n</xf:if>\n"
-}

@@ -1,0 +1,17 @@
+{
+    "group_name": "questionThreads",
+    "title": "Question mark [Image]",
+    "description": "",
+    "property_type": "css",
+    "css_components": [
+        "extra"
+    ],
+    "value_type": "",
+    "value_parameters": "",
+    "depends_on": "",
+    "value_group": "",
+    "property_value": {
+        "extra": "/* Use \"image-rendering: pixelated\" for pixelart images */"
+    },
+    "display_order": 40
+}

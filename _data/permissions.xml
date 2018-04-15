@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <permissions>
-  <permission permission_group_id="forum" permission_id="questionthreads_solve" permission_type="flag" interface_group_id="forumPermissions" display_order="17"/>
+  <permission permission_group_id="forum" permission_id="QT_createQuestion" permission_type="flag" interface_group_id="questionThreads" display_order="10"/>
+  <permission permission_group_id="forum" permission_id="QT_editAnyThreadType" permission_type="flag" interface_group_id="questionThreads" display_order="1000"/>
+  <permission permission_group_id="forum" permission_id="QT_editOwnThreadType" permission_type="flag" interface_group_id="questionThreads" display_order="20"/>
+  <permission permission_group_id="forum" permission_id="QT_markAnySolved" permission_type="flag" interface_group_id="questionThreads" display_order="1010"/>
+  <permission permission_group_id="forum" permission_id="QT_markAnyUnsolved" permission_type="flag" interface_group_id="questionThreads" display_order="1020"/>
+  <permission permission_group_id="forum" permission_id="QT_markOwnSolved" permission_type="flag" interface_group_id="questionThreads" display_order="40"/>
+  <permission permission_group_id="forum" permission_id="QT_markOwnUnsolved" permission_type="flag" interface_group_id="questionThreads" display_order="60"/>
+  <permission permission_group_id="forum" permission_id="QT_selectBestAnswerAny" permission_type="flag" interface_group_id="questionThreads" display_order="1030"/>
+  <permission permission_group_id="forum" permission_id="QT_selectBestAnswerOwn" permission_type="flag" interface_group_id="questionThreads" display_order="70"/>
+  <permission permission_group_id="forum" permission_id="QT_selectBestAnswerOwn_" permission_type="flag" interface_group_id="questionThreads" display_order="75"/>
+  <permission permission_group_id="forum" permission_id="QT_unselectBestAnswerAny" permission_type="flag" interface_group_id="questionThreads" display_order="1040"/>
+  <permission permission_group_id="forum" permission_id="QT_unselectBestAnswerOwn" permission_type="flag" interface_group_id="questionThreads" display_order="80"/>
 </permissions>

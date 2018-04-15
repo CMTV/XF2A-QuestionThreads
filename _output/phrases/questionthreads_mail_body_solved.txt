@@ -1,1 +1,0 @@
-<p>{actionCaller} marked question you are watching as solved at {board}.</p>
