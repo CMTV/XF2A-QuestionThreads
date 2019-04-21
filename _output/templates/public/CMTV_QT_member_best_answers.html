@@ -1,0 +1,28 @@
+<xf:title>{{ phrase('CMTV_QT_x_best_answers', {'name': $user.username}) }}</xf:title>
+
+<xf:head option="metaNoindex"><meta name="robots" content="noindex" /></xf:head>
+
+<xf:breadcrumb href="{{ link('members', $user) }}">{$user.username}</xf:breadcrumb>
+
+<xf:if is="$total">
+	<div class="block">
+		<div class="block-container">
+			<ol class="block-body">
+				<xf:foreach loop="$bestAnswers" value="$post">
+					<xf:include template="search_result_post" />
+				</xf:foreach>
+			</ol>
+		</div>
+
+		<xf:pagenav link="members/best-answers" data="{$user}" page="{$page}" perpage="{$perPage}" total="{$total}"
+					wrapperclass="block-outer block-outer--after" />
+	</div>
+<xf:else />
+	<div class="blockMessage">
+		<xf:if is="$xf.visitor.user_id === $user.user_id">
+			{{ phrase('CMTV_QT_you_do_not_have_any_best_answers_yet') }}
+		<xf:else />
+			{{ phrase('CMTV_QT_x_do_not_have_any_best_answers_yet', {'name': $user.username}) }}
+		</xf:if>
+	</div>
+</xf:if>

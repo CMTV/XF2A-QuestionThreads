@@ -1,9 +1,0 @@
-{
-    "template": "style_property_template_messageUserElements",
-    "description": "Adding best answer count option",
-    "execution_order": 10,
-    "enabled": true,
-    "action": "str_replace",
-    "find": "<xf:option name=\"{$formBaseKey}[like_count]\" selected=\"{$property.property_value.like_count}\">",
-    "replace": "<xf:option name=\"{$formBaseKey}[QT_best_answer_count]\" selected=\"{$property.property_value.QT_best_answer_count}\">\n\t{{ phrase('QT_total_best_answers') }}\n</xf:option>\n\n$0"
-}

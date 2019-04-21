@@ -1,0 +1,15 @@
+{
+    "group_name": "CMTV_QT",
+    "title": "Question mark [Extra]",
+    "description": "Extra styling for question mark of any type",
+    "property_type": "css",
+    "css_components": [
+        "extra"
+    ],
+    "value_type": "",
+    "value_parameters": "",
+    "depends_on": "",
+    "value_group": "",
+    "property_value": [],
+    "display_order": 1000
+}

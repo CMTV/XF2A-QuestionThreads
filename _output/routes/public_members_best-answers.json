@@ -1,0 +1,11 @@
+{
+    "route_type": "public",
+    "route_prefix": "members",
+    "sub_name": "best-answers",
+    "format": ":int<user_id,username>/best-answers/:page",
+    "build_class": "",
+    "build_method": "",
+    "controller": "CMTV\\QuestionThreads:MemberBestAnswers",
+    "context": "members",
+    "action_prefix": ""
+}

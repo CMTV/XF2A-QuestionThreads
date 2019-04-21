@@ -1,9 +1,0 @@
-{
-    "template": "forum_post_thread",
-    "description": "Using custom thread prompt \"Question title\"",
-    "execution_order": 10,
-    "enabled": true,
-    "action": "str_replace",
-    "find": "{$forum.thread_prompt}",
-    "replace": "{{ ($forum->QT_type === 'questions_only' && $xf.options.QT_useQuestionPrompt) ? phrase('QT_question_title') : $forum.thread_prompt }}"
-}

@@ -1,0 +1,13 @@
+{
+    "group_name": "CMTV_QT",
+    "title": "Best answer user details background color",
+    "description": "",
+    "property_type": "value",
+    "css_components": [],
+    "value_type": "color",
+    "value_parameters": "",
+    "depends_on": "CMTV_QT_best_answer_color_user_details",
+    "value_group": "bestAnswer",
+    "property_value": "mix(lighten(@xf-CMTV_QT_question_mark_solved_color, 5%), @xf-contentAltBg, 15%)",
+    "display_order": 330
+}

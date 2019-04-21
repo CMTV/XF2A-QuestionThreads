@@ -1,0 +1,9 @@
+{
+    "template": "thread_edit",
+    "description": "Thread type",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<xf:macro template=\"helper_thread_options\" name=\"thread_status\" arg-thread=\"{$thread}\" />",
+    "replace": "<xf:include template=\"CMTV_QT_thread_type\" />\n\n$0"
+}

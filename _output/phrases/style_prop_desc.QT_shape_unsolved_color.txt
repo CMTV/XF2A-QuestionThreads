@@ -1,1 +1,0 @@
-This property defines the color of unsolved question mark shape and icon as well.

@@ -1,0 +1,1 @@
+Style settings of Question Threads addon.

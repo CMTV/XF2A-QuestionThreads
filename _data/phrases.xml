@@ -1,142 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
 <phrases>
-  <phrase title="QT_best_answer" version_id="2000070" version_string="2.0.0"><![CDATA[Best answer]]></phrase>
-  <phrase title="QT_best_answer_ratio_explanation" version_id="2000070" version_string="2.0.0"><![CDATA[A user who answered at least once in 10 questions and has 5 best answers will have a ratio of 0.5.]]></phrase>
-  <phrase title="QT_best_answer_successfully_selected" version_id="2000070" version_string="2.0.0"><![CDATA[Best answer successfully selected!]]></phrase>
-  <phrase title="QT_best_answer_successfully_unselected" version_id="2000070" version_string="2.0.0"><![CDATA[Best answer successfully unselected!]]></phrase>
-  <phrase title="QT_best_answers" version_id="2000070" version_string="2.0.0"><![CDATA[Best answers]]></phrase>
-  <phrase title="QT_convert_existing_threads" version_id="2000070" version_string="2.0.0"><![CDATA[Convert existing threads depending on forum type]]></phrase>
-  <phrase title="QT_convert_threads_hint" version_id="2000070" version_string="2.0.0"><![CDATA[If selected:
+  <phrase title="CMTV_QT_ask_question" version_id="2010070" version_string="2.1.0"><![CDATA[Ask question]]></phrase>
+  <phrase title="CMTV_QT_best_answer" version_id="2010070" version_string="2.1.0"><![CDATA[Best answer]]></phrase>
+  <phrase title="CMTV_QT_best_answers" version_id="2010070" version_string="2.1.0"><![CDATA[Best answers]]></phrase>
+  <phrase title="CMTV_QT_cant_unselect_this_post_is_not_the_best_answer" version_id="2010070" version_string="2.1.0"><![CDATA[Can't unselect. This post is not the best answer.]]></phrase>
+  <phrase title="CMTV_QT_convert_existing_threads" version_id="2010070" version_string="2.1.0"><![CDATA[Convert existing threads]]></phrase>
+  <phrase title="CMTV_QT_convert_existing_threads_explain" version_id="2010070" version_string="2.1.0"><![CDATA[If selected:
 <ul>
-	<li><strong>Threads only</strong> — all existing questions will be converted to threads</li>
+	<li><strong>Threads only</strong> — all existing questions in this forum will be converted to threads</li>
 	<li><strong>Threads and questions</strong> — nothing will happen</li>
-	<li><strong>Questions only</strong> — all existing threads will be converted to questions</li>
+	<li><strong>Questions only</strong> — all existing threads in this forum will be converted to questions</li>
 </ul>]]></phrase>
-  <phrase title="QT_converting_to_questions" version_id="2000070" version_string="2.0.0"><![CDATA[Converting to questions]]></phrase>
-  <phrase title="QT_converting_to_threads" version_id="2000070" version_string="2.0.0"><![CDATA[Converting to threads]]></phrase>
-  <phrase title="QT_create_question_no_permission" version_id="2000070" version_string="2.0.0"><![CDATA[You dont have a permission to create questions in this forum!]]></phrase>
-  <phrase title="QT_first_post_cant_be_best_answer" version_id="2000070" version_string="2.0.0"><![CDATA[First post can't be the best answer!]]></phrase>
-  <phrase title="QT_for_all_users" version_id="2000070" version_string="2.0.0"><![CDATA[For all users]]></phrase>
-  <phrase title="QT_forum_type" version_id="2000070" version_string="2.0.0"><![CDATA[Forum type]]></phrase>
-  <phrase title="QT_icon" version_id="2000070" version_string="2.0.0"><![CDATA[Icon]]></phrase>
-  <phrase title="QT_indicator" version_id="2000070" version_string="2.0.0"><![CDATA[Indicator]]></phrase>
-  <phrase title="QT_mark_solved" version_id="2000070" version_string="2.0.0"><![CDATA[Mark "Solved"]]></phrase>
-  <phrase title="QT_mark_unsolved" version_id="2000070" version_string="2.0.0"><![CDATA[Mark "Unsolved"]]></phrase>
-  <phrase title="QT_member_account_menu" version_id="2000070" version_string="2.0.0"><![CDATA[Member account menu]]></phrase>
-  <phrase title="QT_member_profile_page" version_id="2000070" version_string="2.0.0"><![CDATA[Member profile page]]></phrase>
-  <phrase title="QT_message_background" version_id="2000070" version_string="2.0.0"><![CDATA[Message background color]]></phrase>
-  <phrase title="QT_not_best_answer" version_id="2000070" version_string="2.0.0"><![CDATA[Not best answer]]></phrase>
-  <phrase title="QT_only_questions_allowed_in_this_forum" version_id="2000070" version_string="2.0.0"><![CDATA[Only questions allowed in this forum]]></phrase>
-  <phrase title="QT_only_threads_allowed_in_this_forum" version_id="2000070" version_string="2.0.0"><![CDATA[Only threads allowed in this forum]]></phrase>
-  <phrase title="QT_post_question" version_id="2000070" version_string="2.0.0"><![CDATA[Post question]]></phrase>
-  <phrase title="QT_question_best_answer_selected_email_html" version_id="2000070" version_string="2.0.0"><![CDATA[<p>{sender} selected best answer of question you are watching at {board}.</p>]]></phrase>
-  <phrase title="QT_question_marked_solved" version_id="2000070" version_string="2.0.0"><![CDATA[Question marked solved!]]></phrase>
-  <phrase title="QT_question_marked_unsolved" version_id="2000070" version_string="2.0.0"><![CDATA[Question marked unsolved!]]></phrase>
-  <phrase title="QT_question_threads" version_id="2000070" version_string="2.0.0"><![CDATA[Question Threads]]></phrase>
-  <phrase title="QT_question_title" version_id="2000070" version_string="2.0.0"><![CDATA[Question title]]></phrase>
-  <phrase title="QT_question_x_best_answer" version_id="2000070" version_string="2.0.0"><![CDATA[{title} - Best answer selected]]></phrase>
-  <phrase title="QT_question_x_solved" version_id="2000070" version_string="2.0.0"><![CDATA[{title} - Question solved]]></phrase>
-  <phrase title="QT_question_your_answer_best_selected_email_html" version_id="2000070" version_string="2.0.0"><![CDATA[<p>{sender} marked your answer as best answer of question you are watching at {board}.</p>]]></phrase>
-  <phrase title="QT_questions_only" version_id="2000070" version_string="2.0.0"><![CDATA[Questions only]]></phrase>
-  <phrase title="QT_rebuild_best_answer_counts" version_id="2000070" version_string="2.0.0"><![CDATA[[QT] Rebuild best answer counts]]></phrase>
-  <phrase title="QT_rebuilding_best_answer_counts" version_id="2000070" version_string="2.0.0"><![CDATA[Rebuilding best answer counts]]></phrase>
-  <phrase title="QT_shape" version_id="2000070" version_string="2.0.0"><![CDATA[Shape]]></phrase>
-  <phrase title="QT_solved" version_id="2000070" version_string="2.0.0"><![CDATA[Solved]]></phrase>
-  <phrase title="QT_there_is_a_best_answer_already" version_id="2000070" version_string="2.0.0"><![CDATA[There is a best answer already!]]></phrase>
-  <phrase title="QT_this_post_is_not_the_best_answer" version_id="2000070" version_string="2.0.0"><![CDATA[This post is not the best answer!]]></phrase>
-  <phrase title="QT_this_thread_is_not_a_question" version_id="2000070" version_string="2.0.0"><![CDATA[This thread is not a question!]]></phrase>
-  <phrase title="QT_threads_and_questions" version_id="2000070" version_string="2.0.0"><![CDATA[Threads and questions]]></phrase>
-  <phrase title="QT_threads_only" version_id="2000070" version_string="2.0.0"><![CDATA[Threads only]]></phrase>
-  <phrase title="QT_total_best_answers" version_id="2000070" version_string="2.0.0"><![CDATA[Total best answers]]></phrase>
-  <phrase title="QT_unfortunately_you_dont_have_best_answers" version_id="2000070" version_string="2.0.0"><![CDATA[Unfortunately you don't have best answers]]></phrase>
-  <phrase title="QT_unsolved" version_id="2000070" version_string="2.0.0"><![CDATA[Unsolved]]></phrase>
-  <phrase title="QT_user_best_answer_to_answer_ratio_is_at_least" version_id="2000070" version_string="2.0.0"><![CDATA[User best answers to answers ratio is at least]]></phrase>
-  <phrase title="QT_user_does_not_have_best_answers" version_id="2000070" version_string="2.0.0"><![CDATA[User does not have best answers]]></phrase>
-  <phrase title="QT_user_has_posted_at_least_x_best_answers" version_id="2000070" version_string="2.0.0"><![CDATA[User has posted at least X best answers]]></phrase>
-  <phrase title="QT_user_has_posted_at_least_x_questions" version_id="2000070" version_string="2.0.0"><![CDATA[User has posted at least X questions]]></phrase>
-  <phrase title="QT_user_has_posted_no_more_than_x_questions" version_id="2000070" version_string="2.0.0"><![CDATA[User has posted no more than X questions]]></phrase>
-  <phrase title="QT_watched_question_email_html_footer" version_id="2000070" version_string="2.0.0"><![CDATA[<p class="minorText">Please do not reply to this message. You must visit the forum to reply.</p>
-
-<p class="minorText">This message was sent to you because you opted to watch the question {thread} at {board} with email notifications.</p>
-
-<p class="minorText">If you no longer wish to receive these emails, you may <a href="{disable_this_link}">disable emails from this question</a> or <a href="{disable_all_link}">disable all emails</a>.</p>]]></phrase>
-  <phrase title="QT_watched_question_solved_email_html" version_id="2000070" version_string="2.0.0"><![CDATA[<p>{sender} marked question you are watching solved at {board}.</p>]]></phrase>
-  <phrase title="QT_x_best_answers" version_id="2000070" version_string="2.0.0"><![CDATA[{name}'s best answers]]></phrase>
-  <phrase title="QT_x_marked_question_y_solved" version_id="2000070" version_string="2.0.0"><![CDATA[{name} marked question {title} solved]]></phrase>
-  <phrase title="QT_x_marked_your_answer_best_for_y_question" version_id="2000070" version_string="2.0.0"><![CDATA[{name} marked <strong>your</strong> answer best for {title} question!]]></phrase>
-  <phrase title="QT_x_selected_best_answer_for_y_question" version_id="2000070" version_string="2.0.0"><![CDATA[{name} selected best answer for {title} question]]></phrase>
-  <phrase title="member_stat.QT_best_answers" version_id="2000070" version_string="2.0.0"><![CDATA[Most best answers]]></phrase>
-  <phrase title="option.QT_useIconForQuestionsOnly" version_id="2000070" version_string="2.0.0"><![CDATA[Use questions only forum icon]]></phrase>
-  <phrase title="option.QT_useQuestionPrompt" version_id="2000070" version_string="2.0.0"><![CDATA[Use question prompt]]></phrase>
-  <phrase title="option_explain.QT_useIconForQuestionsOnly" version_id="2000070" version_string="2.0.0"><![CDATA[If selected, custom node icon will be used for questions only forums. Uncheck this if you are having problems with addons that affect node icons.]]></phrase>
-  <phrase title="option_explain.QT_useQuestionPrompt" version_id="2000070" version_string="2.0.0"><![CDATA[If selected, custom prompt "Question title" will be used ignoring any other thread prompts when creating question in questions only forums.]]></phrase>
-  <phrase title="option_group.questionThreads" version_id="2000070" version_string="2.0.0"><![CDATA[Question Threads]]></phrase>
-  <phrase title="option_group_description.questionThreads" version_id="2000070" version_string="2.0.0"><![CDATA[Options of Question Threads addon]]></phrase>
-  <phrase title="permission.forum_QT_createQuestion" version_id="2000070" version_string="2.0.0"><![CDATA[Create new question]]></phrase>
-  <phrase title="permission.forum_QT_editAnyThreadType" version_id="2000070" version_string="2.0.0"><![CDATA[Edit any thread type]]></phrase>
-  <phrase title="permission.forum_QT_editOwnThreadType" version_id="2000070" version_string="2.0.0"><![CDATA[Edit own thread type]]></phrase>
-  <phrase title="permission.forum_QT_markAnySolved" version_id="2000070" version_string="2.0.0"><![CDATA[Mark any questions solved]]></phrase>
-  <phrase title="permission.forum_QT_markAnyUnsolved" version_id="2000070" version_string="2.0.0"><![CDATA[Mark any questions unsolved]]></phrase>
-  <phrase title="permission.forum_QT_markOwnSolved" version_id="2000070" version_string="2.0.0"><![CDATA[Mark own questions solved]]></phrase>
-  <phrase title="permission.forum_QT_markOwnUnsolved" version_id="2000070" version_string="2.0.0"><![CDATA[Mark own questions unsolved]]></phrase>
-  <phrase title="permission.forum_QT_selectBestAnswerAny" version_id="2000070" version_string="2.0.0"><![CDATA[Select best answer in any threads]]></phrase>
-  <phrase title="permission.forum_QT_selectBestAnswerOwn" version_id="2000070" version_string="2.0.0"><![CDATA[Select best answer in own threads]]></phrase>
-  <phrase title="permission.forum_QT_selectBestAnswerOwn_" version_id="2000070" version_string="2.0.0"><![CDATA[Mark own post in question as best answer]]></phrase>
-  <phrase title="permission.forum_QT_unselectBestAnswerAny" version_id="2000070" version_string="2.0.0"><![CDATA[Unselect best answer in any threads]]></phrase>
-  <phrase title="permission.forum_QT_unselectBestAnswerOwn" version_id="2000070" version_string="2.0.0"><![CDATA[Unselect best answer in own threads]]></phrase>
-  <phrase title="permission_interface.questionThreads" version_id="2000070" version_string="2.0.0"><![CDATA[Question Threads]]></phrase>
-  <phrase title="style_prop.QT_best_answer_custom_user_block" version_id="2000070" version_string="2.0.0"><![CDATA[Custom best answer user block background]]></phrase>
-  <phrase title="style_prop.QT_best_answer_indicator_css" version_id="2000070" version_string="2.0.0"><![CDATA[Best answer message indicator]]></phrase>
-  <phrase title="style_prop.QT_best_answer_link_css" version_id="2000070" version_string="2.0.0"><![CDATA[Best answer link]]></phrase>
-  <phrase title="style_prop.QT_best_answer_mark_color" version_id="2000070" version_string="2.0.0"><![CDATA[Best answer mark color]]></phrase>
-  <phrase title="style_prop.QT_best_answer_mark_general_css" version_id="2000070" version_string="2.0.0"><![CDATA[Best answer mark]]></phrase>
-  <phrase title="style_prop.QT_best_answer_mark_icon" version_id="2000070" version_string="2.0.0"><![CDATA[Best answer mark icon]]></phrase>
-  <phrase title="style_prop.QT_best_answer_mark_icon_css" version_id="2000070" version_string="2.0.0"><![CDATA[Best answer mark [Icon]]]></phrase>
-  <phrase title="style_prop.QT_best_answer_mark_image" version_id="2000070" version_string="2.0.0"><![CDATA[Best answer mark image]]></phrase>
-  <phrase title="style_prop.QT_best_answer_mark_image_css" version_id="2000070" version_string="2.0.0"><![CDATA[Best answer mark [Image]]]></phrase>
-  <phrase title="style_prop.QT_best_answer_mark_type" version_id="2000070" version_string="2.0.0"><![CDATA[Best answer mark type]]></phrase>
-  <phrase title="style_prop.QT_best_answer_message_background_color" version_id="2000070" version_string="2.0.0"><![CDATA[Best answer message background color]]></phrase>
-  <phrase title="style_prop.QT_best_answer_message_css" version_id="2000070" version_string="2.0.0"><![CDATA[Best answer message]]></phrase>
-  <phrase title="style_prop.QT_best_answer_message_type" version_id="2000070" version_string="2.0.0"><![CDATA[Best answer message]]></phrase>
-  <phrase title="style_prop.QT_best_answer_user_block_background_color" version_id="2000070" version_string="2.0.0"><![CDATA[Best answer user block background color]]></phrase>
-  <phrase title="style_prop.QT_icon_solved" version_id="2000070" version_string="2.0.0"><![CDATA[Question mark solved icon]]></phrase>
-  <phrase title="style_prop.QT_icon_unsolved" version_id="2000070" version_string="2.0.0"><![CDATA[Question mark unsolved icon]]></phrase>
-  <phrase title="style_prop.QT_image_solved" version_id="2000070" version_string="2.0.0"><![CDATA[Question mark solved image]]></phrase>
-  <phrase title="style_prop.QT_image_unsolved" version_id="2000070" version_string="2.0.0"><![CDATA[Question mark unsolved image]]></phrase>
-  <phrase title="style_prop.QT_question_mark_general_css" version_id="2000070" version_string="2.0.0"><![CDATA[Question mark]]></phrase>
-  <phrase title="style_prop.QT_question_mark_icon_css" version_id="2000070" version_string="2.0.0"><![CDATA[Question mark [Icon]]]></phrase>
-  <phrase title="style_prop.QT_question_mark_image_css" version_id="2000070" version_string="2.0.0"><![CDATA[Question mark [Image]]]></phrase>
-  <phrase title="style_prop.QT_question_mark_shape_css" version_id="2000070" version_string="2.0.0"><![CDATA[Question mark [Shape]]]></phrase>
-  <phrase title="style_prop.QT_question_mark_type" version_id="2000070" version_string="2.0.0"><![CDATA[Question mark type]]></phrase>
-  <phrase title="style_prop.QT_shape_solved_color" version_id="2000070" version_string="2.0.0"><![CDATA[Question mark solved color]]></phrase>
-  <phrase title="style_prop.QT_shape_unsolved_color" version_id="2000070" version_string="2.0.0"><![CDATA[Question mark unsolved color]]></phrase>
-  <phrase title="style_prop.QT_total_best_answers_positions" version_id="2000070" version_string="2.0.0"><![CDATA[Show total best answers]]></phrase>
-  <phrase title="style_prop_desc.QT_best_answer_custom_user_block" version_id="2000070" version_string="2.0.0"><![CDATA[If enabled, allows you to set CSS background property for best answer user block (where avatar, username and user info are located).]]></phrase>
-  <phrase title="style_prop_desc.QT_best_answer_indicator_css" version_id="2000070" version_string="2.0.0"><![CDATA[Usually a small token attached to the message block indicating that this message is the best answer]]></phrase>
-  <phrase title="style_prop_desc.QT_best_answer_link_css" version_id="2000070" version_string="2.0.0"><![CDATA[]]></phrase>
-  <phrase title="style_prop_desc.QT_best_answer_mark_color" version_id="2000070" version_string="2.0.0"><![CDATA[This property defines the color of best answer mark icon.]]></phrase>
-  <phrase title="style_prop_desc.QT_best_answer_mark_general_css" version_id="2000070" version_string="2.0.0"><![CDATA[Type CSS code that will be included to best answer mark regardless its type]]></phrase>
-  <phrase title="style_prop_desc.QT_best_answer_mark_icon" version_id="2000070" version_string="2.0.0"><![CDATA[Put FontAwesome icon code in this field. <a href="https://fontawesome.com/v4.7.0/icons/" target="_blank">List of available icons</a>.]]></phrase>
-  <phrase title="style_prop_desc.QT_best_answer_mark_icon_css" version_id="2000070" version_string="2.0.0"><![CDATA[]]></phrase>
-  <phrase title="style_prop_desc.QT_best_answer_mark_image" version_id="2000070" version_string="2.0.0"><![CDATA[]]></phrase>
-  <phrase title="style_prop_desc.QT_best_answer_mark_image_css" version_id="2000070" version_string="2.0.0"><![CDATA[]]></phrase>
-  <phrase title="style_prop_desc.QT_best_answer_mark_type" version_id="2000070" version_string="2.0.0"><![CDATA[]]></phrase>
-  <phrase title="style_prop_desc.QT_best_answer_message_background_color" version_id="2000070" version_string="2.0.0"><![CDATA[]]></phrase>
-  <phrase title="style_prop_desc.QT_best_answer_message_css" version_id="2000070" version_string="2.0.0"><![CDATA[]]></phrase>
-  <phrase title="style_prop_desc.QT_best_answer_message_type" version_id="2000070" version_string="2.0.0"><![CDATA[Choose how best answer will differ from any other messages in thread.]]></phrase>
-  <phrase title="style_prop_desc.QT_best_answer_user_block_background_color" version_id="2000070" version_string="2.0.0"><![CDATA[]]></phrase>
-  <phrase title="style_prop_desc.QT_icon_solved" version_id="2000070" version_string="2.0.0"><![CDATA[Put FontAwesome icon code in this field. <a href="https://fontawesome.com/v4.7.0/icons/" target="_blank">List of available icons</a>.]]></phrase>
-  <phrase title="style_prop_desc.QT_icon_unsolved" version_id="2000070" version_string="2.0.0"><![CDATA[Put FontAwesome icon code in this field. <a href="https://fontawesome.com/v4.7.0/icons/" target="_blank">List of available icons</a>.]]></phrase>
-  <phrase title="style_prop_desc.QT_image_solved" version_id="2000070" version_string="2.0.0"><![CDATA[]]></phrase>
-  <phrase title="style_prop_desc.QT_image_unsolved" version_id="2000070" version_string="2.0.0"><![CDATA[]]></phrase>
-  <phrase title="style_prop_desc.QT_question_mark_general_css" version_id="2000070" version_string="2.0.0"><![CDATA[Type CSS code that will be included to question mark regardless its type]]></phrase>
-  <phrase title="style_prop_desc.QT_question_mark_icon_css" version_id="2000070" version_string="2.0.0"><![CDATA[]]></phrase>
-  <phrase title="style_prop_desc.QT_question_mark_image_css" version_id="2000070" version_string="2.0.0"><![CDATA[]]></phrase>
-  <phrase title="style_prop_desc.QT_question_mark_shape_css" version_id="2000070" version_string="2.0.0"><![CDATA[]]></phrase>
-  <phrase title="style_prop_desc.QT_question_mark_type" version_id="2000070" version_string="2.0.0"><![CDATA[]]></phrase>
-  <phrase title="style_prop_desc.QT_shape_solved_color" version_id="2000070" version_string="2.0.0"><![CDATA[This property defines the color of solved question mark shape and icon as well.]]></phrase>
-  <phrase title="style_prop_desc.QT_shape_unsolved_color" version_id="2000070" version_string="2.0.0"><![CDATA[This property defines the color of unsolved question mark shape and icon as well.]]></phrase>
-  <phrase title="style_prop_desc.QT_total_best_answers_positions" version_id="2000070" version_string="2.0.0"><![CDATA[Choose where the total best answers number will be displaying]]></phrase>
-  <phrase title="style_prop_group.questionThreads" version_id="2000070" version_string="2.0.0"><![CDATA[Question Threads]]></phrase>
-  <phrase title="style_prop_group_desc.questionThreads" version_id="2000070" version_string="2.0.0"><![CDATA[Customize Question Threads addon to fit your needs]]></phrase>
+  <phrase title="CMTV_QT_first_question_post_cant_be_the_best_answer" version_id="2010070" version_string="2.1.0"><![CDATA[First question post can't be the best answer]]></phrase>
+  <phrase title="CMTV_QT_forum_type" version_id="2010070" version_string="2.1.0"><![CDATA[Forum type]]></phrase>
+  <phrase title="CMTV_QT_indicator" version_id="2010070" version_string="2.1.0"><![CDATA[Indicator]]></phrase>
+  <phrase title="CMTV_QT_mark_as_solved" version_id="2010070" version_string="2.1.0"><![CDATA[Mark as "Solved"]]></phrase>
+  <phrase title="CMTV_QT_mark_as_unsolved" version_id="2010070" version_string="2.1.0"><![CDATA[Mark as "Unsolved"]]></phrase>
+  <phrase title="CMTV_QT_news_feed_question_insert" version_id="2010070" version_string="2.1.0"><![CDATA[{username} asked the question {threadTitle} in {forumTitle}.]]></phrase>
+  <phrase title="CMTV_QT_not_best_answer" version_id="2010070" version_string="2.1.0"><![CDATA[Not best answer]]></phrase>
+  <phrase title="CMTV_QT_only_questions_can_be_marked_as_solved_unsolved" version_id="2010070" version_string="2.1.0"><![CDATA[Only questions can be marked as solved/unsolved.]]></phrase>
+  <phrase title="CMTV_QT_only_questions_can_have_a_best_answer" version_id="2010070" version_string="2.1.0"><![CDATA[Only questions can have a best answer]]></phrase>
+  <phrase title="CMTV_QT_post_background_color" version_id="2010070" version_string="2.1.0"><![CDATA[Post background color]]></phrase>
+  <phrase title="CMTV_QT_question_threads" version_id="2010070" version_string="2.1.0"><![CDATA[Question threads]]></phrase>
+  <phrase title="CMTV_QT_questions" version_id="2010070" version_string="2.1.0"><![CDATA[Questions]]></phrase>
+  <phrase title="CMTV_QT_questions_only" version_id="2010070" version_string="2.1.0"><![CDATA[Questions only]]></phrase>
+  <phrase title="CMTV_QT_questions_to_threads" version_id="2010070" version_string="2.1.0"><![CDATA[Questions to threads]]></phrase>
+  <phrase title="CMTV_QT_rebuild_best_answer_count" version_id="2010070" version_string="2.1.0"><![CDATA[Rebuild best answer count]]></phrase>
+  <phrase title="CMTV_QT_shape" version_id="2010070" version_string="2.1.0"><![CDATA[Shape]]></phrase>
+  <phrase title="CMTV_QT_solved" version_id="2010070" version_string="2.1.0"><![CDATA[Solved]]></phrase>
+  <phrase title="CMTV_QT_this_question_already_has_the_best_answer" version_id="2010070" version_string="2.1.0"><![CDATA[This question already has the best answer]]></phrase>
+  <phrase title="CMTV_QT_thread_post_deleted_not_visible" version_id="2010070" version_string="2.1.0"><![CDATA[Selected thread or post is deleted or not visible]]></phrase>
+  <phrase title="CMTV_QT_threads_and_questions" version_id="2010070" version_string="2.1.0"><![CDATA[Threads and questions]]></phrase>
+  <phrase title="CMTV_QT_threads_only" version_id="2010070" version_string="2.1.0"><![CDATA[Threads only]]></phrase>
+  <phrase title="CMTV_QT_threads_to_questions" version_id="2010070" version_string="2.1.0"><![CDATA[Threads to questions]]></phrase>
+  <phrase title="CMTV_QT_unsolved" version_id="2010070" version_string="2.1.0"><![CDATA[Unsolved]]></phrase>
+  <phrase title="CMTV_QT_user_has_asked_at_least_x_questions" version_id="2010070" version_string="2.1.0"><![CDATA[User has asked at least X questions]]></phrase>
+  <phrase title="CMTV_QT_user_has_asked_no_more_than_x_questions" version_id="2010070" version_string="2.1.0"><![CDATA[User has asked no more than X questions]]></phrase>
+  <phrase title="CMTV_QT_user_has_posted_at_least_x_best_answers" version_id="2010070" version_string="2.1.0"><![CDATA[User has posted at least X best answers]]></phrase>
+  <phrase title="CMTV_QT_user_has_posted_no_more_than_x_best_answers" version_id="2010070" version_string="2.1.0"><![CDATA[User has posted no more than X best answers]]></phrase>
+  <phrase title="CMTV_QT_watched_question_best_answer_selected_email_html" version_id="2010070" version_string="2.1.0"><![CDATA[<p>{sender} selected the best answer of question you are watching at {board}.</p>]]></phrase>
+  <phrase title="CMTV_QT_watched_question_solved_email_html" version_id="2010070" version_string="2.1.0"><![CDATA[<p>{sender} marked question you are watching as "Solved" at {board}.</p>]]></phrase>
+  <phrase title="CMTV_QT_watched_question_x_best_answer_selected" version_id="2010070" version_string="2.1.0"><![CDATA[{title} - Best answer selected]]></phrase>
+  <phrase title="CMTV_QT_watched_question_x_solved" version_id="2010070" version_string="2.1.0"><![CDATA[{title} - Marked as "Solved"]]></phrase>
+  <phrase title="CMTV_QT_x_best_answers" version_id="2010070" version_string="2.1.0"><![CDATA[{name}'s best answers]]></phrase>
+  <phrase title="CMTV_QT_x_do_not_have_any_best_answers_yet" version_id="2010070" version_string="2.1.0"><![CDATA[{name} doesn't have any best answers yet.]]></phrase>
+  <phrase title="CMTV_QT_x_marked_question_y_as_solved" version_id="2010070" version_string="2.1.0"><![CDATA[{name} marked question {title} as solved.]]></phrase>
+  <phrase title="CMTV_QT_x_marked_your_answer_as_best_answer_of_y_question" version_id="2010070" version_string="2.1.0"><![CDATA[{name} marked your answer as "Best answer" of {title} question.]]></phrase>
+  <phrase title="CMTV_QT_x_selected_the_best_answer_of_y_question" version_id="2010070" version_string="2.1.0"><![CDATA[{name} selected the best answer of {title} question]]></phrase>
+  <phrase title="CMTV_QT_you_do_not_have_any_best_answers_yet" version_id="2010070" version_string="2.1.0"><![CDATA[You don't have any best answers yet.]]></phrase>
+  <phrase title="member_stat.CMTV_QT_most_best_answers" version_id="2010070" version_string="2.1.0"><![CDATA[Most best answers]]></phrase>
+  <phrase title="news_feed_post_best_answer" version_id="2010070" version_string="2.1.0"><![CDATA[{username} selected the best answer of thread {threadTitle}.]]></phrase>
+  <phrase title="news_feed_thread_marked_solved" version_id="2010070" version_string="2.1.0"><![CDATA[{username} marked the question {threadTitle} as "Solved".]]></phrase>
+  <phrase title="permission.CMTV_QT_editAnyThreadType" version_id="2010070" version_string="2.1.0"><![CDATA[Edit any thread type]]></phrase>
+  <phrase title="permission.CMTV_QT_markAnyQuestionSolved" version_id="2010070" version_string="2.1.0"><![CDATA[Mark any question as "Solved"]]></phrase>
+  <phrase title="permission.CMTV_QT_markAnyQuestionUnsolved" version_id="2010070" version_string="2.1.0"><![CDATA[Mark any question as "Unsolved"]]></phrase>
+  <phrase title="permission.CMTV_QT_markOwnQuestionSolved" version_id="2010070" version_string="2.1.0"><![CDATA[Mark own question as "Solved"]]></phrase>
+  <phrase title="permission.CMTV_QT_markOwnQuestionUnsolved" version_id="2010070" version_string="2.1.0"><![CDATA[Mark own question as "Unsovled"]]></phrase>
+  <phrase title="permission.CMTV_QT_selectBestAnswerAny" version_id="2010070" version_string="2.1.0"><![CDATA[Select best answer for any question]]></phrase>
+  <phrase title="permission.CMTV_QT_selectBestAnswerOwn" version_id="2010070" version_string="2.1.0"><![CDATA[Select best answer for own question]]></phrase>
+  <phrase title="permission.CMTV_QT_selectBestAnswerOwnPost" version_id="2010070" version_string="2.1.0"><![CDATA[Mark own post in question as best answer]]></phrase>
+  <phrase title="permission.CMTV_QT_unselectBestAnswerAny" version_id="2010070" version_string="2.1.0"><![CDATA[Unselect best answer for any question]]></phrase>
+  <phrase title="permission.CMTV_QT_unselectBestAnswerOwn" version_id="2010070" version_string="2.1.0"><![CDATA[Unselect best answer for own question]]></phrase>
+  <phrase title="permission_interface.CMTV_QT" version_id="2010070" version_string="2.1.0"><![CDATA[Question Threads]]></phrase>
+  <phrase title="permission_interface.CMTV_QT_moderatorPermissions" version_id="2010070" version_string="2.1.0"><![CDATA[Question Threads moderator permissions]]></phrase>
+  <phrase title="style_prop.CMTV_QT_best_answer_bg_color" version_id="2010070" version_string="2.1.0"><![CDATA[Best answer background color]]></phrase>
+  <phrase title="style_prop.CMTV_QT_best_answer_button_extra_styling" version_id="2010070" version_string="2.1.0"><![CDATA[Best answer button [Extra]]]></phrase>
+  <phrase title="style_prop.CMTV_QT_best_answer_color_user_details" version_id="2010070" version_string="2.1.0"><![CDATA[Change background color of user details post block]]></phrase>
+  <phrase title="style_prop.CMTV_QT_best_answer_count_message_user_info" version_id="2010070" version_string="2.1.0"><![CDATA[Show best answer count in message user info block]]></phrase>
+  <phrase title="style_prop.CMTV_QT_best_answer_count_user_stats" version_id="2010070" version_string="2.1.0"><![CDATA[Show best answer count in user profile stats]]></phrase>
+  <phrase title="style_prop.CMTV_QT_best_answer_indicator_styling" version_id="2010070" version_string="2.1.0"><![CDATA[Best answer indicator]]></phrase>
+  <phrase title="style_prop.CMTV_QT_best_answer_mark_extra_styling" version_id="2010070" version_string="2.1.0"><![CDATA[Best answer mark [Extra]]]></phrase>
+  <phrase title="style_prop.CMTV_QT_best_answer_mark_shape_styling" version_id="2010070" version_string="2.1.0"><![CDATA[Best answer mark [Shape]]]></phrase>
+  <phrase title="style_prop.CMTV_QT_best_answer_mark_type" version_id="2010070" version_string="2.1.0"><![CDATA[Best answer mark type]]></phrase>
+  <phrase title="style_prop.CMTV_QT_best_answer_post_styling" version_id="2010070" version_string="2.1.0"><![CDATA[Best answer post styling]]></phrase>
+  <phrase title="style_prop.CMTV_QT_best_answer_type" version_id="2010070" version_string="2.1.0"><![CDATA[Best answer styling type]]></phrase>
+  <phrase title="style_prop.CMTV_QT_best_answer_user_bg_color" version_id="2010070" version_string="2.1.0"><![CDATA[Best answer user details background color]]></phrase>
+  <phrase title="style_prop.CMTV_QT_question_mark_extra_styling" version_id="2010070" version_string="2.1.0"><![CDATA[Question mark [Extra]]]></phrase>
+  <phrase title="style_prop.CMTV_QT_question_mark_shape_styling" version_id="2010070" version_string="2.1.0"><![CDATA[Question mark [Shape]]]></phrase>
+  <phrase title="style_prop.CMTV_QT_question_mark_solved_color" version_id="2010070" version_string="2.1.0"><![CDATA[Question mark solved color]]></phrase>
+  <phrase title="style_prop.CMTV_QT_question_mark_solved_icon" version_id="2010070" version_string="2.1.0"><![CDATA[Question mark solved FA icon]]></phrase>
+  <phrase title="style_prop.CMTV_QT_question_mark_solved_img" version_id="2010070" version_string="2.1.0"><![CDATA[Question mark solved image]]></phrase>
+  <phrase title="style_prop.CMTV_QT_question_mark_type" version_id="2010070" version_string="2.1.0"><![CDATA[Question mark type]]></phrase>
+  <phrase title="style_prop.CMTV_QT_question_mark_unsolved_color" version_id="2010070" version_string="2.1.0"><![CDATA[Question mark unsolved color]]></phrase>
+  <phrase title="style_prop.CMTV_QT_question_mark_unsolved_icon" version_id="2010070" version_string="2.1.0"><![CDATA[Question mark unsolved FA icon]]></phrase>
+  <phrase title="style_prop.CMTV_QT_question_mark_unsolved_img" version_id="2010070" version_string="2.1.0"><![CDATA[Question mark unsolved image]]></phrase>
+  <phrase title="style_prop.CMTV_QT_questions_only_icon" version_id="2010070" version_string="2.1.0"><![CDATA[Custom node icon for "Questions only" forums]]></phrase>
+  <phrase title="style_prop.CMTV_QT_select_best_answer_mark_icon" version_id="2010070" version_string="2.1.0"><![CDATA[Select best answer mark FA icon]]></phrase>
+  <phrase title="style_prop.CMTV_QT_select_best_answer_mark_img" version_id="2010070" version_string="2.1.0"><![CDATA[Select best answer mark image]]></phrase>
+  <phrase title="style_prop.CMTV_QT_solve_button_color" version_id="2010070" version_string="2.1.0"><![CDATA[Solve button color]]></phrase>
+  <phrase title="style_prop.CMTV_QT_unselect_best_answer_mark_icon" version_id="2010070" version_string="2.1.0"><![CDATA[Unselect best answer mark FA icon]]></phrase>
+  <phrase title="style_prop.CMTV_QT_unselect_best_answer_mark_img" version_id="2010070" version_string="2.1.0"><![CDATA[Unselect best answer mark image]]></phrase>
+  <phrase title="style_prop.CMTV_QT_unsolve_button_color" version_id="2010070" version_string="2.1.0"><![CDATA[Unsolve button color]]></phrase>
+  <phrase title="style_prop_desc.CMTV_QT_best_answer_bg_color" version_id="2010070" version_string="2.1.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.CMTV_QT_best_answer_button_extra_styling" version_id="2010070" version_string="2.1.0"><![CDATA[Extra styling for whole best answer button]]></phrase>
+  <phrase title="style_prop_desc.CMTV_QT_best_answer_color_user_details" version_id="2010070" version_string="2.1.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.CMTV_QT_best_answer_count_message_user_info" version_id="2010070" version_string="2.1.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.CMTV_QT_best_answer_count_user_stats" version_id="2010070" version_string="2.1.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.CMTV_QT_best_answer_indicator_styling" version_id="2010070" version_string="2.1.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.CMTV_QT_best_answer_mark_extra_styling" version_id="2010070" version_string="2.1.0"><![CDATA[Extra styling for question mark of any type]]></phrase>
+  <phrase title="style_prop_desc.CMTV_QT_best_answer_mark_shape_styling" version_id="2010070" version_string="2.1.0"><![CDATA[The styling of best answer mark which type is set to "Shape"]]></phrase>
+  <phrase title="style_prop_desc.CMTV_QT_best_answer_mark_type" version_id="2010070" version_string="2.1.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.CMTV_QT_best_answer_post_styling" version_id="2010070" version_string="2.1.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.CMTV_QT_best_answer_type" version_id="2010070" version_string="2.1.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.CMTV_QT_best_answer_user_bg_color" version_id="2010070" version_string="2.1.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.CMTV_QT_question_mark_extra_styling" version_id="2010070" version_string="2.1.0"><![CDATA[Extra styling for question mark of any type]]></phrase>
+  <phrase title="style_prop_desc.CMTV_QT_question_mark_shape_styling" version_id="2010070" version_string="2.1.0"><![CDATA[Customize the look and feel of custom question mark]]></phrase>
+  <phrase title="style_prop_desc.CMTV_QT_question_mark_solved_color" version_id="2010070" version_string="2.1.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.CMTV_QT_question_mark_solved_icon" version_id="2010070" version_string="2.1.0"><![CDATA[Full Font Awesome icon code. Example: <code>far fa-question-circle</code>. Only works when the type of question mark is "Icon".]]></phrase>
+  <phrase title="style_prop_desc.CMTV_QT_question_mark_solved_img" version_id="2010070" version_string="2.1.0"><![CDATA[The path to the solved question mark image. Only works when the type of question mark is "Image".]]></phrase>
+  <phrase title="style_prop_desc.CMTV_QT_question_mark_type" version_id="2010070" version_string="2.1.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.CMTV_QT_question_mark_unsolved_color" version_id="2010070" version_string="2.1.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.CMTV_QT_question_mark_unsolved_icon" version_id="2010070" version_string="2.1.0"><![CDATA[Full Font Awesome icon code. Example: <code>far fa-question-circle</code>. Only works when the type of question mark is "Icon".]]></phrase>
+  <phrase title="style_prop_desc.CMTV_QT_question_mark_unsolved_img" version_id="2010070" version_string="2.1.0"><![CDATA[The path to the unsolved question mark image. Only works when the type of question mark is "Image".]]></phrase>
+  <phrase title="style_prop_desc.CMTV_QT_questions_only_icon" version_id="2010070" version_string="2.1.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.CMTV_QT_select_best_answer_mark_icon" version_id="2010070" version_string="2.1.0"><![CDATA[Font Awesome icon code. Example: <code>far fa-question-circle</code> or just <code>fa-plus</code> (<code>far</code> will be added automatically then). Only works when the type of best answer mark is "Icon".]]></phrase>
+  <phrase title="style_prop_desc.CMTV_QT_select_best_answer_mark_img" version_id="2010070" version_string="2.1.0"><![CDATA[The path to the best mark image. Only works when the type of best mark is "Image".]]></phrase>
+  <phrase title="style_prop_desc.CMTV_QT_solve_button_color" version_id="2010070" version_string="2.1.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_desc.CMTV_QT_unselect_best_answer_mark_icon" version_id="2010070" version_string="2.1.0"><![CDATA[Font Awesome icon code. Example: <code>far fa-question-circle</code> or just <code>fa-plus</code> (<code>far</code> will be added automatically then). Only works when the type of best answer mark is "Icon".]]></phrase>
+  <phrase title="style_prop_desc.CMTV_QT_unselect_best_answer_mark_img" version_id="2010070" version_string="2.1.0"><![CDATA[The path to the best mark image. Only works when the type of best mark is "Image".]]></phrase>
+  <phrase title="style_prop_desc.CMTV_QT_unsolve_button_color" version_id="2010070" version_string="2.1.0"><![CDATA[]]></phrase>
+  <phrase title="style_prop_group.CMTV_QT" version_id="2010070" version_string="2.1.0"><![CDATA[Question Threads]]></phrase>
+  <phrase title="style_prop_group_desc.CMTV_QT" version_id="2010070" version_string="2.1.0"><![CDATA[Style settings of Question Threads addon.]]></phrase>
 </phrases>

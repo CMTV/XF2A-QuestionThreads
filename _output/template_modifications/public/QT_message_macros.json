@@ -1,9 +1,0 @@
-{
-    "template": "message_macros",
-    "description": "Adding total best answers number if needed",
-    "execution_order": 10,
-    "enabled": true,
-    "action": "str_replace",
-    "find": "<xf:if is=\"$extras.like_count\">",
-    "replace": "<xf:macro template=\"QT_best_answer_count_macros\" name=\"message_macros\"\n\t\t  arg-user=\"{$user}\" arg-extras=\"{$extras}\" />\n\n$0"
-}

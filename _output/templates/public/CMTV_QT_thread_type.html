@@ -1,0 +1,16 @@
+<xf:if is="$thread.isInsert()">
+	<xf:if is="$forum.CMTV_QT_type == 'both'">
+		<xf:macro name="type_selector" arg-isQuestion="{{ false }}" />
+	</xf:if>
+<xf:else />
+	<xf:if is="$xf.visitor.hasPermission('CMTV_QT', 'editAnyThreadType')">
+		<xf:macro name="type_selector" arg-isQuestion="{$thread.CMTV_QT_is_question}" />
+	</xf:if>
+</xf:if>
+
+<xf:macro name="type_selector" arg-isQuestion="!">
+	<xf:radiorow name="CMTV_QT_is_question" value="{$isQuestion}" label="{{ phrase('type') }}">
+		<xf:option value="0">{{ phrase('thread') }}</xf:option>
+		<xf:option value="1">{{ phrase('question') }}</xf:option>
+	</xf:radiorow>
+</xf:macro>

@@ -1,9 +1,0 @@
-{
-    "template": "search_result_post",
-    "description": "Adding best answer mark",
-    "execution_order": 10,
-    "enabled": true,
-    "action": "str_replace",
-    "find": "<h3 class=\"contentRow-title\">",
-    "replace": "$0\n\n<xf:include template=\"QT_search_result_post_best_answer\" />"
-}

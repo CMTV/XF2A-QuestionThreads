@@ -1,0 +1,9 @@
+{
+    "template": "thread_view",
+    "description": "Adding styles to solve/unsolve buttons, best answer button and etc",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "preg_replace",
+    "find": "/^/",
+    "replace": "<xf:css src=\"CMTV_QT_thread_view.less\" />"
+}

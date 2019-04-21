@@ -1,9 +1,0 @@
-{
-    "template": "forum_post_quick_thread",
-    "description": "Changing submit button icon",
-    "execution_order": 10,
-    "enabled": true,
-    "action": "preg_replace",
-    "find": "/(type=\"submit\".+icon=\")(.+)(\">)/",
-    "replace": "$1{{ ($forum->QT_type === 'questions_only') ? 'QT_question' : '$2' }}$3"
-}

@@ -1,115 +1,72 @@
 <?php
 /**
- * Question Threads
- *
- * You CAN use/change/share this code.
+ * Question Threads xF2 addon by CMTV
  * Enjoy!
- *
- * Written by CMTV
- * Date: 12.03.2018
- * Time: 9:41
  */
 
-namespace QuestionThreads\Repository;
+namespace CMTV\QuestionThreads\Repository;
 
-use XF\Entity\User;
+use CMTV\QuestionThreads\XF\Entity\Thread;
 use XF\Entity\Post;
+use XF\Entity\User;
 use XF\Mvc\Entity\Finder;
 use XF\Mvc\Entity\Repository;
+use XF\Repository\NewsFeed;
+
+use CMTV\QuestionThreads\Constants as C;
 
 class BestAnswer extends Repository
 {
-    public function getBestAnswer($post_id)
+    public function findMemberBestAnswers(User $user): Finder
     {
-        return $this->finder('QuestionThreads:BestAnswer')->where(['post_id' => $post_id])->fetchOne();
+        return $this->finder(C::__('BestAnswer'))
+            ->where('post_user_id', $user->user_id)
+            ->where('is_counted', true);
     }
 
-    public function toggleBestAnswer(Post $post)
+    public function publishBestAnswerNewsFeed(User $user, Post $post)
     {
-        $bestAnswer = $this->getBestAnswer($post->post_id);
-
-        if(!$bestAnswer)
-        {
-            $this->selectBestAnswer($post);
-            return true;
-        }
-        else
-        {
-            $this->unselectBestAnswer($post);
-            return false;
-        }
+        $newsFeedRepo = $this->getNewsFeedRepo();
+        $newsFeedRepo->publish(
+            'post',
+            $post->post_id,
+            'best_answer',
+            $user->user_id,
+            $user->username
+        );
     }
 
-    public function selectBestAnswer(Post $post)
+    public function unpublishBestAnswerNewsFeed(Post $post)
     {
-        $thread = $post->Thread;
-        $thread->fastUpdate('QT_solved', true);
-        $thread->fastUpdate('QT_best_answer_id', $post->post_id);
-
-        /** @var BestAnswer $bestAnswer */
-        $bestAnswer = $this->em->create('QuestionThreads:BestAnswer');
-        $bestAnswer->post_id = $post->post_id;
-        $bestAnswer->post_user_id = $post->user_id;
-        $bestAnswer->thread_id = $post->Thread->thread_id;
-        $bestAnswer->thread_user_id = $post->Thread->user_id;
-        $bestAnswer->is_counted = true;
-        $bestAnswer->save();
-
-        $post->User->fastUpdate('QT_best_answer_count', $this->countBestAnswers($post->User));
+        $newsFeedRepo = $this->getNewsFeedRepo();
+        $newsFeedRepo->unpublish(
+            'post',
+            $post->post_id,
+            null,
+            'best_answer'
+        );
     }
 
-    public function unselectBestAnswer(Post $post)
+    public function alertWatchers(User $sender, Post $post)
     {
-        $thread = $post->Thread;
-        $thread->fastUpdate('QT_best_answer_id', 0);
+        $data = [
+            'thread_id' => $post->Thread->thread_id,
+            'post_id' => $post->post_id,
+            'sender' => $sender->user_id,
+            'contentType' => 'post',
+            'contentId' => $post->post_id,
+            'action' => 'best_answer_selected',
+            'email_template' => C::_('best_answer_selected')
+        ];
 
-        $bestAnswer = $this->getBestAnswer($post->post_id);
-
-        if($bestAnswer)
-        {
-            $bestAnswer->delete();
-        }
-
-        $post->User->fastUpdate('QT_best_answer_count', $this->countBestAnswers($post->User));
+        $this->app()->jobManager()->enqueue(C::__('AlertWatchers'), $data);
     }
 
-    public function removeBestAnswerFromThread(\QuestionThreads\XF\Entity\Thread $thread)
+    /**
+     * @return NewsFeed
+     */
+    protected function getNewsFeedRepo()
     {
-        if($thread->QT_best_answer_id)
-        {
-            /** @var Post $post */
-            $post = $this->finder('XF:Post')->whereId($thread->QT_best_answer_id)->fetchOne();
-
-            $this->unselectBestAnswer($post);
-        }
-    }
-
-    public function countBestAnswers(User $user)
-    {
-        $query = "SELECT COUNT(*) FROM `xf_QT_best_answer` WHERE `post_user_id` = ? AND `is_counted` = 1";
-
-        $bestAnswers = $this->db()->fetchOne($query, $user->user_id);
-
-        return $bestAnswers;
-    }
-
-    public function adjustBestAnswers(User $user)
-    {
-        $user->fastUpdate('QT_best_answer_count', $this->countBestAnswers($user));
-    }
-
-    public function findUserBestAnswers($user_id)
-    {
-        if($user_id instanceof \XF\Entity\User)
-        {
-            $user_id = $user_id->user_id;
-        }
-
-        /** @var Finder $finder */
-        $finder = $this->finder('QuestionThreads:BestAnswer')
-            ->where(['post_user_id' => $user_id, 'is_counted' => 1])
-            ->setDefaultOrder('best_answer_id', 'DESC');
-
-        return $finder;
+        return $this->repository('XF:NewsFeed');
     }
 }

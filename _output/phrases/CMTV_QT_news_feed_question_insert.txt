@@ -1,0 +1,1 @@
+{username} asked the question {threadTitle} in {forumTitle}.

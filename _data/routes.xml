@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<routes>
+  <route route_type="public" route_prefix="members" sub_name="best-answers" format=":int&lt;user_id,username&gt;/best-answers/:page" controller="CMTV\QuestionThreads:MemberBestAnswers" context="members"/>
+</routes>

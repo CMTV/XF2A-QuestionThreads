@@ -1,0 +1,9 @@
+{
+    "template": "search_result_thread",
+    "description": "Adding question and best answer marks if needed",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<h3 class=\"contentRow-title\">",
+    "replace": "$0\n\n<xf:macro name=\"thread_marks\" template=\"CMTV_QT_thread_marks_macros\"\n\t\t  arg-context=\"thread_list\" arg-thread=\"{$thread}\" />"
+}

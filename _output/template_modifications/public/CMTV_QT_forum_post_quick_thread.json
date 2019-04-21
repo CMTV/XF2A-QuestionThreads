@@ -1,0 +1,9 @@
+{
+    "template": "forum_post_quick_thread",
+    "description": "Replacing \"Post thread\" with \"Ask question\" if needed",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "{{ phrase('post_thread') }}",
+    "replace": "{{ ($forum.CMTV_QT_type == 'questions_only') ? phrase('CMTV_QT_ask_question') : phrase('post_thread') }}"
+}

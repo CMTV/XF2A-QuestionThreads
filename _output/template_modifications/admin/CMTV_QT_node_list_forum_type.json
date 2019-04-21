@@ -1,0 +1,9 @@
+{
+    "template": "node_list",
+    "description": "Adding forum type to a list of nodes",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<span class=\"dataList-hint\" dir=\"auto\">{$node.NodeType.title}</span>",
+    "replace": "<xf:if is=\"$node.NodeType.node_type_id == 'Forum'\">\n\t<xf:set var=\"$forum\" value=\"{{ $node->getData() }}\" />\n\t\n\t<xf:if is=\"$forum.CMTV_QT_type !== 'threads_only'\">\n\t\t<span class=\"dataList-hint\" dir=\"auto\">\n\t\t\t{$node.NodeType.title} | {{$forum->getTypePhrase()}}\n\t\t</span>\n\t<xf:else />\n\t\t$0\n\t</xf:if>\n<xf:else />\n\t$0\n</xf:if>"
+}

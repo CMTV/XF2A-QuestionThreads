@@ -1,18 +1,14 @@
 <?php
 /**
- * Question Threads
- *
- * You CAN use/change/share this code.
+ * Question Threads xF2 addon by CMTV
  * Enjoy!
- *
- * Written by CMTV
- * Date: 06.03.2018
- * Time: 14:47
  */
 
-namespace QuestionThreads\XF\Admin\Controller;
+namespace CMTV\QuestionThreads\XF\Admin\Controller;
 
 use XF\Mvc\FormAction;
+
+use CMTV\QuestionThreads\Constants as C;
 
 class Forum extends XFCP_Forum
 {
@@ -20,25 +16,24 @@ class Forum extends XFCP_Forum
     {
         parent::saveTypeData($form, $node, $data);
 
-        $form->setup(function() use ($data)
-        {
-            $data->QT_type = $this->filter('QT_type', 'str');
-        });
+        $forumType = $this->filter(C::_('type'), 'str');
 
-        if($this->filter('QT_convert_threads', 'bool'))
-        {
-            /** @var \QuestionThreads\Repository\Forum $forumRepo */
-            $forumRepo = $this->repository('QuestionThreads:Forum');
+        $data->bulkSet([
+            'CMTV_QT_type' => $forumType
+        ]);
 
-            switch($this->filter('QT_type', 'str'))
-            {
-                case \QuestionThreads\XF\Entity\Forum::QT_THREADS_ONLY:
-                    $forumRepo->convertToThreadsOnly($data);
-                    break;
-                case \QuestionThreads\XF\Entity\Forum::QT_QUESTIONS_ONLY:
-                    $forumRepo->convertToQuestionsOnly($data);
-                    break;
-            }
+        if (
+            in_array($forumType, ['threads_only', 'questions_only'])
+            &&
+            $this->filter(C::_('convert'), 'bool')
+        )
+        {
+            $this->app->jobManager()->enqueueUnique(
+                C::_('convertation'),
+                C::__('ConvertForumThreads'),
+                ['forum_id' => $data->node_id, 'type' => $forumType],
+                true
+            );
         }
     }
 }

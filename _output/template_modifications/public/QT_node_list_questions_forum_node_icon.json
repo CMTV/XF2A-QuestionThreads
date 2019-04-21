@@ -1,9 +1,0 @@
-{
-    "template": "node_list.less",
-    "description": "Adding questions only forum node icon",
-    "execution_order": 10,
-    "enabled": true,
-    "action": "str_replace",
-    "find": ".node--page &:before",
-    "replace": ".node--QT_questions_only_forum &:before\n{\n\t.m-faContent(@fa-var-question-circle, .86em);\n}\n\n$0"
-}

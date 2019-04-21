@@ -1,0 +1,14 @@
+<div class="contentRow-title">
+	{{ phrase('news_feed_thread_marked_solved', {
+		'username': username_link($user, false, {'defaultname': $newsFeed.username}),
+		'threadTitle': '<a href="' . link('threads', $content) . '">' . prefix('thread', $content) . $content.title . '</a>'
+	}) }}
+</div>
+
+<div class="contentRow-snippet">{{ snippet($content.FirstPost.message, $xf.options.newsFeedMessageSnippetLength, {'stripQuote': true}) }}</div>
+<xf:if is="{$content.FirstPost.attach_count}">
+	<xf:macro template="news_feed_attached_images" name="attached_images"
+		arg-attachments="{$content.FirstPost.Attachments}" arg-link="{{ link('threads', $content) }}" />
+</xf:if>
+
+<div class="contentRow-minor"><xf:date time="{$newsFeed.event_date}" /></div>

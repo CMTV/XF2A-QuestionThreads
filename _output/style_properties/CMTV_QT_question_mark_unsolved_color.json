@@ -1,0 +1,13 @@
+{
+    "group_name": "CMTV_QT",
+    "title": "Question mark unsolved color",
+    "description": "",
+    "property_type": "value",
+    "css_components": [],
+    "value_type": "color",
+    "value_parameters": "",
+    "depends_on": "",
+    "value_group": "questionMark",
+    "property_value": "#DC3838",
+    "display_order": 30
+}

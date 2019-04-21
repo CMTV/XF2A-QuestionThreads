@@ -1,0 +1,13 @@
+<xf:selectrow name="CMTV_QT_type" label="{{ phrase('CMTV_QT_forum_type') }}" value="{$forum.CMTV_QT_type}">
+	<xf:option value="threads_only">{{ phrase('CMTV_QT_threads_only') }}</xf:option>
+	<xf:option value="both">{{ phrase('CMTV_QT_threads_and_questions') }}</xf:option>
+	<xf:option value="questions_only">{{ phrase('CMTV_QT_questions_only') }}</xf:option>
+</xf:selectrow>
+
+<xf:if is="!$forum.isInsert()">
+	<xf:checkboxrow name="CMTV_QT_convert">
+		<xf:option hint="{{ phrase('CMTV_QT_convert_existing_threads_explain') }}">
+			{{ phrase('CMTV_QT_convert_existing_threads') }}
+		</xf:option>
+	</xf:checkboxrow>
+</xf:if>

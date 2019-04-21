@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <permission_interface_groups>
-  <interface_group interface_group_id="questionThreads" display_order="100" is_moderator="1"/>
+  <interface_group interface_group_id="CMTV_QT" display_order="90" is_moderator="0"/>
+  <interface_group interface_group_id="CMTV_QT_moderatorPermissions" display_order="91" is_moderator="1"/>
 </permission_interface_groups>

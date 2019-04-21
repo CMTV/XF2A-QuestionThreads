@@ -1,80 +1,86 @@
 {
-    "QT_best_answer_custom_user_block.json": {
-        "hash": "84ad7aff4a7f33164d636e8b2b33d2e9"
+    "CMTV_QT_best_answer_bg_color.json": {
+        "hash": "197605afe594939a4de29b38ce963e5a"
     },
-    "QT_best_answer_indicator_css.json": {
-        "hash": "68b33006b72884c2b3ea287ca9c7ee59"
+    "CMTV_QT_best_answer_button_extra_styling.json": {
+        "hash": "d9a45b791bb5c811711028721510819c"
     },
-    "QT_best_answer_link_css.json": {
-        "hash": "ba97dc832d707aa3b5aa26727dce70fe"
+    "CMTV_QT_best_answer_color_user_details.json": {
+        "hash": "2a35c9fd847bb9274922fba35194aa99"
     },
-    "QT_best_answer_mark_color.json": {
-        "hash": "d86b118d3b295d207b57c768f49d2d23"
+    "CMTV_QT_best_answer_count_message_user_info.json": {
+        "hash": "d8f143ec03b9dc3c9b28cee147abaa1e"
     },
-    "QT_best_answer_mark_general_css.json": {
-        "hash": "1e36026a1c921d6dca69e586e1410313"
+    "CMTV_QT_best_answer_count_user_stats.json": {
+        "hash": "daf114a77109e9c220cad5bd23caf4cc"
     },
-    "QT_best_answer_mark_icon.json": {
-        "hash": "9c6f3be9b51e66b58ebd6f5004559e63"
+    "CMTV_QT_best_answer_indicator_styling.json": {
+        "hash": "760eb4e7feb164a755ca2815395b7bb5"
     },
-    "QT_best_answer_mark_icon_css.json": {
-        "hash": "2bead24d027b3ae3f15ce43ae98da120"
+    "CMTV_QT_best_answer_mark_extra_styling.json": {
+        "hash": "6440f2ae888ccf3bb29a212db5b0a7bc"
     },
-    "QT_best_answer_mark_image.json": {
-        "hash": "b9d1e55ed8b3638f93d745f5e5fd05c1"
+    "CMTV_QT_best_answer_mark_shape_styling.json": {
+        "hash": "34a72fadd6300c28d7e684046798dfa8"
     },
-    "QT_best_answer_mark_image_css.json": {
-        "hash": "2497fe46bb5e8fbfda34ef9022029be4"
+    "CMTV_QT_best_answer_mark_type.json": {
+        "hash": "be3c55c1c7dd693bcc6882be97ec1058"
     },
-    "QT_best_answer_mark_type.json": {
-        "hash": "e5cae37d6666c011047284ebc18ebd59"
+    "CMTV_QT_best_answer_post_styling.json": {
+        "hash": "93e279d38580eec26d2afeb079a09a93"
     },
-    "QT_best_answer_message_background_color.json": {
-        "hash": "c75a4e5a7dc4b440b224c2eb327583ee"
+    "CMTV_QT_best_answer_type.json": {
+        "hash": "8ae913a5daadc5507205809ccd09be0f"
     },
-    "QT_best_answer_message_css.json": {
-        "hash": "ca3deb9592ff9e5e4076fb89f741b128"
+    "CMTV_QT_best_answer_user_bg_color.json": {
+        "hash": "8e426171013f91248b9b616d8f4008e6"
     },
-    "QT_best_answer_message_type.json": {
-        "hash": "90964d19d8cf771f8d7df5bc546416f4"
+    "CMTV_QT_question_mark_extra_styling.json": {
+        "hash": "d2f6a0dae7d4ba9dba3d97761f9e65a9"
     },
-    "QT_best_answer_user_block_background_color.json": {
-        "hash": "fb18372fd601f9bf53be1c29d8d7b669"
+    "CMTV_QT_question_mark_shape_styling.json": {
+        "hash": "ddc6a6bee95926bde54fb59e12bd3726"
     },
-    "QT_icon_solved.json": {
-        "hash": "1455baaf66b838990f034fdd1a911fed"
+    "CMTV_QT_question_mark_solved_color.json": {
+        "hash": "3cb584645ce0f6cde3991536b61de8ba"
     },
-    "QT_icon_unsolved.json": {
-        "hash": "67e76860e80a9a464de811240f94bb49"
+    "CMTV_QT_question_mark_solved_icon.json": {
+        "hash": "9c9d0ce5e919dab06c721d738ac35d12"
     },
-    "QT_image_solved.json": {
-        "hash": "1d7fbf0c0d9056075221c7ca1b84264b"
+    "CMTV_QT_question_mark_solved_img.json": {
+        "hash": "f9aabc6852953704862e8f61681c7911"
     },
-    "QT_image_unsolved.json": {
-        "hash": "176dbb2910fa607b22dff3fd31bd08d1"
+    "CMTV_QT_question_mark_type.json": {
+        "hash": "c596cfdddf8f4ef360f5e98c9284e030"
     },
-    "QT_question_mark_general_css.json": {
-        "hash": "e349e20825bee3a15c9e1e5c017da1cd"
+    "CMTV_QT_question_mark_unsolved_color.json": {
+        "hash": "9fb6c884b9368d3d772215a198ecf97c"
     },
-    "QT_question_mark_icon_css.json": {
-        "hash": "7af193ff7602ec9c3aaf88b305b7b441"
+    "CMTV_QT_question_mark_unsolved_icon.json": {
+        "hash": "37139ac7a6b514418819a38a026cd6a8"
     },
-    "QT_question_mark_image_css.json": {
-        "hash": "e4ca2f6479d8a8f6aa1bea08832703a1"
+    "CMTV_QT_question_mark_unsolved_img.json": {
+        "hash": "b26a6a541906f0f8fd2908e76ce0781b"
     },
-    "QT_question_mark_shape_css.json": {
-        "hash": "e5872d95cca76449b557aae8fcfdaded"
+    "CMTV_QT_questions_only_icon.json": {
+        "hash": "13b20c18d351f7bc020c51e6967099a6"
     },
-    "QT_question_mark_type.json": {
-        "hash": "03e0ef5c7db80b63f1ec4b3e53a9b65c"
+    "CMTV_QT_select_best_answer_mark_icon.json": {
+        "hash": "bc3d46b86aadf99819120f021ee1d73e"
     },
-    "QT_shape_solved_color.json": {
-        "hash": "a06287a9217113d805a48b4cfee1eb39"
+    "CMTV_QT_select_best_answer_mark_img.json": {
+        "hash": "7873021beefe23de17b44c69f53b0d11"
     },
-    "QT_shape_unsolved_color.json": {
-        "hash": "2905b3151da0678800e3cda47cfb0d2f"
+    "CMTV_QT_solve_button_color.json": {
+        "hash": "f9aae52c349bcf274dfecb29fadbc018"
     },
-    "QT_total_best_answers_positions.json": {
-        "hash": "1950f78454473c09b2c4262b162fc730"
+    "CMTV_QT_unselect_best_answer_mark_icon.json": {
+        "hash": "62515cd780d8c4b76dcf941dc6e5b509"
+    },
+    "CMTV_QT_unselect_best_answer_mark_img.json": {
+        "hash": "17b72a8db8ef8e6c2a4178564b4629ef"
+    },
+    "CMTV_QT_unsolve_button_color.json": {
+        "hash": "9b21149388cde7d7cffd677df3bca76d"
     }
 }

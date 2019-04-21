@@ -1,54 +1,52 @@
 <?php
 /**
- * Question Threads
- *
- * You CAN use/change/share this code.
+ * Question Threads xF2 addon by CMTV
  * Enjoy!
- *
- * Written by CMTV
- * Date: 06.03.2018
- * Time: 12:28
  */
 
-namespace QuestionThreads\XF\Entity;
+namespace CMTV\QuestionThreads\XF\Entity;
 
 use XF\Mvc\Entity\Structure;
 
+use CMTV\QuestionThreads\Constants as C;
+
 /**
  * COLUMNS
- * @property string QT_type
+ * @property string CMTV_QT_type
  */
 class Forum extends XFCP_Forum
 {
-    const QT_THREADS_ONLY = 'threads_only';
-    const QT_THREADS_QUESTIONS = 'threads_questions';
-    const QT_QUESTIONS_ONLY = 'questions_only';
-
     public static function getStructure(Structure $structure)
     {
         $structure = parent::getStructure($structure);
 
-        $structure->columns['QT_type'] = [
+        // Columns
+
+        $structure->columns[C::_('type')] = [
             'type' => self::STR,
-            'default' => self::QT_THREADS_ONLY,
-            'allowedValues' => [self::QT_THREADS_ONLY, self::QT_THREADS_QUESTIONS, self::QT_QUESTIONS_ONLY]
+            'default' => 'threads_only',
+            'allowedValues' => ['threads_only', 'questions_only', 'both']
         ];
+
+        // Getters
+
+        $structure->getters['type_phrase'] = true;
 
         return $structure;
     }
 
-    public function canCreateQuestion()
+    //************************* OTHER ***************************
+
+    public function getTypePhrase()
     {
-        if($this->QT_type === self::QT_THREADS_ONLY)
+        switch ($this->CMTV_QT_type)
         {
-            return false;
+            case 'threads_only':
+                return \XF::phrase(C::_('threads_only'));
+            case 'both':
+                return \XF::phrase(C::_('threads_and_questions'));
+            case 'questions_only':
+                return \XF::phrase(C::_('questions_only'));
         }
-
-        if(!\XF::visitor()->hasNodePermission($this->node_id, 'QT_createQuestion'))
-        {
-            return false;
-        }
-
-        return true;
     }
 }

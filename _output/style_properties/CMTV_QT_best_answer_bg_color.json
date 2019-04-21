@@ -1,0 +1,13 @@
+{
+    "group_name": "CMTV_QT",
+    "title": "Best answer background color",
+    "description": "",
+    "property_type": "value",
+    "css_components": [],
+    "value_type": "color",
+    "value_parameters": "",
+    "depends_on": "",
+    "value_group": "bestAnswer",
+    "property_value": "mix(lighten(@xf-CMTV_QT_question_mark_solved_color, 5%), @xf-contentBg, 10%)",
+    "display_order": 310
+}

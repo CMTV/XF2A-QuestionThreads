@@ -1,25 +1,25 @@
 <?php
 /**
- * Question Threads
- *
- * You CAN use/change/share this code.
+ * Question Threads xF2 addon by CMTV
  * Enjoy!
- *
- * Written by CMTV
- * Date: 07.03.2018
- * Time: 15:44
  */
 
-namespace QuestionThreads\XF\Entity;
+namespace CMTV\QuestionThreads\XF\Entity;
 
-use QuestionThreads\Repository\BestAnswer;
+use CMTV\QuestionThreads\Entity\BestAnswer;
+use XF\Entity\Post;
 use XF\Mvc\Entity\Structure;
+
+use CMTV\QuestionThreads\Constants as C;
 
 /**
  * COLUMNS
- * @property bool QT_question
- * @property bool QT_solved
- * @property int QT_best_answer_id
+ * @property bool CMTV_QT_is_question
+ * @property bool CMTV_QT_is_solved
+ * @property int CMTV_QT_best_answer_id
+ *
+ * RELATIONS
+ * @property BestAnswer BestAnswer
  */
 class Thread extends XFCP_Thread
 {
@@ -27,180 +27,99 @@ class Thread extends XFCP_Thread
     {
         $structure = parent::getStructure($structure);
 
-        $structure->columns['QT_question'] = [
+        // Columns
+
+        $structure->columns[C::_('is_question')] = [
             'type' => self::BOOL,
             'default' => false
         ];
-        $structure->columns['QT_solved'] = [
+
+        $structure->columns[C::_('is_solved')] = [
             'type' => self::BOOL,
             'default' => false
         ];
-        $structure->columns['QT_best_answer_id'] = [
+
+        $structure->columns[C::_('best_answer_id')] = [
             'type' => self::UINT,
             'default' => 0
+        ];
+
+        // Relations
+
+        $structure->relations['BestAnswer'] = [
+            'entity' => C::__('BestAnswer'),
+            'type' => self::TO_ONE,
+            'conditions' => [['best_answer_id', '=', '$' . C::_('best_answer_id')]],
+            'primary' => true
         ];
 
         return $structure;
     }
 
+    //************************* LIFE CYCLE ***************************
+
+    protected function _postSave()
+    {
+        parent::_postSave();
+
+        if ($bestAnswer = $this->BestAnswer)
+        {
+            $bestAnswer->is_counted = $this->CMTV_QT_is_question && $this->CMTV_QT_is_solved;
+            $bestAnswer->save();
+        }
+    }
+
     protected function _postDelete()
     {
-        if($this->QT_best_answer_id)
-        {
-            $bestAnswer = $this->finder('QuestionThreads:BestAnswer')->where(['post_id' => $this->QT_best_answer_id])->fetchOne();
-
-            if($bestAnswer)
-            {
-                $bestAnswer->delete();
-            }
-        }
-
         parent::_postDelete();
+
+        if ($bestAnswer = $this->BestAnswer)
+        {
+            $bestAnswer->delete();
+        }
     }
 
-    protected function threadHidden($hardDelete = false)
-    {
-        if($this->QT_best_answer_id)
-        {
-            /** @var \QuestionThreads\Entity\BestAnswer $bestAnswer */
-            $bestAnswer = $this->finder('QuestionThreads:BestAnswer')->where(['post_id' => $this->QT_best_answer_id])->fetchOne();
-
-            if($bestAnswer)
-            {
-                $bestAnswer->fastUpdate('is_counted', 0);
-
-                /** @var BestAnswer $bestAnswerRepo */
-                $bestAnswerRepo = $this->repository('QuestionThreads:BestAnswer');
-                $bestAnswerRepo->adjustBestAnswers($bestAnswer->BestAnswerPoster);
-            }
-        }
-
-        parent::threadHidden($hardDelete);
-    }
-
-    protected function threadMadeVisible()
-    {
-        if($this->QT_question && $this->QT_best_answer_id)
-        {
-            /** @var \QuestionThreads\Entity\BestAnswer $bestAnswer */
-            $bestAnswer = $this->finder('QuestionThreads:BestAnswer')->where(['post_id' => $this->QT_best_answer_id])->fetchOne();
-
-            if($bestAnswer)
-            {
-                $bestAnswer->fastUpdate('is_counted', 1);
-
-                /** @var BestAnswer $bestAnswerRepo */
-                $bestAnswerRepo = $this->repository('QuestionThreads:BestAnswer');
-                $bestAnswerRepo->adjustBestAnswers($bestAnswer->BestAnswerPoster);
-            }
-        }
-
-        parent::threadMadeVisible();
-    }
-
-    public function canEditType()
-    {
-        $visitor = \XF::visitor();
-
-        if($visitor->hasPermission('forum', 'QT_editAnyThreadType'))
-        {
-            return true;
-        }
-
-        if(
-            $visitor->hasPermission('forum', 'QT_editOwnThreadType')
-            && $this->user_id === $visitor->user_id
-            && $this->Forum->QT_type === Forum::QT_THREADS_QUESTIONS
-        )
-        {
-            return true;
-        }
-
-        return false;
-    }
+    //************************* PERMISSIONS ***************************
 
     public function canMarkSolved()
     {
-        $visitor = \XF::visitor();
-
-        if($visitor->hasPermission('forum', 'QT_markAnySolved'))
-        {
-            return true;
-        }
-
-        if(
-            $visitor->hasPermission('forum', 'QT_markOwnSolved')
-            && $this->user_id === $visitor->user_id
-        )
-        {
-            return true;
-        }
-
-        return false;
+        return $this->canMarkGeneric('Solved');
     }
 
     public function canMarkUnsolved()
     {
-        $visitor = \XF::visitor();
-
-        if($visitor->hasPermission('forum', 'QT_markAnyUnsolved'))
-        {
-            return true;
-        }
-
-        if(
-            $visitor->hasPermission('forum', 'QT_markOwnUnsolved')
-            && $this->user_id === $visitor->user_id
-        )
-        {
-            return true;
-        }
-
-        return false;
+        return $this->canMarkGeneric('Unsolved');
     }
 
-    public function canSelectBestAnswer(Post $post = null)
+    protected function canMarkGeneric(string $mark): bool
     {
         $visitor = \XF::visitor();
 
-        if($visitor->hasPermission('forum', 'QT_selectBestAnswerAny'))
+        if ($this->user_id === $visitor->user_id && $visitor->hasPermission(C::_(), 'markOwnQuestion' . $mark))
         {
             return true;
         }
 
-        if(
-            $visitor->hasPermission('forum', 'QT_selectBestAnswerOwn')
-            && $this->user_id === $visitor->user_id
-        )
+        return $visitor->hasPermission(C::_(), 'markAnyQuestion' . $mark);
+    }
+
+    //************************* OTHER ***************************
+
+    public function postRemoved(Post $post)
+    {
+        parent::postRemoved($post);
+
+        if ($bestAnswer = $this->BestAnswer)
         {
-            if ($post && $post->user_id === $visitor->user_id)
+            if ($post->post_id === $bestAnswer->post_id)
             {
-                return $visitor->hasPermission('forum', 'QT_selectBestAnswerOwn_');
+                $bestAnswer->delete();
             }
-
-            return true;
         }
-
-        return false;
     }
 
-    public function canUnselectBestAnswer()
+    public function bestAnswerRemoved()
     {
-        $visitor = \XF::visitor();
-
-        if($visitor->hasPermission('forum', 'QT_unselectBestAnswerAny'))
-        {
-            return true;
-        }
-
-        if(
-            $visitor->hasPermission('forum', 'QT_unselectBestAnswerOwn')
-            && $this->user_id === $visitor->user_id
-        )
-        {
-            return true;
-        }
-
-        return false;
+        $this->CMTV_QT_best_answer_id = 0;
     }
 }

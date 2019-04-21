@@ -1,1 +1,0 @@
-Type CSS code that will be included to question mark regardless its type

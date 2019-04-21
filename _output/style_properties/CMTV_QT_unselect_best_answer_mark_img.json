@@ -1,0 +1,13 @@
+{
+    "group_name": "CMTV_QT",
+    "title": "Unselect best answer mark image",
+    "description": "The path to the best mark image. Only works when the type of best mark is \"Image\".",
+    "property_type": "value",
+    "css_components": [],
+    "value_type": "string",
+    "value_parameters": "",
+    "depends_on": "",
+    "value_group": "bestAnswerMark",
+    "property_value": "styles/default/xenforo/reactions/emojione/dislike.png",
+    "display_order": 240
+}

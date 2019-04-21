@@ -1,0 +1,13 @@
+{
+    "group_name": "CMTV_QT",
+    "title": "Show best answer count in user profile stats",
+    "description": "",
+    "property_type": "value",
+    "css_components": [],
+    "value_type": "boolean",
+    "value_parameters": "",
+    "depends_on": "",
+    "value_group": "bestAnswerCount",
+    "property_value": 1,
+    "display_order": 400
+}

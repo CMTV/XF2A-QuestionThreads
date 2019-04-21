@@ -1,0 +1,17 @@
+{
+    "group_name": "CMTV_QT",
+    "title": "Best answer button [Extra]",
+    "description": "Extra styling for whole best answer button",
+    "property_type": "css",
+    "css_components": [
+        "extra"
+    ],
+    "value_type": "",
+    "value_parameters": "",
+    "depends_on": "",
+    "value_group": "",
+    "property_value": {
+        "extra": "// Select/Unselect best answer button colors\n\n&--select\n{\n\tcolor: darken(@xf-CMTV_QT_question_mark_solved_color, 8%);\n}\n\n&--unselect\n{\n\tcolor: @xf-CMTV_QT_question_mark_unsolved_color;\n}"
+    },
+    "display_order": 1020
+}

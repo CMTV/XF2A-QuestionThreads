@@ -1,35 +1,29 @@
 {
-    "XF-Admin-Controller-Forum_QuestionThreads-XF-Admin-Controller-Forum.json": {
-        "hash": "bc04b2b1e6e289ef95ffcd0a2e9f123c"
+    "XF-Admin-Controller-Forum_CMTV-QuestionThreads-XF-Admin-Controller-Forum.json": {
+        "hash": "1904ac47d849827dcb4c951bf669a24a"
     },
-    "XF-Criteria-User_QuestionThreads-XF-Criteria-User.json": {
-        "hash": "be5046662a3d46dbcc9efd98b47afc46"
+    "XF-Entity-Forum_CMTV-QuestionThreads-XF-Entity-Forum.json": {
+        "hash": "3a7e9c4929e5e866131d71416e8e958d"
     },
-    "XF-Entity-Forum_QuestionThreads-XF-Entity-Forum.json": {
-        "hash": "a69573322f353c7f60c7c7c50c54da4d"
+    "XF-Entity-Post_CMTV-QuestionThreads-XF-Entity-Post.json": {
+        "hash": "1221f8fca646083f683bae0e2e669891"
     },
-    "XF-Entity-Post_QuestionThreads-XF-Entity-Post.json": {
-        "hash": "c7d5fd44fba25f61ab3573c1cdef9d5a"
+    "XF-Entity-Thread_CMTV-QuestionThreads-XF-Entity-Thread.json": {
+        "hash": "ff86271e82db659c5612f30048b8178f"
     },
-    "XF-Entity-Thread_QuestionThreads-XF-Entity-Thread.json": {
-        "hash": "b1a2ac25f48a248ff75ef82dfa15a33d"
+    "XF-Entity-User_CMTV-QuestionThreads-XF-Entity-User.json": {
+        "hash": "c0682fcd6b4dd3eb47586b338b9fe69b"
     },
-    "XF-Entity-User_QuestionThreads-XF-Entity-User.json": {
-        "hash": "6eedbfcffc849ef485c1e93e94bc678f"
+    "XF-Pub-Controller-Forum_CMTV-QuestionThreads-XF-Pub-Controller-Forum.json": {
+        "hash": "5ac0223c3e2e250734bea4ac199e25c6"
     },
-    "XF-InlineMod-Thread-Merge_QuestionThreads-XF-InlineMod-Thread-Merge.json": {
-        "hash": "05da043d68df3624771a0f6bbe752d5e"
+    "XF-Pub-Controller-Post_CMTV-QuestionThreads-XF-Pub-Controller-Post.json": {
+        "hash": "6a30949134707de20373c04348f0d05c"
     },
-    "XF-Pub-Controller-Forum_QuestionThreads-XF-Pub-Controller-Forum.json": {
-        "hash": "61e46bef71e1d93725dcb598595f17d2"
+    "XF-Pub-Controller-Thread_CMTV-QuestionThreads-XF-Pub-Controller-Thread.json": {
+        "hash": "c96532d9862f7d672fd67a01d78322ac"
     },
-    "XF-Pub-Controller-Member_QuestionThreads-XF-Pub-Controller-Member.json": {
-        "hash": "25ba2a338947eef3c71dd1dbca763d24"
-    },
-    "XF-Pub-Controller-Post_QuestionThreads-XF-Pub-Controller-Post.json": {
-        "hash": "a18c3fac3b4234bffd2196cb92e0dde1"
-    },
-    "XF-Pub-Controller-Thread_QuestionThreads-XF-Pub-Controller-Thread.json": {
-        "hash": "75da1f0d1ea3c422107124c847fbb9ed"
+    "XF-Service-Post-Mover_CMTV-QuestionThreads-XF-Service-Post-Mover.json": {
+        "hash": "444ae13794f8c1f8d97e10cfe6ee46d5"
     }
 }

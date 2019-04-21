@@ -1,0 +1,59 @@
+.CMTV_QT
+{	
+	&.bestAnswerMarkContainer
+	{
+		display: inline-block;
+
+		.bestAnswerMark
+		{
+			&.bestAnswerMark--shape.bestAnswerMark
+			{
+				.xf-CMTV_QT_best_answer_mark_shape_styling();
+			}
+			
+			&.bestAnswerMark--icon.bestAnswerMark
+			{
+				&--thread_list, &--thread_title
+				{	
+					font-size: 14px;
+				}
+				
+				&--thread_title
+				{
+					position: relative;
+					top: -2px;
+				}
+			}
+			
+			&.bestAnswerMark--image.bestAnswerMark
+			{
+				width: 18px;
+				height: 18px;
+				
+				vertical-align: baseline;
+				
+				&--thread_list, &--thread_title
+				{
+					position: relative;
+					top: 2px;
+				}
+
+				&--thread_title
+				{
+					width: 20px;
+					height: 20px;
+				}
+				
+				&--best_answer_button
+				{
+					width: 16px;
+					height: 16px;
+					
+					vertical-align: text-bottom;
+				}
+			}
+			
+			.xf-CMTV_QT_best_answer_mark_extra_styling();
+		}
+	}
+}

@@ -1,22 +1,18 @@
 <?php
 /**
- * Question Threads
- *
- * You CAN use/change/share this code.
+ * Question Threads xF2 addon by CMTV
  * Enjoy!
- *
- * Written by CMTV
- * Date: 12.03.2018
- * Time: 9:57
  */
 
-namespace QuestionThreads\XF\Entity;
+namespace CMTV\QuestionThreads\XF\Entity;
 
 use XF\Mvc\Entity\Structure;
 
+use CMTV\QuestionThreads\Constants as C;
+
 /**
  * COLUMNS
- * @property int QT_best_answer_count
+ * @property int CMTV_QT_best_answer_count
  */
 class User extends XFCP_User
 {
@@ -24,11 +20,32 @@ class User extends XFCP_User
     {
         $structure = parent::getStructure($structure);
 
-        $structure->columns['QT_best_answer_count'] = [
+        // Columns
+
+        $structure->columns[C::_('best_answer_count')] = [
             'type' => self::UINT,
             'default' => 0,
+            'changeLog' => false,
+            'api' => true
         ];
 
         return $structure;
+    }
+
+    //************************* OTHER ***************************
+
+    public function bestAnswersDecrease()
+    {
+        if ($this->CMTV_QT_best_answer_count > 0)
+        {
+            $this->CMTV_QT_best_answer_count--;
+            $this->save();
+        }
+    }
+
+    public function bestAnswersIncrease()
+    {
+        $this->CMTV_QT_best_answer_count++;
+        $this->save();
     }
 }

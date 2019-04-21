@@ -1,0 +1,31 @@
+<xf:checkboxrow label="{{ phrase('CMTV_QT_question_threads') }}">
+	
+	<xf:option name="user_criteria[CMTV_QT_questions_asked][rule]" value="CMTV_QT_questions_asked" selected="{$criteria.CMTV_QT_questions_asked}"
+			   label="{{ phrase('CMTV_QT_user_has_asked_at_least_x_questions:') }}">
+		<xf:numberbox name="user_criteria[CMTV_QT_questions_asked][data][questions]" value="{$criteria.CMTV_QT_questions_asked.questions}"
+					  size="5" min="0" step="1" />
+	</xf:option>
+
+	<xf:option name="user_criteria[CMTV_QT_questions_maximum][rule]" value="CMTV_QT_questions_maximum" selected="{$criteria.CMTV_QT_questions_maximum}"
+			   label="{{ phrase('CMTV_QT_user_has_asked_no_more_than_x_questions:') }}">
+		<xf:numberbox name="user_criteria[CMTV_QT_questions_maximum][data][questions]" value="{$criteria.CMTV_QT_questions_maximum.questions}"
+					  size="5" min="0" step="1" />
+	</xf:option>
+	
+	<xf:option name="user_criteria[CMTV_QT_best_answers_posted][rule]" value="CMTV_QT_best_answers_posted" selected="{$criteria.CMTV_QT_best_answers_posted}"
+			   label="{{ phrase('CMTV_QT_user_has_posted_at_least_x_best_answers:') }}">
+		<xf:numberbox name="user_criteria[CMTV_QT_best_answers_posted][data][best_answers]" value="{$criteria.CMTV_QT_best_answers_posted.best_answers}"
+					  size="5" min="0" step="1" />
+	</xf:option>
+	
+	<xf:option name="user_criteria[CMTV_QT_best_answers_maximum][rule]" value="CMTV_QT_best_answers_maximum" selected="{$criteria.CMTV_QT_best_answers_maximum}"
+			   label="{{ phrase('CMTV_QT_user_has_posted_no_more_than_x_best_answers:') }}">
+		<xf:numberbox name="user_criteria[CMTV_QT_best_answers_maximum][data][best_answers]" value="{$criteria.CMTV_QT_best_answers_maximum.best_answers}"
+					  size="5" min="0" step="1" />
+	</xf:option>
+	
+</xf:checkboxrow>
+
+<hr class="formRowSep" />
+
+<!--[CMTV\QuestionThreads:after]-->

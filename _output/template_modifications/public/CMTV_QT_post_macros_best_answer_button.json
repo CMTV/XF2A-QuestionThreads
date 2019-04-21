@@ -1,0 +1,9 @@
+{
+    "template": "post_macros",
+    "description": "Adding best answer button",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<xf:react content=\"{$post}\" link=\"posts/react\" list=\"< .js-post | .js-reactionsList\" />",
+    "replace": "<xf:include template=\"CMTV_QT_best_answer_button\" />\n\n$0"
+}

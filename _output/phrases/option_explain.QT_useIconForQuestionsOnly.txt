@@ -1,1 +1,0 @@
-If selected, custom node icon will be used for questions only forums. Uncheck this if you are having problems with addons that affect node icons.

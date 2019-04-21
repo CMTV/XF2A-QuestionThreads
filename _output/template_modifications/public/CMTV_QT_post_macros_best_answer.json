@@ -1,0 +1,9 @@
+{
+    "template": "post_macros",
+    "description": "Styling the best answer post",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<article class=\"message ",
+    "replace": "$0 {{ $post.canDisplayUnselectBestAnswer() ? 'CMTV_QT bestAnswer bestAnswer--' . property('CMTV_QT_best_answer_type') . (property('CMTV_QT_best_answer_color_user_details') ? ' bestAnswer--colorUser ' : ' ') : '' }}"
+}

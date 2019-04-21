@@ -1,0 +1,13 @@
+<xf:pageaction if="$thread.CMTV_QT_is_question">
+	<xf:if is="!$thread.CMTV_QT_is_solved && $thread.canMarkSolved()">
+		<xf:button href="{{ link('threads/markSolved', $thread) }}" class="CMTV_QT button--solve" fa="fa-check">
+			{{ phrase('CMTV_QT_mark_as_solved') }}
+		</xf:button>
+	</xf:if>
+
+	<xf:if is="$thread.CMTV_QT_is_solved && $thread.canMarkUnsolved()">
+		<xf:button href="{{ link('threads/markUnsolved', $thread) }}" class="CMTV_QT button--unsolve" fa="fa-times">
+			{{ phrase('CMTV_QT_mark_as_unsolved') }}
+		</xf:button>
+	</xf:if>
+</xf:pageaction>

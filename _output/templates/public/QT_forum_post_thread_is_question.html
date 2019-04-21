@@ -1,9 +1,0 @@
-<xf:if is="{{ $forum->QT_type === 'threads_questions' }}">
-	<hr class="formRowSep" />
-	<xf:radiorow name="QT_question" label="{{ phrase('type') }}" value="0">
-		<xf:option value="0" label="{{ phrase('thread') }}" />
-		<xf:option value="1" label="{{ phrase('question') }}"
-				   disabled="{{ (!$forum->canCreateQuestion()) ? 'disabled' : '' }}"
-				   hint="{{ (!$forum->canCreateQuestion()) ? phrase('QT_create_question_no_permission') : '' }}" />
-	</xf:radiorow>
-</xf:if>

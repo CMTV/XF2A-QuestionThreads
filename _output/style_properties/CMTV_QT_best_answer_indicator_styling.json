@@ -1,0 +1,32 @@
+{
+    "group_name": "CMTV_QT",
+    "title": "Best answer indicator",
+    "description": "",
+    "property_type": "css",
+    "css_components": [
+        "text",
+        "background",
+        "border",
+        "border_radius",
+        "border_width_simple",
+        "border_color_simple",
+        "border_radius_simple",
+        "padding",
+        "extra"
+    ],
+    "value_type": "",
+    "value_parameters": "",
+    "depends_on": "",
+    "value_group": "",
+    "property_value": {
+        "font-size": "90%",
+        "color": "contrast(@xf-paletteAccent2)",
+        "background-color": "@xf-CMTV_QT_question_mark_solved_color",
+        "border-radius": "@xf-borderRadiusSmall",
+        "padding-top": "1px",
+        "padding-right": "4px",
+        "padding-bottom": "1px",
+        "padding-left": "4px"
+    },
+    "display_order": 1060
+}

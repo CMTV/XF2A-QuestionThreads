@@ -1,0 +1,13 @@
+{
+    "group_name": "CMTV_QT",
+    "title": "Best answer styling type",
+    "description": "",
+    "property_type": "value",
+    "css_components": [],
+    "value_type": "radio",
+    "value_parameters": "background={{ phrase('CMTV_QT_post_background_color') }}\nindicator={{ phrase('CMTV_QT_indicator') }}",
+    "depends_on": "",
+    "value_group": "bestAnswer",
+    "property_value": "background",
+    "display_order": 300
+}

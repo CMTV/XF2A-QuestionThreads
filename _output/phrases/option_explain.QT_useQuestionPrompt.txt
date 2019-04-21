@@ -1,1 +1,0 @@
-If selected, custom prompt "Question title" will be used ignoring any other thread prompts when creating question in questions only forums.

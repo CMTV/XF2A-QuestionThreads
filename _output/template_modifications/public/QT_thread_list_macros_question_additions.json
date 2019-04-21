@@ -1,9 +1,0 @@
-{
-    "template": "thread_list_macros",
-    "description": "Adding question mark and best answer icons before thread title",
-    "execution_order": 10,
-    "enabled": true,
-    "action": "str_replace",
-    "find": "<div class=\"structItem-title\">",
-    "replace": "$0\n\n<xf:include template=\"QT_thread_list_macros_question_additions\" />"
-}

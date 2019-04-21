@@ -1,0 +1,9 @@
+{
+    "template": "node_list_forum",
+    "description": "Changing \"Threads\" label to \"Questions\"",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<dt>{{ phrase('threads') }}</dt>",
+    "replace": "<xf:if is=\"$node.Data.CMTV_QT_type == 'questions_only'\">\n\t<dt>{{ phrase('CMTV_QT_questions') }}</dt>\n<xf:else />\n\t$0\n</xf:if>"
+}

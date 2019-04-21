@@ -1,0 +1,9 @@
+{
+    "template": "forum_view",
+    "description": "Changing \"Post thread\" button text to \"Ask question\"",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "{{ phrase('post_thread') }}",
+    "replace": "<xf:if is=\"$forum.CMTV_QT_type == 'questions_only'\">\n\t{{ phrase('CMTV_QT_ask_question') }}\n<xf:else />\n\t$0\n</xf:if>"
+}

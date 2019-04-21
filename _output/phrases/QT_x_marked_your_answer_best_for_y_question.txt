@@ -1,1 +1,0 @@
-{name} marked <strong>your</strong> answer best for {title} question!

@@ -1,0 +1,9 @@
+{
+    "template": "search_result_post",
+    "description": "Adding best answer mark if needed",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<h3 class=\"contentRow-title\">",
+    "replace": "$0\n\n<xf:if is=\"$post.isBestAnswer()\">\n\t<xf:macro name=\"mark_link\" template=\"CMTV_QT_best_answer_mark_macros\"\n\t\t\t  arg-link=\"{{ link('posts', $post) }}\"\n\t\t\t  arg-context=\"search_result\" arg-state=\"select\" />\n</xf:if>"
+}

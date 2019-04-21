@@ -1,0 +1,13 @@
+{
+    "group_name": "CMTV_QT",
+    "title": "Change background color of user details post block",
+    "description": "",
+    "property_type": "value",
+    "css_components": [],
+    "value_type": "boolean",
+    "value_parameters": "",
+    "depends_on": "",
+    "value_group": "bestAnswer",
+    "property_value": 0,
+    "display_order": 320
+}

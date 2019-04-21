@@ -1,0 +1,6 @@
+If selected:
+<ul>
+	<li><strong>Threads only</strong> — all existing questions in this forum will be converted to threads</li>
+	<li><strong>Threads and questions</strong> — nothing will happen</li>
+	<li><strong>Questions only</strong> — all existing threads in this forum will be converted to questions</li>
+</ul>

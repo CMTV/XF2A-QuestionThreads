@@ -1,82 +1,118 @@
 <?php
 /**
- * Question Threads
- *
- * You CAN use/change/share this code.
+ * Question Threads xF2 addon by CMTV
  * Enjoy!
- *
- * Written by CMTV
- * Date: 14.03.2018
- * Time: 9:46
  */
 
-namespace QuestionThreads\XF\Entity;
+namespace CMTV\QuestionThreads\XF\Entity;
 
-use QuestionThreads\Entity\BestAnswer;
+use CMTV\QuestionThreads\Constants as C;
 
 class Post extends XFCP_Post
 {
-    protected function _postDelete()
+    //************************* PERMISSIONS ***************************
+
+    public function canSelectBestAnswer()
     {
-        /** @var Thread $thread */
+        $visitor = \XF::visitor();
         $thread = $this->Thread;
 
-        if($thread->QT_best_answer_id === $this->post_id)
+        if ($thread->user_id === $visitor->user_id && $visitor->hasPermission(C::_(), 'selectBestAnswerOwn'))
         {
-            $bestAnswer = $this->finder('QuestionThreads:BestAnswer')->where(['post_id' => $thread->QT_best_answer_id])->fetchOne();
-
-            if($bestAnswer)
+            if ($this->user_id === $visitor->user_id)
             {
-                $bestAnswer->delete();
+                if ($visitor->hasPermission(C::_(), 'selectBestAnswerOwnPost'))
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                return true;
             }
         }
 
-        parent::_postDelete();
+        return $visitor->hasPermission(C::_(), 'selectBestAnswerAny');
     }
 
-    protected function postHidden($hardDelete = false)
+    public function canUnselectBestAnswer()
     {
-        /** @var Thread $thread */
+        $visitor = \XF::visitor();
         $thread = $this->Thread;
 
-        if($thread->QT_best_answer_id === $this->post_id)
+        if ($thread->user_id === $visitor->user_id && $visitor->hasPermission(C::_(), 'unselectBestAnswerOwn'))
         {
-            /** @var BestAnswer $bestAnswer */
-            $bestAnswer = $this->finder('QuestionThreads:BestAnswer')->where(['post_id' => $thread->QT_best_answer_id])->fetchOne();
-
-            if($bestAnswer)
-            {
-                $bestAnswer->fastUpdate('is_counted', 0);
-
-                /** @var \QuestionThreads\Repository\BestAnswer $bestAnswerRepo */
-                $bestAnswerRepo = $this->repository('QuestionThreads:BestAnswer');
-                $bestAnswerRepo->adjustBestAnswers($bestAnswer->BestAnswerPoster);
-            }
+            return true;
         }
 
-        parent::postHidden($hardDelete);
+        return $visitor->hasPermission(C::_(), 'unselectBestAnswerAny');
     }
 
-    protected function postMadeVisible()
+    //************************* OTHER ***************************
+
+    public function canDisplaySelectBestAnswer()
     {
         /** @var Thread $thread */
         $thread = $this->Thread;
 
-        if($thread->QT_question && ($thread->QT_best_answer_id === $this->post_id))
+        $canGeneric = $this->canDisplayGenericBestAnswer();
+
+        return $canGeneric && !$thread->CMTV_QT_best_answer_id;
+    }
+
+    public function canDisplayUnselectBestAnswer()
+    {
+        /** @var Thread $thread */
+        $thread = $this->Thread;
+
+        $canGeneric = $this->canDisplayGenericBestAnswer();
+
+        if ($bestAnswer = $thread->BestAnswer)
         {
-            /** @var BestAnswer $bestAnswer */
-            $bestAnswer = $this->finder('QuestionThreads:BestAnswer')->where(['post_id' => $thread->QT_best_answer_id])->fetchOne();
-
-            if($bestAnswer)
-            {
-                $bestAnswer->fastUpdate('is_counted', 1);
-
-                /** @var \QuestionThreads\Repository\BestAnswer $bestAnswerRepo */
-                $bestAnswerRepo = $this->repository('QuestionThreads:BestAnswer');
-                $bestAnswerRepo->adjustBestAnswers($bestAnswer->BestAnswerPoster);
-            }
+            return $canGeneric && $thread->CMTV_QT_is_solved && ($this->post_id === $bestAnswer->post_id);
         }
 
-        parent::postMadeVisible();
+        return false;
+    }
+
+    protected function canDisplayGenericBestAnswer()
+    {
+        /** @var Thread $thread */
+        $thread = $this->Thread;
+
+        if ($thread->isDeleted() || !$thread->isVisible())
+        {
+            return false;
+        }
+
+        if ($this->isDeleted() || !$this->isVisible())
+        {
+            return false;
+        }
+
+        if (!$thread->CMTV_QT_is_question)
+        {
+            return false;
+        }
+
+        if ($thread->first_post_id === $this->post_id)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function isBestAnswer()
+    {
+        /** @var Thread $thread */
+        $thread = $this->Thread;
+
+        if ($bestAnswer = $thread->BestAnswer)
+        {
+            return $this->post_id === $bestAnswer->post_id;
+        }
+
+        return false;
     }
 }

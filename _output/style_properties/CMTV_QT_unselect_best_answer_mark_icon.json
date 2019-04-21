@@ -1,0 +1,13 @@
+{
+    "group_name": "CMTV_QT",
+    "title": "Unselect best answer mark FA icon",
+    "description": "Font Awesome icon code. Example: <code>far fa-question-circle</code> or just <code>fa-plus</code> (<code>far</code> will be added automatically then). Only works when the type of best answer mark is \"Icon\".",
+    "property_type": "value",
+    "css_components": [],
+    "value_type": "string",
+    "value_parameters": "",
+    "depends_on": "",
+    "value_group": "bestAnswerMark",
+    "property_value": "fa-times",
+    "display_order": 220
+}

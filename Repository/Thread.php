@@ -1,64 +1,62 @@
 <?php
 /**
- * Question Threads
- *
- * You CAN use/change/share this code.
+ * Question Threads xF2 addon by CMTV
  * Enjoy!
- *
- * Written by CMTV
- * Date: 14.03.2018
- * Time: 18:42
  */
 
-namespace QuestionThreads\Repository;
+namespace CMTV\QuestionThreads\Repository;
 
+use XF\Entity\User;
 use XF\Mvc\Entity\Repository;
+use XF\Repository\NewsFeed;
+
+use CMTV\QuestionThreads\Constants as C;
 
 class Thread extends Repository
 {
-    /**
-     * @param \QuestionThreads\XF\Entity\Thread $question
-     */
-    public function convertQuestionToThread(\XF\Entity\Thread $question)
+    public function publishMarkedSolved(User $user, \XF\Entity\Thread $thread)
     {
-        if($question->QT_best_answer_id)
-        {
-            /** @var \QuestionThreads\Entity\BestAnswer $bestAnswer */
-            $bestAnswer = $this->finder('QuestionThreads:BestAnswer')->where(['post_id' => $question->QT_best_answer_id])->fetchOne();
+        $newsFeedRepo = $this->getNewsFeedRepo();
+        $newsFeedRepo->publish(
+            'thread',
+            $thread->thread_id,
+            'marked_solved',
+            $user->user_id,
+            $user->username
+        );
+    }
 
-            if($bestAnswer)
-            {
-                $bestAnswer->fastUpdate('is_counted', false);
+    public function unpublishMarkedSolved(\XF\Entity\Thread $thread)
+    {
+        $newsFeedRepo = $this->getNewsFeedRepo();
+        $newsFeedRepo->unpublish(
+            'thread',
+            $thread->thread_id,
+            null,
+            'marked_solved'
+        );
+    }
 
-                /** @var BestAnswer $bestAnswerRepo */
-                $bestAnswerRepo = $this->repository('QuestionThreads:BestAnswer');
-                $bestAnswerRepo->adjustBestAnswers($bestAnswer->BestAnswerPoster);
-            }
-        }
+    public function alertWatchers(User $user, \XF\Entity\Thread $thread)
+    {
+        $data = [
+            'thread_id' => $thread->thread_id,
+            'post_id' => $thread->first_post_id,
+            'sender' => $user->user_id,
+            'contentType' => 'thread',
+            'contentId' => $thread->thread_id,
+            'action' => 'marked_solved',
+            'email_template' => C::_('question_marked_solved')
+        ];
 
-        $question->fastUpdate('QT_question', 0);
+        $this->app()->jobManager()->enqueue(C::__('AlertWatchers'), $data);
     }
 
     /**
-     * @param \QuestionThreads\XF\Entity\Thread $thread
+     * @return NewsFeed
      */
-    public function convertThreadToQuestion(\XF\Entity\Thread $thread)
+    protected function getNewsFeedRepo()
     {
-        if($thread->QT_best_answer_id)
-        {
-            /** @var \QuestionThreads\Entity\BestAnswer $bestAnswer */
-            $bestAnswer = $this->finder('QuestionThreads:BestAnswer')->where(['post_id' => $thread->QT_best_answer_id])->fetchOne();
-
-            if($bestAnswer)
-            {
-                $bestAnswer->fastUpdate('is_counted', true);
-
-                /** @var BestAnswer $bestAnswerRepo */
-                $bestAnswerRepo = $this->repository('QuestionThreads:BestAnswer');
-                $bestAnswerRepo->adjustBestAnswers($bestAnswer->BestAnswerPoster);
-            }
-        }
-
-        $thread->fastUpdate('QT_question', 1);
+        return $this->repository('XF:NewsFeed');
     }
 }

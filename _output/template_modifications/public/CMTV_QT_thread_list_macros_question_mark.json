@@ -1,0 +1,9 @@
+{
+    "template": "thread_list_macros",
+    "description": "Adding thread marks before thread title",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<div class=\"structItem-title\">",
+    "replace": "$0\n\n<xf:macro name=\"thread_marks\" template=\"CMTV_QT_thread_marks_macros\"\n\t\t  arg-context=\"thread_list\" arg-thread=\"{$thread}\" />"
+}

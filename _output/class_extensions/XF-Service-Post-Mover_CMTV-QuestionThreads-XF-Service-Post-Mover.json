@@ -1,0 +1,6 @@
+{
+    "from_class": "XF\\Service\\Post\\Mover",
+    "to_class": "CMTV\\QuestionThreads\\XF\\Service\\Post\\Mover",
+    "execute_order": 10,
+    "active": true
+}

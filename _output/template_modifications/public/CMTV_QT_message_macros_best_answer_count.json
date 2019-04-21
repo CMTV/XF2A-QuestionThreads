@@ -1,0 +1,9 @@
+{
+    "template": "message_macros",
+    "description": "Showing best answer count in user info block in messages",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "\t\t\t\t\t<xf:if is=\"$extras.message_count\">\n\t\t\t\t\t\t<dl class=\"pairs pairs--justified\">\n\t\t\t\t\t\t\t<dt>{{ phrase('messages') }}</dt>\n\t\t\t\t\t\t\t<dd>{$user.message_count|number}</dd>\n\t\t\t\t\t\t</dl>\n\t\t\t\t\t</xf:if>",
+    "replace": "$0\n\n<xf:if is=\"property('CMTV_QT_best_answer_count_message_user_info')\">\n\t<dl class=\"pairs pairs--justified\">\n\t\t<dt>{{ phrase('CMTV_QT_best_answers') }}</dt>\n\t\t<dd>{$user.CMTV_QT_best_answer_count|number}</dd>\n\t</dl>\n</xf:if>"
+}

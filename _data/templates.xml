@@ -1,294 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <templates>
-  <template type="public" title="QT_best_answer_count_macros" version_id="2000070" version_string="2.0.0"><![CDATA[<xf:macro name="member_macros" arg-user="!">
-	<xf:set var="$_QT_property" value="{{ property('QT_total_best_answers_positions') }}" />
-
-	<!--[QT:stat_pairs:above_best_answers]-->
-	<xf:if is="{{ $_QT_property.member_profile_page }}">
-		<dl class="pairs pairs--rows pairs--rows--centered">
-			<dt>{{ phrase('QT_best_answers') }}</dt>
-			<dd>
-				<a href="{{ link('members/bestAnswers', $user) }}" class="fauxBlockLink-linkRow u-concealed">
-					{$user.QT_best_answer_count|number}
-				</a>
-			</dd>
-		</dl>
-	</xf:if>
-</xf:macro>
-
-<xf:macro name="message_macros" arg-extras="!" arg-user="!">
-	<xf:if is="$extras.QT_best_answer_count">
-		<dl class="pairs pairs--justified">
-			<dt>{{ phrase('QT_best_answers') }}</dt>
-			<dd>{$user.QT_best_answer_count|number}</dd>
-		</dl>
-	</xf:if>
-</xf:macro>
-
-<xf:macro name="account_visitor_menu">
-	<xf:set var="$_QT_property" value="{{ property('QT_total_best_answers_positions') }}" />
-
-	<!--[QT:stat_pairs:above_best_answers]-->
-	<xf:if is="{{ $_QT_property.member_account_menu }}">
-		<dl class="pairs pairs--justified fauxBlockLink">
-			<dt>{{ phrase('QT_best_answers') }}</dt>
-			<dd>
-				<a href="{{ link('members/bestAnswers', $xf.visitor) }}" class="fauxBlockLink-linkRow u-concealed">
-					{$xf.visitor.QT_best_answer_count|number}
-				</a>
-			</dd>
-		</dl>
-	</xf:if>
-</xf:macro>]]></template>
-  <template type="email" title="QT_best_answer_selected" version_id="2000070" version_string="2.0.0"><![CDATA[<mail:subject>
-	{{ phrase('QT_question_x_best_answer', {
-		'title': prefix('thread', $thread, 'escaped') . $thread.title
-	}) }}
-</mail:subject>
-
-<xf:if is="$receiver.user_id === $post.user_id">
-	{{ phrase('QT_question_your_answer_best_selected_email_html', {
-		'receiver': $receiver.username,
-		'sender': username_link_email($sender, $sender.username),
-		'board': '<a href="' . link('canonical:index') . '">' . $xf.options.boardTitle . '</a>'
-	}) }}	
-	<xf:else />
-	{{ phrase('QT_question_best_answer_selected_email_html', {
-		'receiver': $receiver.username,
-		'sender': username_link_email($sender, $sender.username),
-		'board': '<a href="' . link('canonical:index') . '">' . $xf.options.boardTitle . '</a>'
-	}) }}
-</xf:if>
-
-<h2><a href="{{ link('canonical:posts', $post) }}">{{ prefix('thread', $thread, 'escaped') }}{$thread.title}</a></h2>
-
-<xf:if is="$xf.options.emailWatchedThreadIncludeMessage">
-	<div class="message">{{ bb_code_type('emailHtml', $post.message, 'post', $post) }}</div>
-</xf:if>
-
-<xf:macro template="thread_forum_macros" name="go_thread_bar" arg-thread="{$thread}" arg-watchType="threads" />
-
-<xf:macro template="QT_email_macros" name="watched_question_footer" arg-thread="{$thread}" />]]></template>
-  <template type="email" title="QT_email_macros" version_id="2000070" version_string="2.0.0"><![CDATA[<xf:macro name="watched_question_footer" arg-thread="!">
-	{{ phrase('QT_watched_question_email_html_footer', {
-		'thread': '<a href="' . link('canonical:threads', $thread) . '">' . $thread.title . '</a>',
-		'board': $xf.options.boardTitle,
-		'disable_this_link': link('canonical:email-stop/content', $xf.toUser, {'t': 'thread', 'id': $thread.thread_id}),
-		'disable_all_link': link('canonical:email-stop/all', $xf.toUser)
-	}) }}
-</xf:macro>]]></template>
-  <template type="public" title="QT_forum_post_thread_is_question" version_id="2000070" version_string="2.0.0"><![CDATA[<xf:if is="{{ $forum->QT_type === 'threads_questions' }}">
-	<hr class="formRowSep" />
-	<xf:radiorow name="QT_question" label="{{ phrase('type') }}" value="0">
-		<xf:option value="0" label="{{ phrase('thread') }}" />
-		<xf:option value="1" label="{{ phrase('question') }}"
-				   disabled="{{ (!$forum->canCreateQuestion()) ? 'disabled' : '' }}"
-				   hint="{{ (!$forum->canCreateQuestion()) ? phrase('QT_create_question_no_permission') : '' }}" />
-	</xf:radiorow>
-</xf:if>]]></template>
-  <template type="admin" title="QT_forum_type" version_id="2000070" version_string="2.0.0"><![CDATA[<xf:selectrow name="QT_type" value="{$forum.QT_type}" label="{{ phrase('QT_forum_type') }}">
-	<xf:option value="threads_only">{{ phrase('QT_threads_only') }}</xf:option>
-	<xf:option value="threads_questions">{{ phrase('QT_threads_and_questions') }}</xf:option>
-	<xf:option value="questions_only">{{ phrase('QT_questions_only') }}</xf:option>
-</xf:selectrow>
-
-<xf:checkboxrow>
-	<xf:option name="QT_convert_threads"
-			   label="{{ phrase('QT_convert_existing_threads') }}"
-			   hint="{{ phrase('QT_convert_threads_hint') }}" />
-</xf:checkboxrow>]]></template>
-  <template type="admin" title="QT_helper_criteria" version_id="2000070" version_string="2.0.0"><![CDATA[<xf:checkboxrow label="{{ phrase('QT_question_threads') }}">
-
-	<xf:option name="user_criteria[QT_questions_posted][rule]" value="QT_questions_posted" selected="{$criteria.QT_questions_posted}"
-			   label="{{ phrase('QT_user_has_posted_at_least_x_questions:') }}">
-		<xf:numberbox name="user_criteria[QT_questions_posted][data][questions]" value="{$criteria.QT_questions_posted.questions}"
+  <template type="admin" title="CMTV_QT_criteria" version_id="2010070" version_string="2.1.0"><![CDATA[<xf:checkboxrow label="{{ phrase('CMTV_QT_question_threads') }}">
+	
+	<xf:option name="user_criteria[CMTV_QT_questions_asked][rule]" value="CMTV_QT_questions_asked" selected="{$criteria.CMTV_QT_questions_asked}"
+			   label="{{ phrase('CMTV_QT_user_has_asked_at_least_x_questions:') }}">
+		<xf:numberbox name="user_criteria[CMTV_QT_questions_asked][data][questions]" value="{$criteria.CMTV_QT_questions_asked.questions}"
 					  size="5" min="0" step="1" />
 	</xf:option>
 
-	<xf:option name="user_criteria[QT_questions_maximum][rule]" value="QT_questions_maximum" selected="{$criteria.QT_questions_maximum}"
-			   label="{{ phrase('QT_user_has_posted_no_more_than_x_questions:') }}">
-		<xf:numberbox name="user_criteria[QT_questions_maximum][data][questions]" value="{$criteria.QT_questions_maximum.questions}"
+	<xf:option name="user_criteria[CMTV_QT_questions_maximum][rule]" value="CMTV_QT_questions_maximum" selected="{$criteria.CMTV_QT_questions_maximum}"
+			   label="{{ phrase('CMTV_QT_user_has_asked_no_more_than_x_questions:') }}">
+		<xf:numberbox name="user_criteria[CMTV_QT_questions_maximum][data][questions]" value="{$criteria.CMTV_QT_questions_maximum.questions}"
 					  size="5" min="0" step="1" />
 	</xf:option>
-
-	<xf:option name="user_criteria[QT_best_answer_count][rule]" value="QT_best_answer_count" selected="{$criteria.QT_best_answer_count}"
-			   label="{{ phrase('QT_user_has_posted_at_least_x_best_answers:') }}">
-		<xf:numberbox name="user_criteria[QT_best_answer_count][data][best_answers]" value="{$criteria.QT_best_answer_count.best_answers}"
+	
+	<xf:option name="user_criteria[CMTV_QT_best_answers_posted][rule]" value="CMTV_QT_best_answers_posted" selected="{$criteria.CMTV_QT_best_answers_posted}"
+			   label="{{ phrase('CMTV_QT_user_has_posted_at_least_x_best_answers:') }}">
+		<xf:numberbox name="user_criteria[CMTV_QT_best_answers_posted][data][best_answers]" value="{$criteria.CMTV_QT_best_answers_posted.best_answers}"
 					  size="5" min="0" step="1" />
 	</xf:option>
-
-	<xf:option name="user_criteria[QT_best_answer_ratio][rule]" value="QT_best_answer_ratio" selected="{$criteria.QT_best_answer_ratio}"
-			   label="{{ phrase('QT_user_best_answer_to_answer_ratio_is_at_least:') }}">
-		<xf:numberbox name="user_criteria[QT_best_answer_ratio][data][ratio]" value="{$criteria.QT_best_answer_ratio.ratio}"
-					  size="5" min="0" step="0.25" />
-		<xf:afterhint>{{ phrase('QT_best_answer_ratio_explanation') }}</xf:afterhint>
+	
+	<xf:option name="user_criteria[CMTV_QT_best_answers_maximum][rule]" value="CMTV_QT_best_answers_maximum" selected="{$criteria.CMTV_QT_best_answers_maximum}"
+			   label="{{ phrase('CMTV_QT_user_has_posted_no_more_than_x_best_answers:') }}">
+		<xf:numberbox name="user_criteria[CMTV_QT_best_answers_maximum][data][best_answers]" value="{$criteria.CMTV_QT_best_answers_maximum.best_answers}"
+					  size="5" min="0" step="1" />
 	</xf:option>
-
+	
 </xf:checkboxrow>
 
 <hr class="formRowSep" />
 
-<!--[QT:user:after_QT]-->]]></template>
-  <template type="public" title="QT_macros" version_id="2000070" version_string="2.0.0"><![CDATA[<xf:macro name="question_mark" arg-thread="!" arg-forceState="{{ false }}">
-	<xf:if is="$forceState">
-		<xf:set var="$thread.QT_solved" value="$forceState" />
-	</xf:if>
-	
-	<!-- Shape -->
-	<xf:if is="{{ property('QT_question_mark_type') === 'shape' }}">
-		<span class="QT_question_mark QT_question_mark_shape {{ ($thread.QT_solved) ? 'QT_solved' : 'QT_unsolved' }}"
-			  title="{{ ($thread.QT_solved) ? phrase('QT_solved') : phrase('QT_unsolved') }}"></span>
-	</xf:if>
+<!--[CMTV\QuestionThreads:after]-->]]></template>
+  <template type="admin" title="CMTV_QT_forum_type" version_id="2010070" version_string="2.1.0"><![CDATA[<xf:selectrow name="CMTV_QT_type" label="{{ phrase('CMTV_QT_forum_type') }}" value="{$forum.CMTV_QT_type}">
+	<xf:option value="threads_only">{{ phrase('CMTV_QT_threads_only') }}</xf:option>
+	<xf:option value="both">{{ phrase('CMTV_QT_threads_and_questions') }}</xf:option>
+	<xf:option value="questions_only">{{ phrase('CMTV_QT_questions_only') }}</xf:option>
+</xf:selectrow>
 
-	<!-- Icon -->
-	<xf:if is="{{ property('QT_question_mark_type') === 'icon' }}">
-		<xf:if is="$thread.QT_solved">
-			<i class="fa {{ property('QT_icon_solved') }} QT_question_mark QT_question_mark_icon QT_solved" title="{{ phrase('QT_solved') }}"></i>
-			<xf:else />
-			<i class="fa {{ property('QT_icon_unsolved') }} QT_question_mark QT_question_mark_icon QT_unsolved" title="{{ phrase('QT_unsolved') }}"></i>
-		</xf:if>
-	</xf:if>
-
-	<!-- Image -->
-	<xf:if is="{{ property('QT_question_mark_type') === 'image' }}">
-		<img class="QT_question_mark QT_question_mark_image {{ ($thread.QT_solved) ? 'QT_solved' : 'QT_unsolved' }}"
-			 src="{{ ($thread.QT_solved) ? property('QT_image_solved') : property('QT_image_unsolved') }}"
-			 title="{{ ($thread.QT_solved) ? phrase('QT_solved') : phrase('QT_unsolved') }}">
-	</xf:if>
-</xf:macro>
-
-<xf:macro name="best_answer_mark" arg-thread="!">
-	<a href="{{ link('threads/bestAnswer', $thread) }}" class="QT_best_answer_link" title="{{ phrase('QT_best_answer') }}">
-		<!-- Icon -->
-		<xf:if is="{{ property('QT_best_answer_mark_type') === 'icon' }}">
-			<i class="fa {{ property('QT_best_answer_mark_icon') }} QT_best_answer_mark QT_best_answer_mark_icon"></i>
-		</xf:if>
-
-		<!-- Image -->
-		<xf:if is="{{ property('QT_best_answer_mark_type') === 'image' }}">
-			<img class="QT_best_answer_mark QT_best_answer_mark_image"
-				 src="{{ property('QT_best_answer_mark_image') }}">
-		</xf:if>
-	</a>
-</xf:macro>
-
-<xf:macro name="best_answer_indicator">
-	<span class="message-QT_best_answer">{{ phrase('QT_best_answer') }}</span>
-</xf:macro>
-
-<xf:macro name="best_answer_classes">
-	<xf:set var="$_QT_classes" value="QT_best_answer" />
-
-	<xf:if is="{{ property('QT_best_answer_message_type') === 'messageBackground' }}">
-		<xf:set var="$_QT_classes" value="{{ {$_QT_classes} . ' QT_message_background' }}" />
-	</xf:if>
-
-	<xf:if is="{{ property('QT_best_answer_custom_user_block') }}">
-		<xf:set var="$_QT_classes" value="{{ {$_QT_classes} . ' QT_user_block_background' }}" />
-	</xf:if>
-	
-	{$_QT_classes}
-</xf:macro>]]></template>
-  <template type="public" title="QT_member_best_answers" version_id="2000070" version_string="2.0.0"><![CDATA[<xf:title>{{ phrase('QT_x_best_answers', {'name': $user.username}) }}</xf:title>
-
-<xf:breadcrumb href="{{ link('members', $user) }}">{$user.username}</xf:breadcrumb>
-
-<xf:if is="$total > 0">
-	<div class="block">
-		<div class="block-container">
-			<ul class="block-body">
-				<xf:foreach loop="$bestAnswers" value="$bestAnswer">
-					<xf:set var="$post" value="{$bestAnswer->BestAnswerPost}" />
-					<li class="block-row block-row--separated">
-						<div class="contentRow">
-							<span class="contentRow-figure">
-								<xf:avatar user="$bestAnswer.BestAnswerPoster" size="s" />
-							</span>
-							<div class="contentRow-main">
-								<h3 class="contentRow-title">
-									<a href="{{ link('threads/post', $post.Thread, {'post_id': $post.post_id}) }}">{{ prefix('thread', $post.Thread) . highlight($post.Thread.title, $options.term) }}</a>
-								</h3>
-
-								<div class="contentRow-snippet">{{ snippet($post.message, 300, {'term': $options.term, 'stripQuote': true}) }}</div>
-
-								<div class="contentRow-minor contentRow-minor--hideLinks">
-									<ul class="listInline listInline--bullet">
-										<li><xf:username user="{$post.User}" defaultname="{$post.username}" /></li>
-										<li>{{ phrase('post_x', {'position': number($post.position + 1)}) }}</li>
-										<li><xf:date time="{$post.post_date}" /></li>
-										<li>{{ phrase('forum:') }} <a href="{{ link('forums', $post.Thread.Forum) }}">{$post.Thread.Forum.title}</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</li>
-				</xf:foreach>
-			</ul>
-		</div>
-
-		<xf:pagenav link="members/bestAnswers" data="{$user}" page="{$page}" perpage="{$perPage}" total="{$total}"
-					wrapperclass="block-outer block-outer--after" />
-	</div>
-	<xf:else />
-	<div class="blockMessage">
-		<xf:if is="{{ $xf.visitor && ($xf.visitor.user_id === $user.user_id) }}">
-			{{ phrase('QT_unfortunately_you_dont_have_best_answers') }}
-			<xf:else />
-			{{ phrase('QT_user_does_not_have_best_answers') }}
-		</xf:if>
-	</div>
+<xf:if is="!$forum.isInsert()">
+	<xf:checkboxrow name="CMTV_QT_convert">
+		<xf:option hint="{{ phrase('CMTV_QT_convert_existing_threads_explain') }}">
+			{{ phrase('CMTV_QT_convert_existing_threads') }}
+		</xf:option>
+	</xf:checkboxrow>
 </xf:if>]]></template>
-  <template type="public" title="QT_post_edit_thread_type_switcher" version_id="2000070" version_string="2.0.0"><![CDATA[<xf:if is="{{ $thread->canEditType() }}">
-	<xf:formrow rowtype="{{ $quickEdit ? 'fullWidth' : '' }}" label="{{ phrase('type') }}">
-		<xf:radio name="QT_question" value="{$thread.QT_question}">
-			<xf:option value="0" label="{{ phrase('thread') }}" />
-			<xf:option value="1" label="{{ phrase('question') }}" />
-		</xf:radio>
-	</xf:formrow>
-</xf:if>]]></template>
-  <template type="public" title="QT_post_macros_best_answer" version_id="2000070" version_string="2.0.0"><![CDATA[<xf:if is="!$post.isFirstPost() && $thread.QT_question">
-	<xf:if is="{{ !$thread.QT_best_answer_id && $thread->canSelectBestAnswer($post) }}">
-		<a href="{{ link('posts/selectBestAnswer', $post) }}" class="actionBar-action QT_best_answer_action QT_select">
-			<xf:if is="{{ property('QT_best_answer_mark_type') === 'icon' }}">
-				<i class="fa {{ property('QT_best_answer_mark_icon') }} QT_best_answer_action QT_best_answer_mark_icon"></i>
-			</xf:if>
-
-			<xf:if is="{{ property('QT_best_answer_mark_type') === 'image' }}">
-				<img class="QT_best_answer_mark QT_best_answer_mark_image"
-					 src="{{ property('QT_best_answer_mark_image') }}">
-			</xf:if>
-
-			<span>{{ phrase('QT_best_answer') }}</span>
-		</a>
-	</xf:if>
-
-	<xf:if is="{{ $thread.QT_best_answer_id && $thread->canUnselectBestAnswer() && ($thread.QT_best_answer_id === $post.post_id) }}">
-		<a href="{{ link('posts/unselectBestAnswer', $post) }}" class="actionBar-action QT_best_answer_action QT_unselect">
-			<i class="fa fa-times"></i>
-			<span>{{ phrase('QT_not_best_answer') }}</span>
-		</a>
-	</xf:if>
-</xf:if>]]></template>
-  <template type="public" title="QT_post_macros_best_answer_indicator" version_id="2000070" version_string="2.0.0"><![CDATA[<xf:if is="$thread.QT_question">
-	<xf:if is="{{ $thread.QT_best_answer_id === $post.post_id }}">
-		<xf:if is="{{ property('QT_best_answer_message_type') === 'indicator' }}">
-			<xf:macro template="QT_macros" name="best_answer_indicator" />
-		</xf:if>
-	</xf:if>
-</xf:if>]]></template>
-  <template type="email" title="QT_question_solved" version_id="2000070" version_string="2.0.0"><![CDATA[<mail:subject>
-	{{ phrase('QT_question_x_solved', {
+  <template type="email" title="CMTV_QT_best_answer_selected" version_id="2010070" version_string="2.1.0"><![CDATA[<mail:subject>
+	{{ phrase('CMTV_QT_watched_question_x_best_answer_selected', {
 		'title': prefix('thread', $thread, 'escaped') . $thread.title
 	}) }}
 </mail:subject>
 
-{{ phrase('QT_watched_question_solved_email_html', {
+{{ phrase('CMTV_QT_watched_question_best_answer_selected_email_html', {
 	'receiver': $receiver.username,
-	'sender': username_link_email($sender, $sender.username),
+	'sender': username_link_email($post.User, $post.username),
 	'board': '<a href="' . link('canonical:index') . '">' . $xf.options.boardTitle . '</a>'
 }) }}
 
-<h2><a href="{{ link('canonical:posts', $post) }}">{{ prefix('thread', $thread, 'escaped') }}{$thread.title}</a></h2>
+<h2><a href="{{ link('canonical:threads', $thread) }}">{{ prefix('thread', $thread, 'escaped') }}{$thread.title}</a></h2>
 
 <xf:if is="$xf.options.emailWatchedThreadIncludeMessage">
 	<div class="message">{{ bb_code_type('emailHtml', $post.message, 'post', $post) }}</div>
@@ -296,267 +64,475 @@
 
 <xf:macro template="thread_forum_macros" name="go_thread_bar" arg-thread="{$thread}" arg-watchType="threads" />
 
-<xf:macro template="QT_email_macros" name="watched_question_footer" arg-thread="{$thread}" />]]></template>
-  <template type="public" title="QT_search_result_post_best_answer" version_id="2000070" version_string="2.0.0"><![CDATA[<xf:if is="$post.Thread.QT_best_answer_id === $post.post_id">
-	<xf:macro template="QT_macros" name="best_answer_mark" arg-thread="{$post.Thread}" />
+<xf:macro template="thread_forum_macros" name="watched_thread_footer" arg-thread="{$thread}" />]]></template>
+  <template type="email" title="CMTV_QT_question_marked_solved" version_id="2010070" version_string="2.1.0"><![CDATA[<mail:subject>
+	{{ phrase('CMTV_QT_watched_question_x_solved', {
+		'title': prefix('thread', $thread, 'escaped') . $thread.title
+	}) }}
+</mail:subject>
+
+{{ phrase('CMTV_QT_watched_question_solved_email_html', {
+	'receiver': $receiver.username,
+	'sender': username_link_email($post.User, $post.username),
+	'board': '<a href="' . link('canonical:index') . '">' . $xf.options.boardTitle . '</a>'
+}) }}
+
+<h2><a href="{{ link('canonical:threads', $thread) }}">{{ prefix('thread', $thread, 'escaped') }}{$thread.title}</a></h2>
+
+<xf:if is="$xf.options.emailWatchedThreadIncludeMessage">
+	<div class="message">{{ bb_code_type('emailHtml', $post.message, 'post', $post) }}</div>
+</xf:if>
+
+<xf:macro template="thread_forum_macros" name="go_thread_bar" arg-thread="{$thread}" arg-watchType="threads" />
+
+<xf:macro template="thread_forum_macros" name="watched_thread_footer" arg-thread="{$thread}" />]]></template>
+  <template type="public" title="CMTV_QT_best_answer_button" version_id="2010070" version_string="2.1.0"><![CDATA[<xf:if is="$post.canDisplaySelectBestAnswer() && $post.canSelectBestAnswer()">
+	<a href="{{ link('posts/selectBestAnswer', $post) }}" class="CMTV_QT bestAnswerButton bestAnswerButton--select">
+		<xf:macro name="mark" arg-state="select" arg-context="best_answer_button" template="CMTV_QT_best_answer_mark_macros" />
+		{{ phrase('CMTV_QT_best_answer') }}
+	</a>
+</xf:if>
+
+<xf:if is="$post.canDisplayUnselectBestAnswer() && $post.canUnselectBestAnswer()">
+	<a href="{{ link('posts/unselectBestAnswer', $post) }}" class="CMTV_QT bestAnswerButton bestAnswerButton--unselect">
+		<xf:macro name="mark" arg-state="unselect" arg-context="best_answer_button" template="CMTV_QT_best_answer_mark_macros" />
+		{{ phrase('CMTV_QT_not_best_answer') }}
+	</a>
 </xf:if>]]></template>
-  <template type="public" title="QT_search_result_thread_question_additions" version_id="2000070" version_string="2.0.0"><![CDATA[<xf:if is="$thread.QT_question">
-	<!-- Question mark -->
-	<xf:macro template="QT_macros" name="question_mark" arg-thread="{$thread}" />
-	
-	<!-- Best answer icon -->
-	<xf:if is="$thread.QT_best_answer_id">
-		<xf:macro template="QT_macros" name="best_answer_mark" arg-thread="{$thread}" />
-	</xf:if>
+  <template type="public" title="CMTV_QT_best_answer_indicator" version_id="2010070" version_string="2.1.0"><![CDATA[<xf:if is="$post.canDisplayUnselectBestAnswer() && property('CMTV_QT_best_answer_type') == 'indicator'">
+	<li>
+		<span class="CMTV_QT bestAnswerIndicator">{{ phrase('CMTV_QT_best_answer') }}</span>
+	</li>
 </xf:if>]]></template>
-  <template type="admin" title="QT_style_property_template_totalBestAnswersPositions" version_id="2000070" version_string="2.0.0"><![CDATA[<xf:checkboxrow rowclass="{$rowClass}"
-	label="{$titleHtml}"
-	hint="{$hintHtml}"
-	explain="{$property.description}">
-
-	<xf:option name="{$formBaseKey}[member_profile_page]" selected="{$property.property_value.member_profile_page}">
-		{{ phrase('QT_member_profile_page') }}
-	</xf:option>
-	<xf:option name="{$formBaseKey}[member_account_menu]" selected="{$property.property_value.member_account_menu}">
-		{{ phrase('QT_member_account_menu') }}
-	</xf:option>
-</xf:checkboxrow>]]></template>
-  <template type="public" title="QT_thread_edit_type_switcher" version_id="2000070" version_string="2.0.0"><![CDATA[<xf:if is="{{ $thread->canEditType() }}">
-	<xf:radiorow name="QT_question" label="{{ phrase('type') }}" value="{$thread.QT_question}">
-		<xf:option value="0" label="{{ phrase('thread') }}" />
-		<xf:option value="1" label="{{ phrase('question') }}" />
-	</xf:radiorow>
-</xf:if>]]></template>
-  <template type="public" title="QT_thread_list_macros_question_additions" version_id="2000070" version_string="2.0.0"><![CDATA[<xf:if is="$thread.QT_question">
-	<!-- Question mark -->
-	<xf:macro template="QT_macros" name="question_mark" arg-thread="{$thread}" />
-	
-	<!-- Best answer icon -->
-	<xf:if is="$thread.QT_best_answer_id">
-		<xf:macro template="QT_macros" name="best_answer_mark" arg-thread="{$thread}" />
-	</xf:if>
-</xf:if>]]></template>
-  <template type="public" title="QT_thread_view_pageactions" version_id="2000070" version_string="2.0.0"><![CDATA[<xf:pageaction if="$thread.QT_question">
-	<xf:if is="{{ !$thread.QT_solved && $thread->canMarkSolved() }}">
-		<xf:button href="{{ link('threads/markSolved', $thread) }}" class="QT_pageaction_solved" icon="confirm">
-			{{ phrase('QT_mark_solved') }}
-		</xf:button>
-	</xf:if>
-	
-	<xf:if is="{{ $thread.QT_solved && $thread->canMarkUnsolved() }}">
-		<xf:button href="{{ link('threads/markUnsolved', $thread) }}" class="QT_pageaction_unsolved" icon="cancel">
-			{{ phrase('QT_mark_unsolved') }}
-		</xf:button>
-	</xf:if>
-</xf:pageaction>]]></template>
-  <template type="public" title="QT_thread_view_question_mark" version_id="2000070" version_string="2.0.0"><![CDATA[<xf:if is="$thread.QT_question">
-	<xf:macro template="QT_macros" name="question_mark" arg-thread="{$thread}" />
-</xf:if>]]></template>
-  <template type="admin" title="QT_tools_rebuild" version_id="2000070" version_string="2.0.0"><![CDATA[<xf:macro template="tools_rebuild" name="rebuild_job"
-		  arg-header="{{ phrase('QT_rebuild_best_answer_counts') }}"
-		  arg-job="QuestionThreads:RebuildBestAnswerCounts" />]]></template>
-  <template type="public" title="QuestionThreads.less" version_id="2000070" version_string="2.0.0"><![CDATA[///////////////////
-/////////////////// Question mark
-///////////////////
-
-.QT_question_mark
-{
-	margin-right: 3px;
-
-	.contentRow & 
+  <template type="public" title="CMTV_QT_best_answer_mark.less" version_id="2010070" version_string="2.1.0"><![CDATA[.CMTV_QT
+{	
+	&.bestAnswerMarkContainer
 	{
-		margin-right: 1px;
-	}
-	
-	.xf-QT_question_mark_general_css();
-}
+		display: inline-block;
 
-.QT_question_mark_shape
-{
-	display: inline-block;
-
-	width: 10px;
-	height: 10px;
-
-	&.QT_solved
-	{
-		background: @xf-QT_shape_solved_color;
-		border-color: xf-intensify(@xf-QT_shape_solved_color, 10%);
-	}
-
-	&.QT_unsolved
-	{
-		background: @xf-QT_shape_unsolved_color;
-		border-color: xf-intensify(@xf-QT_shape_unsolved_color, 10%);
-	}
-
-	.xf-QT_question_mark_shape_css();
-}
-
-.QT_question_mark_icon
-{
-	&.QT_solved
-	{
-		color: @xf-QT_shape_solved_color;
-	}
-
-	&.QT_unsolved
-	{
-		color: @xf-QT_shape_unsolved_color;
-	}
-
-	.xf-QT_question_mark_icon_css();
-}
-
-.QT_question_mark_image
-{
-	.xf-QT_question_mark_image_css();
-}
-
-///////////////////
-/////////////////// Best answer mark
-///////////////////
-
-.QT_best_answer_mark
-{
-	.xf-QT_best_answer_mark_general_css();
-}
-
-.QT_best_answer_link
-{
-	&:hover
-	{
-		text-decoration: none;
-	}
-
-	.contentRow &
-	{
-		padding-right: 0px;
-	}
-	
-	.xf-QT_best_answer_link_css();
-}
-
-.QT_best_answer_mark_icon
-{
-	color: @xf-QT_best_answer_mark_color;
-	font-size: 90%;
-
-	&:hover
-	{
-		color: xf-intensify(@xf-QT_best_answer_mark_color, 7%);
-	}
-
-	.xf-QT_best_answer_mark_icon_css();
-}
-
-.QT_best_answer_mark_image
-{
-	.QT_best_answer_action &
-	{
-		vertical-align: bottom;
-		vertical-align: text-bottom;
-	}
-
-	.xf-QT_best_answer_mark_image_css();
-}
-
-.message-QT_best_answer
-{
-	.xf-QT_best_answer_indicator_css();
-}
-
-///////////////////
-/////////////////// Best answer
-///////////////////
-
-.QT_best_answer
-{
-	&.QT_message_background
-	{
-		.message-cell--main
+		.bestAnswerMark
 		{
-			background: @xf-QT_best_answer_message_background_color;
-		}
-
-		.message-userArrow:after
-		{
-			border-right-color: @xf-QT_best_answer_message_background_color;
-		}
-
-		@media (max-width: @xf-messageSingleColumnWidth) {
-			.message-userArrow:after
+			&.bestAnswerMark--shape.bestAnswerMark
 			{
-				border-right-color: transparent;
-				border-bottom-color: @xf-QT_best_answer_message_background_color !important;
+				.xf-CMTV_QT_best_answer_mark_shape_styling();
+			}
+			
+			&.bestAnswerMark--icon.bestAnswerMark
+			{
+				&--thread_list, &--thread_title
+				{	
+					font-size: 14px;
+				}
+				
+				&--thread_title
+				{
+					position: relative;
+					top: -2px;
+				}
+			}
+			
+			&.bestAnswerMark--image.bestAnswerMark
+			{
+				width: 18px;
+				height: 18px;
+				
+				vertical-align: baseline;
+				
+				&--thread_list, &--thread_title
+				{
+					position: relative;
+					top: 2px;
+				}
+
+				&--thread_title
+				{
+					width: 20px;
+					height: 20px;
+				}
+				
+				&--best_answer_button
+				{
+					width: 16px;
+					height: 16px;
+					
+					vertical-align: text-bottom;
+				}
+			}
+			
+			.xf-CMTV_QT_best_answer_mark_extra_styling();
+		}
+	}
+}]]></template>
+  <template type="public" title="CMTV_QT_best_answer_mark_macros" version_id="2010070" version_string="2.1.0"><![CDATA[<xf:macro name="mark_link" arg-link="!" arg-context="!" arg-state="!">
+	<a href="{$link}" title="{{ phrase('CMTV_QT_best_answer') }}" class="CMTV_QT bestAnswerMarkContainer">
+		<xf:macro name="mark_inner" arg-context="{$context}" arg-state="{$state}" />
+	</a>
+</xf:macro>
+
+<xf:macro name="mark" arg-context="!" arg-state="!">
+	<div class="CMTV_QT bestAnswerMarkContainer">
+		<xf:macro name="mark_inner" arg-context="{$context}" arg-state="{$state}" />
+	</div>
+</xf:macro>
+
+<xf:macro name="mark_inner" arg-context="!" arg-state="!">
+	<xf:css src="CMTV_QT_best_answer_mark.less" />
+	
+	<xf:set var="$type" value="{{ property('CMTV_QT_best_answer_mark_type') }}" />
+	<xf:set var="$classes" value="CMTV_QT bestAnswerMark bestAnswerMark--{$context} bestAnswerMark--{$state} bestAnswerMark--{$type}" />
+	
+	<xf:if is="$type == 'icon'">
+		<xf:fa class="{$classes}" icon="{{ ($state == 'select') ? property('CMTV_QT_select_best_answer_mark_icon') : property('CMTV_QT_unselect_best_answer_mark_icon') }}"></xf:fa>
+	<xf:elseif is="$type == 'image'" />
+		<img class="{$classes}" src="{{ ($state == 'select') ? property('CMTV_QT_select_best_answer_mark_img') : property('CMTV_QT_unselect_best_answer_mark_img') }}" />
+	<xf:else />
+		<div class="{$classes}"></div>
+	</xf:if>
+</xf:macro>]]></template>
+  <template type="public" title="CMTV_QT_best_answers_stat_pair" version_id="2010070" version_string="2.1.0"><![CDATA[<!--[CMTV\QuestionThreads:stat_pairs:above_best_answers]-->
+<xf:if is="property('CMTV_QT_best_answer_count_user_stats')">
+	<dl class="pairs pairs--rows pairs--rows--centered fauxBlockLink">
+		<dt>{{ phrase('CMTV_QT_best_answers') }}</dt>
+		<dd>
+			<a href="{{ link('members/best-answers', $user) }}" class="fauxBlockLink-linkRow u-concealed">
+				{$user.CMTV_QT_best_answer_count|number}
+			</a>
+		</dd>
+	</dl>
+</xf:if>
+<!--[CMTV\QuestionThreads:stat_pairs:above_best_answers]-->]]></template>
+  <template type="public" title="CMTV_QT_member_best_answers" version_id="2010070" version_string="2.1.0"><![CDATA[<xf:title>{{ phrase('CMTV_QT_x_best_answers', {'name': $user.username}) }}</xf:title>
+
+<xf:head option="metaNoindex"><meta name="robots" content="noindex" /></xf:head>
+
+<xf:breadcrumb href="{{ link('members', $user) }}">{$user.username}</xf:breadcrumb>
+
+<xf:if is="$total">
+	<div class="block">
+		<div class="block-container">
+			<ol class="block-body">
+				<xf:foreach loop="$bestAnswers" value="$post">
+					<xf:include template="search_result_post" />
+				</xf:foreach>
+			</ol>
+		</div>
+
+		<xf:pagenav link="members/best-answers" data="{$user}" page="{$page}" perpage="{$perPage}" total="{$total}"
+					wrapperclass="block-outer block-outer--after" />
+	</div>
+<xf:else />
+	<div class="blockMessage">
+		<xf:if is="$xf.visitor.user_id === $user.user_id">
+			{{ phrase('CMTV_QT_you_do_not_have_any_best_answers_yet') }}
+		<xf:else />
+			{{ phrase('CMTV_QT_x_do_not_have_any_best_answers_yet', {'name': $user.username}) }}
+		</xf:if>
+	</div>
+</xf:if>]]></template>
+  <template type="public" title="CMTV_QT_question_mark.less" version_id="2010070" version_string="2.1.0"><![CDATA[/*.CMTV_QT
+{
+	&.questionMarkContainer
+	{
+		display: inline-block;
+		
+		padding-right: @xf-paddingSmall;
+
+		.questionMark
+		{			
+			width: 10px;
+			height: 10px;
+			
+			border: @xf-borderSize solid;
+			
+			position: relative;
+			top: -1px;
+						
+			&--thread_view
+			{
+				top: -3px;
+			}
+						
+			&--solved
+			{
+				background-color: @xf-CMTV_QT_question_mark_solved_color;
+				border-color: darken(@xf-CMTV_QT_question_mark_solved_color, 12%);
+			}
+			
+			&--unsolved
+			{
+				background-color: @xf-CMTV_QT_question_mark_unsolved_color;
+				border-color: darken(@xf-CMTV_QT_question_mark_unsolved_color, 12%);
+			}
+						
+			&--circle
+			{
+				border-radius: 50%;
+			}
+			
+			&--square
+			{
+				border-radius: 0;
+			}
+			
+			&--custom
+			{
+				.xf-CMTV_QT_question_mark_custom_styling();
 			}
 		}
 	}
+}*/
 
-	&.QT_user_block_background
+.CMTV_QT
+{
+	&.questionMarkContainer
 	{
-		.message-cell--user
+		display: inline-block;
+		
+		.questionMark
 		{
-			background: @xf-QT_best_answer_user_block_background_color;
+			&--thread_list
+			{
+				margin-right: @xf-paddingSmall;
+			}
+			
+			&.questionMark--shape.questionMark
+			{
+				&--thread_title
+				{
+					position: relative;
+					top: -2px;
+				}
+				
+				.xf-CMTV_QT_question_mark_shape_styling();
+			}
+			
+			&.questionMark--icon.questionMark
+			{
+				font-size: 14px;
+				
+				&--solved
+				{
+					color: @xf-CMTV_QT_question_mark_solved_color;
+				}
+				
+				&--unsolved
+				{
+					color: @xf-CMTV_QT_question_mark_unsolved_color;
+				}
+				
+				&--thread_title
+				{
+					position: relative;
+					top: -2px;
+				}
+			}
+			
+			&.questionMark--image.questionMark
+			{
+				width: 18px;
+				height: 18px;
+				
+				vertical-align: baseline;
+				
+				&--thread_list, &--thread_title
+				{
+					position: relative;
+					top: 2px;
+				}
+				
+				&--thread_title
+				{
+					width: 20px;
+					height: 20px;
+				}
+			}
+			
+			.xf-CMTV_QT_question_mark_extra_styling();
 		}
 	}
+}]]></template>
+  <template type="public" title="CMTV_QT_question_mark_macros" version_id="2010070" version_string="2.1.0"><![CDATA[<xf:macro name="mark" arg-context="!" arg-state="!">
+	<div class="CMTV_QT questionMarkContainer" title="{{ ($state == 'solved') ? phrase('CMTV_QT_solved') : phrase('CMTV_QT_unsolved') }}">
+		<xf:macro name="mark_inner" arg-context="{$context}" arg-state="{$state}" />
+	</div>
+</xf:macro>
 
-	.xf-QT_best_answer_message_css();
-}
+<xf:macro name="mark_inner" arg-context="!" arg-state="!">
+	<xf:css src="CMTV_QT_question_mark.less" />
+	
+	<xf:set var="$type" value="{{ property('CMTV_QT_question_mark_type') }}" />
+	<xf:set var="$classes" value="CMTV_QT questionMark questionMark--{$context} questionMark--{$state} questionMark--{$type}" />
+	
+	<xf:if is="$type == 'image'">
+		<img class="{$classes}" src="{{ ($state == 'solved') ? property('CMTV_QT_question_mark_solved_img') : property('CMTV_QT_question_mark_unsolved_img') }}" />
+	<xf:elseif is="$type == 'icon'" />
+		<xf:fa class="{$classes}" icon="{{ ($state == 'solved') ? property('CMTV_QT_question_mark_solved_icon') : property('CMTV_QT_question_mark_unsolved_icon') }}"></xf:fa>
+	<xf:else />
+		<div class="{$classes}"></div>
+	</xf:if>
+</xf:macro>]]></template>
+  <template type="public" title="CMTV_QT_questions_only_forums.less" version_id="2010070" version_string="2.1.0"><![CDATA[// Node icon
 
-///////////////////
-/////////////////// Select/Unselect best answer buttons
-///////////////////
-
-.QT_best_answer_action
+.node-icon
 {
-	&.QT_select
+	i
 	{
-		color: @xf-QT_best_answer_mark_color;
+		.node--forum.node--questionsOnly &:before
+		{
+			.m-faContent(@fa-var-question-circle);
+		}
+	}
+}]]></template>
+  <template type="public" title="CMTV_QT_solve_unsolve_buttons" version_id="2010070" version_string="2.1.0"><![CDATA[<xf:pageaction if="$thread.CMTV_QT_is_question">
+	<xf:if is="!$thread.CMTV_QT_is_solved && $thread.canMarkSolved()">
+		<xf:button href="{{ link('threads/markSolved', $thread) }}" class="CMTV_QT button--solve" fa="fa-check">
+			{{ phrase('CMTV_QT_mark_as_solved') }}
+		</xf:button>
+	</xf:if>
+
+	<xf:if is="$thread.CMTV_QT_is_solved && $thread.canMarkUnsolved()">
+		<xf:button href="{{ link('threads/markUnsolved', $thread) }}" class="CMTV_QT button--unsolve" fa="fa-times">
+			{{ phrase('CMTV_QT_mark_as_unsolved') }}
+		</xf:button>
+	</xf:if>
+</xf:pageaction>]]></template>
+  <template type="public" title="CMTV_QT_thread_marks_macros" version_id="2010070" version_string="2.1.0"><![CDATA[<xf:macro name="thread_marks" arg-context="!" arg-thread="!">
+	<xf:if is="$thread.CMTV_QT_is_question">
+		<xf:macro name="mark" template="CMTV_QT_question_mark_macros" 
+				  arg-context="{$context}" arg-state="{{ $thread.CMTV_QT_is_solved ? 'solved' : 'unsolved' }}" />
+		
+		<xf:set var="$bestAnswer" value="{$thread.BestAnswer}" />
+		
+		<xf:if is="$thread.CMTV_QT_is_solved && $bestAnswer">
+			<xf:macro name="mark_link" template="CMTV_QT_best_answer_mark_macros" 
+					  arg-context="{$context}" arg-state="select"
+					  arg-link="{{ link('posts', $bestAnswer.BestAnswerPost) }}" />
+		</xf:if>
+	</xf:if>
+</xf:macro>]]></template>
+  <template type="public" title="CMTV_QT_thread_type" version_id="2010070" version_string="2.1.0"><![CDATA[<xf:if is="$thread.isInsert()">
+	<xf:if is="$forum.CMTV_QT_type == 'both'">
+		<xf:macro name="type_selector" arg-isQuestion="{{ false }}" />
+	</xf:if>
+<xf:else />
+	<xf:if is="$xf.visitor.hasPermission('CMTV_QT', 'editAnyThreadType')">
+		<xf:macro name="type_selector" arg-isQuestion="{$thread.CMTV_QT_is_question}" />
+	</xf:if>
+</xf:if>
+
+<xf:macro name="type_selector" arg-isQuestion="!">
+	<xf:radiorow name="CMTV_QT_is_question" value="{$isQuestion}" label="{{ phrase('type') }}">
+		<xf:option value="0">{{ phrase('thread') }}</xf:option>
+		<xf:option value="1">{{ phrase('question') }}</xf:option>
+	</xf:radiorow>
+</xf:macro>]]></template>
+  <template type="public" title="CMTV_QT_thread_view.less" version_id="2010070" version_string="2.1.0"><![CDATA[.CMTV_QT
+{
+	// Solve and Unsolve page action buttons
+	
+	&.button
+	{	
+		&--solve
+		{
+			background: @xf-CMTV_QT_solve_button_color;
+			.m-buttonBlockColorVariationSimple(@xf-CMTV_QT_solve_button_color);
+		}
+		
+		&--unsolve
+		{
+			background: @xf-CMTV_QT_unsolve_button_color;
+			.m-buttonBlockColorVariationSimple(@xf-CMTV_QT_unsolve_button_color);
+		}
 	}
 	
-	&.QT_unselect
+	// Best answer
+
+	&.bestAnswer:not(.is-mod-selected).bestAnswer
 	{
-		color: @xf-QT_shape_unsolved_color;
+
+		&--background
+		{
+			.message-cell--main
+			{
+				background: @xf-CMTV_QT_best_answer_bg_color;
+			}
+			
+			.message-userArrow::after
+			{
+				border-right-color: @xf-CMTV_QT_best_answer_bg_color;
+			}
+		}
+		
+		&--colorUser
+		{
+			.message-cell--user
+			{
+				background: @xf-CMTV_QT_best_answer_user_bg_color;
+			}
+		}
+		
+		.xf-CMTV_QT_best_answer_post_styling();
 	}
-}
-
-///////////////////
-/////////////////// Solved/Unsolved pageaction buttons
-///////////////////
-
-.button.QT_pageaction_solved
-{
-	.xf-buttonCta();
-
-	background: @xf-QT_shape_solved_color;
-
-	.m-buttonBlockColorVariationSimple(xf-default(@xf-QT_shape_solved_color, transparent));
-}
-
-.button.QT_pageaction_unsolved
-{
-	.xf-buttonCta();
-
-	background: @xf-QT_shape_unsolved_color;
-
-	.m-buttonBlockColorVariationSimple(xf-default(@xf-QT_shape_unsolved_color, transparent));
+	
+	// Best answer button
+	
+	&.bestAnswerButton
+	{
+		.xf-CMTV_QT_best_answer_button_extra_styling();
+	}
+	
+	// Best answer indicator
+	
+	&.bestAnswerIndicator
+	{
+		.xf-CMTV_QT_best_answer_indicator_styling();
+	}
 }]]></template>
-  <template type="public" title="alert_post_QT_best_answer_selected" version_id="2000070" version_string="2.0.0"><![CDATA[<xf:macro template="QT_macros" name="best_answer_mark" arg-thread="{$content.Thread}" />
-<xf:if is="$xf.visitor.user_id && ($xf.visitor.user_id === $content.user_id)">
-	{{ phrase('QT_x_marked_your_answer_best_for_y_question', {
+  <template type="public" title="alert_post_best_answer_selected" version_id="2010070" version_string="2.1.0"><![CDATA[<xf:macro name="mark" template="CMTV_QT_best_answer_mark_macros" arg-context="alert" arg-state="select" />
+
+<xf:if is="$xf.visitor.user_id == $content.user_id">
+	{{ phrase('CMTV_QT_x_marked_your_answer_as_best_answer_of_y_question', {
 		'name': username_link($user, false, {'defaultname': $alert.username}),
-		'title': '<a href="' . link('posts', $content) . '" class="fauxBlockLink-blockLink">' . prefix('thread', $content.Thread) . $content.Thread.title . '</a>'})
-	}}
-	<xf:else />
-	{{ phrase('QT_x_selected_best_answer_for_y_question', {
+		'title': '<a href="' . link('posts', $content) . '" class="fauxBlockLink-blockLink">' . prefix('thread', $content.Thread) . $content.Thread.title . '</a>'
+	}) }}
+<xf:else />
+	{{ phrase('CMTV_QT_x_selected_the_best_answer_of_y_question', {
 		'name': username_link($user, false, {'defaultname': $alert.username}),
-		'title': '<a href="' . link('posts', $content) . '" class="fauxBlockLink-blockLink">' . prefix('thread', $content.Thread) . $content.Thread.title . '</a>'})
-	}}
+		'title': '<a href="' . link('posts', $content) . '" class="fauxBlockLink-blockLink">' . prefix('thread', $content.Thread) . $content.Thread.title . '</a>'
+	}) }}
 </xf:if>]]></template>
-  <template type="public" title="alert_thread_QT_solved" version_id="2000070" version_string="2.0.0"><![CDATA[<xf:macro template="QT_macros" name="question_mark" arg-thread="{$content}" arg-forceState="QT_solved" />
-{{ phrase('QT_x_marked_question_y_solved', {
+  <template type="public" title="alert_thread_marked_solved" version_id="2010070" version_string="2.1.0"><![CDATA[<xf:macro name="mark" template="CMTV_QT_question_mark_macros" arg-context="alert" arg-state="solved" />
+
+{{ phrase('CMTV_QT_x_marked_question_y_as_solved', {
 	'name': username_link($user, false, {'defaultname': $alert.username}),
-	'title': '<a href="' . link('threads', $content) . '" class="fauxBlockLink-blockLink">' . prefix('thread', $thread) . $content.title . '</a>'})
-}}]]></template>
+	'title': '<a href="' . link('threads', $content) . '" class="fauxBlockLink-blockLink">' . prefix('thread', $content) . $content.title . '</a>'
+}) }}]]></template>
+  <template type="public" title="news_feed_item_post_best_answer" version_id="2010070" version_string="2.1.0"><![CDATA[<div class="contentRow-title">
+	{{ phrase('news_feed_post_best_answer', {
+		'username': username_link($user, false, {'defaultname': $newsFeed.username}),
+		'threadTitle': '<a href="' . link('posts', $content) . '">' . prefix('thread', $content.Thread) . $content.Thread.title . '</a>'
+	}) }}
+</div>
+
+<div class="contentRow-snippet">{{ snippet($content.message, $xf.options.newsFeedMessageSnippetLength, {'stripQuote': true}) }}</div>
+<xf:if is="{$content.attach_count}">
+	<xf:macro template="news_feed_attached_images" name="attached_images"
+		arg-attachments="{$content.Attachments}" arg-link="{{ link('posts', $content) }}" />
+</xf:if>
+
+<div class="contentRow-minor"><xf:date time="{$newsFeed.event_date}" /></div>]]></template>
+  <template type="public" title="news_feed_item_thread_marked_solved" version_id="2010070" version_string="2.1.0"><![CDATA[<div class="contentRow-title">
+	{{ phrase('news_feed_thread_marked_solved', {
+		'username': username_link($user, false, {'defaultname': $newsFeed.username}),
+		'threadTitle': '<a href="' . link('threads', $content) . '">' . prefix('thread', $content) . $content.title . '</a>'
+	}) }}
+</div>
+
+<div class="contentRow-snippet">{{ snippet($content.FirstPost.message, $xf.options.newsFeedMessageSnippetLength, {'stripQuote': true}) }}</div>
+<xf:if is="{$content.FirstPost.attach_count}">
+	<xf:macro template="news_feed_attached_images" name="attached_images"
+		arg-attachments="{$content.FirstPost.Attachments}" arg-link="{{ link('threads', $content) }}" />
+</xf:if>
+
+<div class="contentRow-minor"><xf:date time="{$newsFeed.event_date}" /></div>]]></template>
 </templates>

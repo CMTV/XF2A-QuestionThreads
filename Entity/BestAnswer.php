@@ -1,16 +1,10 @@
 <?php
 /**
- * Question Threads
- *
- * You CAN use/change/share this code.
+ * Question Threads xF2 addon by CMTV
  * Enjoy!
- *
- * Written by CMTV
- * Date: 12.03.2018
- * Time: 11:40
  */
 
-namespace QuestionThreads\Entity;
+namespace CMTV\QuestionThreads\Entity;
 
 use XF\Entity\Post;
 use XF\Entity\Thread;
@@ -18,37 +12,62 @@ use XF\Entity\User;
 use XF\Mvc\Entity\Entity;
 use XF\Mvc\Entity\Structure;
 
+use CMTV\QuestionThreads\Constants as C;
+
 /**
  * COLUMNS
- * @property int best_answer_id
+ * @property int|null best_answer_id
  * @property int post_id
  * @property int post_user_id
  * @property int thread_id
- * @property int thread_user_id
+ * @property int thread_user_is
  * @property bool is_counted
  *
  * RELATIONS
  * @property Post BestAnswerPost
  * @property User BestAnswerPoster
  * @property Thread Thread
- * @property User ThreadAuthor
+ * @property User ThreadPoster
  */
 class BestAnswer extends Entity
 {
     public static function getStructure(Structure $structure)
     {
-        $structure->table = 'xf_QT_best_answer';
-        $structure->shortName = 'QuestionThreads:BestAnswer';
+        $structure->table = 'xf_' . C::_('best_answer');
         $structure->primaryKey = 'best_answer_id';
+        $structure->shortName = C::_('BestAnswer');
+
+        // Columns
 
         $structure->columns = [
-            'best_answer_id' => ['type' => self::UINT, 'autoIncrement' => true],
-            'post_id' => ['type' => self::UINT, 'required' => true],
-            'post_user_id' => ['type' => self::UINT, 'required' => true],
-            'thread_id' => ['type' => self::UINT, 'required' => true],
-            'thread_user_id' => ['type' => self::UINT, 'required' => true],
-            'is_counted' => ['type' => self::BOOL, 'default' => true]
+            'best_answer_id' => [
+                'type' => self::UINT,
+                'autoIncrement' => true,
+                'nullable' => true
+            ],
+            'post_id' => [
+                'type' => self::UINT,
+                'required' => true
+            ],
+            'post_user_id' => [
+                'type' => self::UINT,
+                'required' => true
+            ],
+            'thread_id' => [
+                'type' => self::UINT,
+                'required' => true
+            ],
+            'thread_user_id' => [
+                'type' => self::UINT,
+                'required' => true
+            ],
+            'is_counted' => [
+                'type' => self::BOOL,
+                'default' => true
+            ]
         ];
+
+        // Relations
 
         $structure->relations = [
             'BestAnswerPost' => [
@@ -60,45 +79,74 @@ class BestAnswer extends Entity
             'BestAnswerPoster' => [
                 'entity' => 'XF:User',
                 'type' => self::TO_ONE,
-                'conditions' => [['user_id', '=', '$post_user_id']],
-                'primary' => true
+                'conditions' => [['user_id', '=', '$post_user_id']]
             ],
             'Thread' => [
                 'entity' => 'XF:Thread',
                 'type' => self::TO_ONE,
-                'conditions' => [['thread_id', '=', '$thread_id']],
-                'primary' => true
+                'conditions' => [['thread_id', '=', '$thread_id']]
             ],
-            'ThreadAuthor' => [
+            'ThreadPoster' => [
                 'entity' => 'XF:User',
                 'type' => self::TO_ONE,
-                'conditions' => [['user_id', '=', '$thread_user_id']],
-                'primary' => true
+                'conditions' => [['user_id', '=', '$thread_user_id']]
             ]
         ];
 
-        $structure->defaultWith = ['BestAnswerPost', 'BestAnswerPoster', 'Thread', 'ThreadAuthor'];
+        $structure->defaultWith = ['BestAnswerPost', 'BestAnswerPoster'];
 
         return $structure;
     }
 
-    protected function _postDelete()
-    {
-        /** @var \QuestionThreads\Repository\BestAnswer $bestAnswerRepo */
-        $bestAnswerRepo = $this->repository('QuestionThreads:BestAnswer');
+    //************************* LIFE CYCLE ***************************
 
-        $bestAnswerThread = $this->Thread;
-        if($bestAnswerThread)
+    protected function _postSave()
+    {
+        /** @var \CMTV\QuestionThreads\XF\Entity\User $baPoster */
+        $baPoster = $this->BestAnswerPoster;
+
+        if ($this->isInsert())
         {
-            $bestAnswerThread->fastUpdate('QT_best_answer_id', 0);
+            $baPoster->bestAnswersIncrease();
         }
 
-        $user = $this->BestAnswerPoster;
-        $bestAnswerRepo->adjustBestAnswers($user);
+        $changed = $this->isStateChanged('is_counted', false);
+
+        switch ($changed)
+        {
+            case 'enter':
+                $baPoster->bestAnswersDecrease();
+                break;
+            case 'leave':
+                $baPoster->bestAnswersIncrease();
+                break;
+        }
     }
 
-    public function canView()
+    protected function _postDelete()
     {
-        return ($this->BestAnswerPost->canView() && $this->Thread->canView());
+        /** @var \CMTV\QuestionThreads\XF\Entity\Thread $thread */
+        if ($thread = $this->Thread)
+        {
+            $thread->bestAnswerRemoved();
+            $thread->save();
+        }
+
+        /** @var \CMTV\QuestionThreads\XF\Entity\User $baPoster */
+        if (($baPoster = $this->BestAnswerPoster) && ($baPost = $this->BestAnswerPost))
+        {
+            $baPoster->bestAnswersDecrease();
+
+            $bestAnswerRepo = $this->getBestAnswerRepo();
+            $bestAnswerRepo->unpublishBestAnswerNewsFeed($baPost);
+        }
+    }
+
+    /**
+     * @return \CMTV\QuestionThreads\Repository\BestAnswer
+     */
+    protected function getBestAnswerRepo()
+    {
+        return $this->repository(C::__('BestAnswer'));
     }
 }

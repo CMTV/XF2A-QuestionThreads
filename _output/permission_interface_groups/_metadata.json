@@ -1,5 +1,8 @@
 {
-    "questionThreads.json": {
-        "hash": "65638d0cedf57ac062d62b9dbffdabe9"
+    "CMTV_QT.json": {
+        "hash": "fbfdc2fa0f8139d633c667f900c71fab"
+    },
+    "CMTV_QT_moderatorPermissions.json": {
+        "hash": "23ff32fb59da278b3f0f763beaba0de4"
     }
 }

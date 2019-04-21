@@ -1,112 +1,80 @@
 <?php
 /**
- * Question Threads
- *
- * You CAN use/change/share this code.
+ * Question Threads xF2 addon by CMTV
  * Enjoy!
- *
- * Written by CMTV
- * Date: 10.03.2018
- * Time: 14:24
  */
 
-namespace QuestionThreads\XF\Pub\Controller;
+namespace CMTV\QuestionThreads\XF\Pub\Controller;
 
-use QuestionThreads\Repository\BestAnswer;
 use XF\Mvc\ParameterBag;
-use XF\Service\Thread\Editor;
+
+use CMTV\QuestionThreads\Constants as C;
 
 class Thread extends XFCP_Thread
 {
-    public function actionBestAnswer(ParameterBag $params)
-    {
-        /** @var \QuestionThreads\XF\Entity\Thread $thread */
-        $thread = $this->assertViewableThread($params->thread_id);
-
-        if($thread->QT_best_answer_id)
-        {
-            $bestAnswer = $this->finder('XF:Post')->whereId($thread->QT_best_answer_id)->fetchOne();
-
-            return $this->redirect($this->plugin('XF:Thread')->getPostLink($bestAnswer));
-        }
-        else
-        {
-            return $this->redirect($this->buildLink('threads', $thread));
-        }
-    }
-
     public function actionMarkSolved(ParameterBag $params)
     {
-        /** @var \QuestionThreads\XF\Entity\Thread $thread */
-        $thread = $this->assertViewableThread($params->thread_id);
-
-        if(!$thread->canMarkSolved())
-        {
-            return $this->noPermission();
-        }
-
-        $thread->fastUpdate('QT_solved', true);
-
-        // Alerting watchers
-        $data = [
-            'thread_id' => $thread->thread_id,
-            'post_id' => $thread->first_post_id,
-            'sender' => \XF::visitor()->user_id,
-            'contentType' => 'thread',
-            'contentId' => $thread->thread_id,
-            'action' => 'QT_solved',
-            'email_template' => 'QT_question_solved'
-        ];
-
-        $this->app()->jobManager()->enqueue('QuestionThreads:AlertWatchers', $data);
-
-        return $this->redirect($this->buildLink('threads', $thread), \XF::phrase('QT_question_marked_solved'));
+        return $this->markGeneric($params->thread_id, true);
     }
 
     public function actionMarkUnsolved(ParameterBag $params)
     {
-        /** @var \QuestionThreads\XF\Entity\Thread $thread */
-        $thread = $this->assertViewableThread($params->thread_id);
+        return $this->markGeneric($params->thread_id, false);
+    }
 
-        $thread->fastUpdate('QT_solved', false);
+    protected function markGeneric(int $threadId, bool $solved)
+    {
+        /** @var \CMTV\QuestionThreads\XF\Entity\Thread $thread */
+        $thread = $this->assertViewableThread($threadId);
 
-        if($thread->QT_best_answer_id)
+        if (!$thread->CMTV_QT_is_question)
         {
-            $bestAnswer = $this->finder('XF:Post')->whereId($thread->QT_best_answer_id)->fetchOne();
-
-            /** @var BestAnswer $bestAnswersRepo */
-            $bestAnswersRepo = $this->repository('QuestionThreads:BestAnswer');
-            $bestAnswersRepo->unselectBestAnswer($bestAnswer);
+            return $this->error(\XF::phrase(C::_('only_questions_can_be_marked_as_solved_unsolved')));
         }
 
-        return $this->redirect($this->buildLink('threads', $thread), \XF::phrase('QT_question_marked_unsolved'));
+        if (!$thread->{'canMark' . ($solved ? 'Solved' : 'Unsolved')}())
+        {
+            return $this->noPermission();
+        }
+
+        $thread->CMTV_QT_is_solved = $solved;
+
+        if (!$thread->preSave())
+        {
+            return $this->error($thread->getErrors());
+        }
+
+        $thread->save();
+
+        // Creating news feed entry
+
+        /** @var \CMTV\QuestionThreads\Repository\Thread $threadRepo */
+        $threadRepo = $this->repository(C::__('Thread'));
+
+        if ($solved)
+        {
+            $threadRepo->publishMarkedSolved(\XF::visitor(), $thread);
+            $threadRepo->alertWatchers(\XF::visitor(), $thread);
+        }
+        else
+        {
+            $threadRepo->unpublishMarkedSolved($thread);
+        }
+
+        return $this->redirect($this->buildLink('threads', $thread));
     }
 
     protected function setupThreadEdit(\XF\Entity\Thread $thread)
     {
-        /** @var Editor $editor */
+        $visitor = \XF::visitor();
+
         $editor = parent::setupThreadEdit($thread);
 
-        /** @var \QuestionThreads\XF\Entity\Thread $thread */
-        $thread = $editor->getThread();
-
-        if($thread->canEditType())
+        if ($visitor->hasPermission(C::_(), 'editAnyThreadType'))
         {
-            if($thread->QT_question && !$this->filter('QT_question', 'bool'))
-            {
-                /** @var \QuestionThreads\Repository\Thread $threadRepo */
-                $threadRepo = $this->repository('QuestionThreads:Thread');
-                $threadRepo->convertQuestionToThread($thread);
-            }
-
-            if(!$thread->QT_question && $this->filter('QT_question', 'bool'))
-            {
-                /** @var \QuestionThreads\Repository\Thread $threadRepo */
-                $threadRepo = $this->repository('QuestionThreads:Thread');
-                $threadRepo->convertThreadToQuestion($thread);
-            }
-
-            $thread->QT_question = $this->filter('QT_question', 'bool');
+            /** @var \CMTV\QuestionThreads\XF\Entity\Thread $thread */
+            $thread = $editor->getThread();
+            $thread->CMTV_QT_is_question = $this->filter(C::_('is_question'), 'bool');
         }
 
         return $editor;

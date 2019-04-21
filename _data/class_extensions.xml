@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <class_extensions>
-  <extension from_class="XF\Admin\Controller\Forum" to_class="QuestionThreads\XF\Admin\Controller\Forum" execute_order="10" active="1"/>
-  <extension from_class="XF\Criteria\User" to_class="QuestionThreads\XF\Criteria\User" execute_order="10" active="1"/>
-  <extension from_class="XF\Entity\Forum" to_class="QuestionThreads\XF\Entity\Forum" execute_order="10" active="1"/>
-  <extension from_class="XF\Entity\Post" to_class="QuestionThreads\XF\Entity\Post" execute_order="10" active="1"/>
-  <extension from_class="XF\Entity\Thread" to_class="QuestionThreads\XF\Entity\Thread" execute_order="10" active="1"/>
-  <extension from_class="XF\Entity\User" to_class="QuestionThreads\XF\Entity\User" execute_order="10" active="1"/>
-  <extension from_class="XF\InlineMod\Thread\Merge" to_class="QuestionThreads\XF\InlineMod\Thread\Merge" execute_order="10" active="1"/>
-  <extension from_class="XF\Pub\Controller\Forum" to_class="QuestionThreads\XF\Pub\Controller\Forum" execute_order="10" active="1"/>
-  <extension from_class="XF\Pub\Controller\Member" to_class="QuestionThreads\XF\Pub\Controller\Member" execute_order="10" active="1"/>
-  <extension from_class="XF\Pub\Controller\Post" to_class="QuestionThreads\XF\Pub\Controller\Post" execute_order="10" active="1"/>
-  <extension from_class="XF\Pub\Controller\Thread" to_class="QuestionThreads\XF\Pub\Controller\Thread" execute_order="10" active="1"/>
+  <extension from_class="XF\Admin\Controller\Forum" to_class="CMTV\QuestionThreads\XF\Admin\Controller\Forum" execute_order="10" active="1"/>
+  <extension from_class="XF\Entity\Forum" to_class="CMTV\QuestionThreads\XF\Entity\Forum" execute_order="10" active="1"/>
+  <extension from_class="XF\Entity\Post" to_class="CMTV\QuestionThreads\XF\Entity\Post" execute_order="10" active="1"/>
+  <extension from_class="XF\Entity\Thread" to_class="CMTV\QuestionThreads\XF\Entity\Thread" execute_order="10" active="1"/>
+  <extension from_class="XF\Entity\User" to_class="CMTV\QuestionThreads\XF\Entity\User" execute_order="10" active="1"/>
+  <extension from_class="XF\Pub\Controller\Forum" to_class="CMTV\QuestionThreads\XF\Pub\Controller\Forum" execute_order="10" active="1"/>
+  <extension from_class="XF\Pub\Controller\Post" to_class="CMTV\QuestionThreads\XF\Pub\Controller\Post" execute_order="10" active="1"/>
+  <extension from_class="XF\Pub\Controller\Thread" to_class="CMTV\QuestionThreads\XF\Pub\Controller\Thread" execute_order="10" active="1"/>
+  <extension from_class="XF\Service\Post\Mover" to_class="CMTV\QuestionThreads\XF\Service\Post\Mover" execute_order="10" active="1"/>
 </class_extensions>

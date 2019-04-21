@@ -1,0 +1,22 @@
+{
+    "group_name": "CMTV_QT",
+    "title": "Best answer mark [Shape]",
+    "description": "The styling of best answer mark which type is set to \"Shape\"",
+    "property_type": "css",
+    "css_components": [
+        "background",
+        "border",
+        "border_radius",
+        "padding",
+        "extra"
+    ],
+    "value_type": "",
+    "value_parameters": "",
+    "depends_on": "",
+    "value_group": "",
+    "property_value": {
+        "border-radius": "50%",
+        "extra": "width: 10px;\nheight: 10px;\n\n&--select\n{\n\tbackground: @xf-CMTV_QT_question_mark_solved_color;\n}\n\n&--unselect\n{\n\tbackground: @xf-CMTV_QT_question_mark_unsolved_color;\n}\n\n&--thread_list, &--thread_title\n{\n\tposition: relative;\n\ttop: -1px;\n}"
+    },
+    "display_order": 1040
+}

@@ -1,8 +1,0 @@
-<xf:macro name="watched_question_footer" arg-thread="!">
-	{{ phrase('QT_watched_question_email_html_footer', {
-		'thread': '<a href="' . link('canonical:threads', $thread) . '">' . $thread.title . '</a>',
-		'board': $xf.options.boardTitle,
-		'disable_this_link': link('canonical:email-stop/content', $xf.toUser, {'t': 'thread', 'id': $thread.thread_id}),
-		'disable_all_link': link('canonical:email-stop/all', $xf.toUser)
-	}) }}
-</xf:macro>

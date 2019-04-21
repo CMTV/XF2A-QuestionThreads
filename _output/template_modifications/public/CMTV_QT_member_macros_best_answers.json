@@ -1,0 +1,9 @@
+{
+    "template": "member_macros",
+    "description": "Showing best answer count in member stats block",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<!--[XF:stat_pairs:above_likes]-->",
+    "replace": "<xf:include template=\"CMTV_QT_best_answers_stat_pair\" />\n\n$0"
+}

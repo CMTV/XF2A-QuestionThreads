@@ -1,0 +1,13 @@
+<xf:macro name="mark" template="CMTV_QT_best_answer_mark_macros" arg-context="alert" arg-state="select" />
+
+<xf:if is="$xf.visitor.user_id == $content.user_id">
+	{{ phrase('CMTV_QT_x_marked_your_answer_as_best_answer_of_y_question', {
+		'name': username_link($user, false, {'defaultname': $alert.username}),
+		'title': '<a href="' . link('posts', $content) . '" class="fauxBlockLink-blockLink">' . prefix('thread', $content.Thread) . $content.Thread.title . '</a>'
+	}) }}
+<xf:else />
+	{{ phrase('CMTV_QT_x_selected_the_best_answer_of_y_question', {
+		'name': username_link($user, false, {'defaultname': $alert.username}),
+		'title': '<a href="' . link('posts', $content) . '" class="fauxBlockLink-blockLink">' . prefix('thread', $content.Thread) . $content.Thread.title . '</a>'
+	}) }}
+</xf:if>

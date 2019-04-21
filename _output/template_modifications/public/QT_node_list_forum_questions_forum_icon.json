@@ -1,9 +1,0 @@
-{
-    "template": "node_list_forum",
-    "description": "Questions only forum node icon",
-    "execution_order": 10,
-    "enabled": true,
-    "action": "str_replace",
-    "find": "node--forum",
-    "replace": "{{ ($node->getData()->QT_type === 'questions_only' && $xf.options.QT_useIconForQuestionsOnly) ? 'node--QT_questions_only_forum' : '$0' }}"
-}

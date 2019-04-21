@@ -1,0 +1,26 @@
+{
+    "group_name": "CMTV_QT",
+    "title": "Question mark [Shape]",
+    "description": "Customize the look and feel of custom question mark",
+    "property_type": "css",
+    "css_components": [
+        "background",
+        "border",
+        "border_radius",
+        "border_width_simple",
+        "border_color_simple",
+        "border_radius_simple",
+        "padding",
+        "extra"
+    ],
+    "value_type": "",
+    "value_parameters": "",
+    "depends_on": "",
+    "value_group": "",
+    "property_value": {
+        "border-width": "@xf-borderSize",
+        "border-radius": "50%",
+        "extra": "width: 10px;\nheight: 10px;\n\n&--solved\n{\n\tbackground-color: @xf-CMTV_QT_question_mark_solved_color;\n\tborder-color: darken(@xf-CMTV_QT_question_mark_solved_color, 12%);\n}\n\n&--unsolved\n{\n\tbackground-color: @xf-CMTV_QT_question_mark_unsolved_color;\n\tborder-color: darken(@xf-CMTV_QT_question_mark_unsolved_color, 12%);\n}"
+    },
+    "display_order": 1010
+}

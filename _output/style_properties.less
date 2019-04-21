@@ -1,27 +1,48 @@
 // ################## THIS IS A GENERATED FILE ##################
 // DO NOT EDIT DIRECTLY. EDIT THE STYLE PROPERTIES IN THE CONTROL PANEL.
 
-@xf-QT_best_answer_custom_user_block: 0;
-@xf-QT_best_answer_mark_color: #00b500;
-@xf-QT_best_answer_mark_icon: fa-diamond;
-@xf-QT_best_answer_mark_image: ~'';
-@xf-QT_best_answer_mark_type: icon;
-@xf-QT_best_answer_message_background_color: #DEFFE2;
-@xf-QT_best_answer_message_type: messageBackground;
-@xf-QT_best_answer_user_block_background_color: #D1FFD6;
-@xf-QT_icon_solved: fa-question-circle-o;
-@xf-QT_icon_unsolved: fa-question-circle-o;
-@xf-QT_image_solved: ~'';
-@xf-QT_image_unsolved: ~'';
-@xf-QT_question_mark_type: shape;
-@xf-QT_shape_solved_color: #00CD18;
-@xf-QT_shape_unsolved_color: rgb(255, 0, 0);
+@xf-CMTV_QT_best_answer_bg_color: mix(lighten(@xf-CMTV_QT_question_mark_solved_color, 5%), @xf-contentBg, 10%);
+@xf-CMTV_QT_best_answer_color_user_details: 0;
+@xf-CMTV_QT_best_answer_count_message_user_info: 1;
+@xf-CMTV_QT_best_answer_count_user_stats: 1;
+@xf-CMTV_QT_best_answer_mark_type: icon;
+@xf-CMTV_QT_best_answer_type: background;
+@xf-CMTV_QT_best_answer_user_bg_color: mix(lighten(@xf-CMTV_QT_question_mark_solved_color, 5%), @xf-contentAltBg, 15%);
+@xf-CMTV_QT_question_mark_solved_color: #00C900;
+@xf-CMTV_QT_question_mark_solved_icon: fa-question;
+@xf-CMTV_QT_question_mark_solved_img: ~'styles/default/xenforo/reactions/emojione/haha.png';
+@xf-CMTV_QT_question_mark_type: shape;
+@xf-CMTV_QT_question_mark_unsolved_color: #DC3838;
+@xf-CMTV_QT_question_mark_unsolved_icon: @xf-CMTV_QT_question_mark_solved_icon;
+@xf-CMTV_QT_question_mark_unsolved_img: ~'styles/default/xenforo/reactions/emojione/wow.png';
+@xf-CMTV_QT_questions_only_icon: 1;
+@xf-CMTV_QT_select_best_answer_mark_icon: fa-gem;
+@xf-CMTV_QT_select_best_answer_mark_img: ~'styles/default/xenforo/reactions/emojione/like.png';
+@xf-CMTV_QT_solve_button_color: @xf-CMTV_QT_question_mark_solved_color;
+@xf-CMTV_QT_unselect_best_answer_mark_icon: fa-times;
+@xf-CMTV_QT_unselect_best_answer_mark_img: ~'styles/default/xenforo/reactions/emojione/dislike.png';
+@xf-CMTV_QT_unsolve_button_color: @xf-CMTV_QT_question_mark_unsolved_color;
 
-.xf-QT_best_answer_indicator_css()
+.xf-CMTV_QT_best_answer_button_extra_styling()
+{
+	// Select/Unselect best answer button colors
+	
+	&--select
+	{
+		color: darken(@xf-CMTV_QT_question_mark_solved_color, 8%);
+	}
+	
+	&--unselect
+	{
+		color: @xf-CMTV_QT_question_mark_unsolved_color;
+	}
+}
+
+.xf-CMTV_QT_best_answer_indicator_styling()
 {
 	font-size: 90%;
 	color: contrast(@xf-paletteAccent2);
-	background: @xf-QT_best_answer_mark_color;
+	background: @xf-CMTV_QT_question_mark_solved_color;
 	border-radius: @xf-borderRadiusSmall;
 	padding-top: 1px;
 	padding-right: 4px;
@@ -29,61 +50,89 @@
 	padding-left: 4px;
 }
 
-.xf-QT_best_answer_link_css()
+.xf-CMTV_QT_best_answer_mark_extra_styling()
 {
-	padding-right: 3px;
+	// Select/Unselect icon best answer mark colors
+	
+	&.bestAnswerMark--icon
+	{
+		&.bestAnswerMark
+		{
+			&--select
+			{
+				color: darken(@xf-CMTV_QT_question_mark_solved_color, 8%);
+			}
+			
+			&--unselect
+			{
+				color: @xf-CMTV_QT_question_mark_unsolved_color;
+			}
+		}
+	}
 }
 
-.xf-QT_best_answer_mark_general_css()
+.xf-CMTV_QT_best_answer_mark_shape_styling()
+{
+	border-radius: 50%;
+	width: 10px;
+	height: 10px;
+	
+	&--select
+	{
+		background: @xf-CMTV_QT_question_mark_solved_color;
+	}
+	
+	&--unselect
+	{
+		background: @xf-CMTV_QT_question_mark_unsolved_color;
+	}
+	
+	&--thread_list, &--thread_title
+	{
+		position: relative;
+		top: -1px;
+	}
+}
+
+.xf-CMTV_QT_best_answer_post_styling()
 {
 	
 }
 
-.xf-QT_best_answer_mark_icon_css()
+.xf-CMTV_QT_question_mark_extra_styling()
 {
 	
 }
 
-.xf-QT_best_answer_mark_image_css()
+.xf-CMTV_QT_question_mark_shape_styling()
 {
-	
-}
-
-.xf-QT_best_answer_message_css()
-{
-	
-}
-
-.xf-QT_question_mark_general_css()
-{
-	
-}
-
-.xf-QT_question_mark_icon_css()
-{
-	
-}
-
-.xf-QT_question_mark_image_css()
-{
-	/* Use "image-rendering: pixelated" for pixelart images */
-}
-
-.xf-QT_question_mark_shape_css()
-{
-	border-width: 1px;
+	border-width: @xf-borderSize;
 	border-style: solid;
 	border-radius: 50%;
+	width: 10px;
+	height: 10px;
+	
+	&--solved
+	{
+		background-color: @xf-CMTV_QT_question_mark_solved_color;
+		border-color: darken(@xf-CMTV_QT_question_mark_solved_color, 12%);
+	}
+	
+	&--unsolved
+	{
+		background-color: @xf-CMTV_QT_question_mark_unsolved_color;
+		border-color: darken(@xf-CMTV_QT_question_mark_unsolved_color, 12%);
+	}
 }
 
-@xf-QT_best_answer_indicator_css--font-size: 90%;
-@xf-QT_best_answer_indicator_css--color: contrast(@xf-paletteAccent2);
-@xf-QT_best_answer_indicator_css--background-color: @xf-QT_best_answer_mark_color;
-@xf-QT_best_answer_indicator_css--border-radius: @xf-borderRadiusSmall;
-@xf-QT_best_answer_indicator_css--padding-top: 1px;
-@xf-QT_best_answer_indicator_css--padding-right: 4px;
-@xf-QT_best_answer_indicator_css--padding-bottom: 1px;
-@xf-QT_best_answer_indicator_css--padding-left: 4px;
-@xf-QT_best_answer_link_css--padding-right: 3px;
-@xf-QT_question_mark_shape_css--border-width: 1px;
-@xf-QT_question_mark_shape_css--border-radius: 50%;
+@xf-CMTV_QT_best_answer_indicator_styling--font-size: 90%;
+@xf-CMTV_QT_best_answer_indicator_styling--color: contrast(@xf-paletteAccent2);
+@xf-CMTV_QT_best_answer_indicator_styling--background-color: @xf-CMTV_QT_question_mark_solved_color;
+@xf-CMTV_QT_best_answer_indicator_styling--border-radius: @xf-borderRadiusSmall;
+@xf-CMTV_QT_best_answer_indicator_styling--padding-top: 1px;
+@xf-CMTV_QT_best_answer_indicator_styling--padding-right: 4px;
+@xf-CMTV_QT_best_answer_indicator_styling--padding-bottom: 1px;
+@xf-CMTV_QT_best_answer_indicator_styling--padding-left: 4px;
+@xf-CMTV_QT_best_answer_mark_shape_styling--border-radius: 50%;
+@xf-CMTV_QT_question_mark_shape_styling--border-width: @xf-borderSize;
+@xf-CMTV_QT_question_mark_shape_styling--border-radius: 50%;

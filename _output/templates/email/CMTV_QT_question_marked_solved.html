@@ -1,0 +1,21 @@
+<mail:subject>
+	{{ phrase('CMTV_QT_watched_question_x_solved', {
+		'title': prefix('thread', $thread, 'escaped') . $thread.title
+	}) }}
+</mail:subject>
+
+{{ phrase('CMTV_QT_watched_question_solved_email_html', {
+	'receiver': $receiver.username,
+	'sender': username_link_email($post.User, $post.username),
+	'board': '<a href="' . link('canonical:index') . '">' . $xf.options.boardTitle . '</a>'
+}) }}
+
+<h2><a href="{{ link('canonical:threads', $thread) }}">{{ prefix('thread', $thread, 'escaped') }}{$thread.title}</a></h2>
+
+<xf:if is="$xf.options.emailWatchedThreadIncludeMessage">
+	<div class="message">{{ bb_code_type('emailHtml', $post.message, 'post', $post) }}</div>
+</xf:if>
+
+<xf:macro template="thread_forum_macros" name="go_thread_bar" arg-thread="{$thread}" arg-watchType="threads" />
+
+<xf:macro template="thread_forum_macros" name="watched_thread_footer" arg-thread="{$thread}" />

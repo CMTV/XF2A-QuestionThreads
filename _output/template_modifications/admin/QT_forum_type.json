@@ -1,9 +1,0 @@
-{
-    "template": "forum_edit",
-    "description": "Forum type select tag",
-    "execution_order": 10,
-    "enabled": true,
-    "action": "str_replace",
-    "find": "<xf:macro template=\"node_edit_macros\" name=\"description\" arg-node=\"{$node}\" />",
-    "replace": "$0\n\n<xf:include template=\"QT_forum_type\" />"
-}

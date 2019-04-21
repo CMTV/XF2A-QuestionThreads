@@ -1,8 +1,11 @@
 <?php
+/**
+ * Question Threads xF2 addon by CMTV
+ * Enjoy!
+ */
 
-namespace QuestionThreads;
+namespace CMTV\QuestionThreads;
 
-use QuestionThreads\XF\Entity\Forum;
 use XF\AddOn\AbstractSetup;
 use XF\AddOn\StepRunnerInstallTrait;
 use XF\AddOn\StepRunnerUninstallTrait;
@@ -10,153 +13,192 @@ use XF\AddOn\StepRunnerUpgradeTrait;
 use XF\Db\Schema\Alter;
 use XF\Db\Schema\Create;
 
+use CMTV\QuestionThreads\Constants as C;
+
 class Setup extends AbstractSetup
 {
-	use StepRunnerInstallTrait;
-	use StepRunnerUpgradeTrait;
-	use StepRunnerUninstallTrait;
+    use StepRunnerInstallTrait;
+    use StepRunnerUpgradeTrait;
+    use StepRunnerUninstallTrait;
 
-	public function installStep1($is1Upgrading)
+    //************************* INSTALL STEPS ***************************
+
+    public function installStep1()
     {
-        $this->schemaManager()->alterTable('xf_forum', function(Alter $table) use ($is1Upgrading) {
-
-            $default = ($is1Upgrading) ? 'threads_questions' : 'threads_only';
-
-            $table->addColumn('QT_type', 'varchar', 25)->setDefault($default);
-        });
-
-        $this->schemaManager()->alterTable('xf_user', function(Alter $table)
+        if ($this->app()->config('CMTV_QT')['upgrade_install'])
         {
-            $table->addColumn('QT_best_answer_count', 'int')->setDefault(0);
-        });
-    }
+            $this->_installStep1();
+            return;
+        }
 
-    public function installStep2()
-    {
-        $this->schemaManager()->alterTable('xf_thread', function(Alter $table) {
-            $table->addColumn('QT_question', 'tinyint')->setDefault(0);
-            $table->addColumn('QT_solved', 'tinyint')->setDefault(0);
-            $table->addColumn('QT_best_answer_id', 'int')->setDefault(0);
-        });
-    }
-
-    public function installStep3()
-    {
-        $this->schemaManager()->createTable('xf_QT_best_answer', function(Create $table)
+        $this->schemaManager()->createTable('xf_' . C::_('best_answer'), function (Create $table)
         {
             $table->addColumn('best_answer_id', 'int')->autoIncrement();
             $table->addColumn('post_id', 'int');
             $table->addColumn('post_user_id', 'int');
             $table->addColumn('thread_id', 'int');
             $table->addColumn('thread_user_id', 'int');
-            $table->addColumn('is_counted', 'tinyint')->setDefault(1);
+            $table->addColumn('is_counted', 'tinyint', 3)->setDefault(1);
+        });
+    }
 
-            $table->addPrimaryKey('best_answer_id');
+    public function installStep2()
+    {
+        if ($this->app()->config('CMTV_QT')['upgrade_install'])
+        {
+            $this->_installStep2();
+            return;
+        }
+
+        $this->schemaManager()->alterTable('xf_thread', function (Alter $table)
+        {
+            $table->addColumn(C::_('is_question'), 'tinyint', 3)->setDefault(0);
+            $table->addColumn(C::_('is_solved'), 'tinyint', 3)->setDefault(0);
+            $table->addColumn(C::_('best_answer_id'), 'int')->setDefault(0);
+        });
+    }
+
+    public function installStep3()
+    {
+        if ($this->app()->config('CMTV_QT')['upgrade_install'])
+        {
+            $this->_installStep3();
+            return;
+        }
+
+        $this->schemaManager()->alterTable('xf_user', function (Alter $table)
+        {
+            $table->addColumn(C::_('best_answer_count'), 'int')->setDefault(0);
         });
     }
 
     public function installStep4()
     {
+        if ($this->app()->config('CMTV_QT')['upgrade_install'])
+        {
+            $this->_installStep4();
+            return;
+        }
+
+        $this->schemaManager()->alterTable('xf_forum', function (Alter $table)
+        {
+            $table->addColumn(C::_('type'), 'enum')->values(['threads_only', 'questions_only', 'both'])->setDefault('threads_only');
+        });
+    }
+
+    public function installStep5()
+    {
         $registeredPermissions = [
-            'QT_createQuestion',
-            'QT_editOwnThreadType',
-            'QT_markOwnSolved',
-            //'QT_markOwnUnsolved',
-            'QT_selectBestAnswerOwn',
-            //'QT_selectBestAnswerOwn_'
-            //'QT_unselectBestAnswerOwn'
+            'markOwnQuestionSolved',
+            'selectBestAnswerOwn'
         ];
 
         $moderatorPermissions = [
-            'QT_editAnyThreadType',
-            'QT_markAnySolved',
-            'QT_markAnyUnsolved',
-            'QT_selectBestAnswerAny',
-            'QT_unselectBestAnswerAny'
+            'editAnyThreadType',
+            'markAnyQuestionSolved',
+            'markAnyQuestionUnsolved',
+            'selectBestAnswerAny',
+            'unselectBestAnswerAny'
         ];
 
-        foreach($registeredPermissions as $registeredPermission)
+        foreach ($registeredPermissions as $permission)
         {
-            $this->applyGlobalPermission('forum', $registeredPermission, 'forum', 'editOwnPost');
+            $this->applyGlobalPermission(
+                C::_(),
+                $permission,
+                'forum',
+                'editOwnPost'
+            );
         }
 
-        foreach($moderatorPermissions as $moderatorPermission)
+        foreach ($moderatorPermissions as $permission)
         {
-            $this->applyGlobalPermission('forum', $moderatorPermission, 'forum', 'manageAnyThread');
+            $this->applyGlobalPermission(
+                C::_(),
+                $permission,
+                'forum',
+                'deleteAnyThread'
+            );
         }
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /// UPDATING FROM 1.x.x
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    public function upgrade(array $stepParams = [])
+    public function postInstall(array &$stateChanges)
     {
-        if($this->addOn->version_id < 2000070)
-        {
-            $this->schemaManager()->alterTable('xf_forum', function(Alter $table)
-            {
-                $table->dropColumns('questionthreads_forum');
-            });
-
-            $this->schemaManager()->alterTable('xf_thread', function(Alter $table)
-            {
-                $table->renameColumn('questionthreads_is_question', 'QT_question');
-                $table->renameColumn('questionthreads_is_solved', 'QT_solved');
-                $table->renameColumn('questionthreads_best_post', 'QT_best_answer_id');
-            });
-
-            $this->installStep1(true);
-            $this->installStep3();
-            $this->installStep4();
-
-            $this->uninstallStep1();
-            $this->db()->query("DELETE FROM `xf_user_alert` WHERE `action` LIKE 'questionthreads_%'");
-
-            $this->app->jobManager()->enqueueUnique('QT_upgrade', 'QuestionThreads:RebuildBestAnswerCounts');
-        }
+        $this->app()->jobManager()->enqueue(C::__('RemapBestAnswers'), [], true);
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /// UNINSTALLING
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //************************* UNINSTALL STEPS ***************************
 
-    // Removing possible running addon-related jobs
     public function uninstallStep1()
     {
-        $db = $this->app->db();
-        $query = "DELETE FROM `xf_job` WHERE `execute_class` LIKE 'QuestionThreads:%'";
-        $db->query($query);
+        $this->schemaManager()->dropTable('xf_' . C::_('best_answer'));
     }
 
-    // Removing all addon-related user alerts
     public function uninstallStep2()
     {
-        $db = $this->app->db();
-        $query = "DELETE FROM `xf_user_alert` WHERE `action` LIKE 'QT_%'";
-        $db->query($query);
+        $this->schemaManager()->alterTable('xf_thread', function (Alter $table)
+        {
+            $table->dropColumns([
+                C::_('is_question'),
+                C::_('is_solved'),
+                C::_('best_answer_id')
+            ]);
+        });
     }
 
     public function uninstallStep3()
     {
-        $this->schemaManager()->dropTable('xf_QT_best_answer');
+        $this->schemaManager()->alterTable('xf_user', function (Alter $table)
+        {
+            $table->dropColumns(C::_('best_answer_count'));
+        });
     }
 
     public function uninstallStep4()
     {
-        $this->schemaManager()->alterTable('xf_forum', function(Alter $table)
+        $this->schemaManager()->alterTable('xf_forum', function (Alter $table)
         {
-            $table->dropColumns('QT_type');
+            $table->dropColumns(C::_('type'));
+        });
+    }
+
+    //************************* UPGRADE STEPS ***************************
+
+    //************************* 2.0.2 -> 2.1.0 ***************************
+
+    public function _installStep1()
+    {
+        $this->schemaManager()->renameTable('xf_qt_best_answer', 'xf_' . C::_('best_answer'));
+
+    }
+
+    public function _installStep2()
+    {
+        $this->schemaManager()->alterTable('xf_thread', function (Alter $table)
+        {
+            $table->renameColumn('QT_question', C::_('is_question'));
+            $table->renameColumn('QT_solved', C::_('is_solved'));
+            $table->renameColumn('QT_best_answer_id', C::_('best_answer_id'));
+        });
+    }
+
+    public function _installStep3()
+    {
+        $this->schemaManager()->alterTable('xf_user', function (Alter $table)
+        {
+            $table->renameColumn('QT_best_answer_count', C::_('best_answer_count'));
+        });
+    }
+
+    public function _installStep4()
+    {
+        $this->schemaManager()->alterTable('xf_forum', function (Alter $table)
+        {
+            $table->renameColumn('QT_type', C::_('type'));
         });
 
-        $this->schemaManager()->alterTable('xf_thread', function(Alter $table)
-        {
-            $table->dropColumns(['QT_question', 'QT_solved', 'QT_best_answer_id']);
-        });
-
-        $this->schemaManager()->alterTable('xf_user', function(Alter $table)
-        {
-            $table->dropColumns('QT_best_answer_count');
-        });
+        $this->query("ALTER TABLE `xf_forum` MODIFY `CMTV_QT_type` ENUM('questions_only', 'threads_only', 'both', 'threads_questions')");
+        $this->query("UPDATE `xf_forum` SET `CMTV_QT_type` = 'both' WHERE `CMTV_QT_type` = 'threads_questions'");
+        $this->query("ALTER TABLE `xf_forum` MODIFY `CMTV_QT_type` ENUM('questions_only', 'threads_only', 'both')");
     }
 }

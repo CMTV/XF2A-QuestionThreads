@@ -1,0 +1,1 @@
+Font Awesome icon code. Example: <code>far fa-question-circle</code> or just <code>fa-plus</code> (<code>far</code> will be added automatically then). Only works when the type of best answer mark is "Icon".

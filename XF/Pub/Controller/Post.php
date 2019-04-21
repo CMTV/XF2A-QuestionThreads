@@ -1,112 +1,140 @@
 <?php
 /**
- * Question Threads
- *
- * You CAN use/change/share this code.
+ * Question Threads xF2 addon by CMTV
  * Enjoy!
- *
- * Written by CMTV
- * Date: 11.03.2018
- * Time: 15:36
  */
 
-namespace QuestionThreads\XF\Pub\Controller;
+namespace CMTV\QuestionThreads\XF\Pub\Controller;
 
-use QuestionThreads\Repository\BestAnswer;
+use CMTV\QuestionThreads\Entity\BestAnswer;
 use XF\Mvc\ParameterBag;
-use XF\Service\Thread\Editor;
+
+use CMTV\QuestionThreads\Constants as C;
 
 class Post extends XFCP_Post
 {
-    protected function setupFirstPostThreadEdit(\XF\Entity\Thread $thread, &$threadChanges)
-    {
-        /** @var Editor $threadEditor */
-        $threadEditor = parent::setupFirstPostThreadEdit($thread, $threadChanges);
-
-        /** @var \QuestionThreads\XF\Entity\Thread $thread */
-        $thread = $threadEditor->getThread();
-
-        if($thread->canEditType())
-        {
-            $thread->QT_question = $this->filter('QT_question', 'bool');
-
-            $threadChanges['QT_question'] = $thread->isChanged('QT_question');
-        }
-
-        return $threadEditor;
-    }
-
     public function actionSelectBestAnswer(ParameterBag $params)
     {
+        /** @var \CMTV\QuestionThreads\XF\Entity\Post $post */
         $post = $this->assertViewablePost($params->post_id);
-        /** @var \QuestionThreads\XF\Entity\Thread $thread */
+
+        /** @var \CMTV\QuestionThreads\XF\Entity\Thread $thread */
         $thread = $post->Thread;
 
-        if(!$thread->QT_question)
-        {
-            return $this->error(\XF::phrase('QT_this_thread_is_not_a_question'));
-        }
-
-        if($post->isFirstPost())
-        {
-            return $this->error(\XF::phrase('QT_first_post_cant_be_best_answer'));
-        }
-
-        if($thread->QT_best_answer_id)
-        {
-            return $this->error(\XF::phrase('QT_there_is_a_best_answer_already'));
-        }
-
-        if(!$thread->canSelectBestAnswer($post))
+        if (!$post->canSelectBestAnswer())
         {
             return $this->noPermission();
         }
 
-        /** @var BestAnswer $bestAnswerRepo */
-        $bestAnswerRepo = $this->repository('QuestionThreads:BestAnswer');
-        $bestAnswerRepo->selectBestAnswer($post);
+        if ($thread->isDeleted() || !$thread->isVisible() || $post->isDeleted() || !$post->isVisible())
+        {
+            return $this->error(\XF::phrase(C::_('thread_post_deleted_not_visible')));
+        }
 
-        // Alerting watchers
-        $data = [
+        if (!$thread->CMTV_QT_is_question)
+        {
+            return $this->error(\XF::phrase(C::_('only_questions_can_have_a_best_answer')));
+        }
+
+        if ($thread->first_post_id === $post->post_id)
+        {
+            return $this->error(\XF::phrase(C::_('first_question_post_cant_be_the_best_answer')));
+        }
+
+        if ($thread->BestAnswer)
+        {
+            return $this->error(\XF::phrase(C::_('this_question_already_has_the_best_answer')));
+        }
+
+        //
+        // Creating and saving new best answer entity
+        //
+
+        /** @var BestAnswer $bestAnswer */
+        $bestAnswer = $this->em()->create(C::__('BestAnswer'));
+
+        $bestAnswer->bulkSet([
+            'post_id' => $post->post_id,
+            'post_user_id' => $post->user_id,
             'thread_id' => $thread->thread_id,
-            'post_id' => $thread->QT_best_answer_id,
-            'sender' => \XF::visitor()->user_id,
-            'contentType' => 'post',
-            'contentId' => $post->post_id,
-            'action' => 'QT_best_answer_selected',
-            'email_template' => 'QT_best_answer_selected'
-        ];
+            'thread_user_id' => $thread->user_id
+        ]);
 
-        $this->app()->jobManager()->enqueue('QuestionThreads:AlertWatchers', $data);
+        if (!$bestAnswer->preSave())
+        {
+            return $this->error($bestAnswer->getErrors());
+        }
 
-        return $this->redirect($this->plugin('XF:Thread')->getPostLink($post), \XF::phrase('QT_best_answer_successfully_selected'));
+        $bestAnswer->save();
+
+        //
+        // Updating thread entity
+        //
+
+        $thread->bulkSet([
+            C::_('is_solved') => true,
+            C::_('best_answer_id') => $bestAnswer->best_answer_id
+        ]);
+
+        if (!$thread->preSave())
+        {
+            return $this->error($thread->getErrors());
+        }
+
+        $thread->save();
+
+        //
+        // Alerting watchers and creating news feed entry
+        //
+
+        $bestAnswerRepo = $this->getBestAnswerRepo();
+
+        $bestAnswerRepo->publishBestAnswerNewsFeed(\XF::visitor(), $post);
+        $bestAnswerRepo->alertWatchers(\XF::visitor(), $post);
+
+        return $this->redirect($this->buildLink('posts', $post));
     }
 
     public function actionUnselectBestAnswer(ParameterBag $params)
     {
+        /** @var \CMTV\QuestionThreads\XF\Entity\Post $post */
         $post = $this->assertViewablePost($params->post_id);
-        /** @var \QuestionThreads\XF\Entity\Thread $thread */
+
+        /** @var \CMTV\QuestionThreads\XF\Entity\Thread $thread */
         $thread = $post->Thread;
 
-        if(!$thread->QT_question)
-        {
-            return $this->error(\XF::phrase('QT_this_thread_is_not_a_question'));
-        }
-
-        if($post->post_id !== $thread->QT_best_answer_id)
-        {
-            return $this->error(\XF::phrase('QT_this_post_is_not_the_best_answer'));
-        }
-
-        if(!$thread->canUnselectBestAnswer())
+        if (!$post->canUnselectBestAnswer())
         {
             return $this->noPermission();
         }
 
-        /** @var BestAnswer $bestAnswerRepo */
-        $bestAnswerRepo = $this->repository('QuestionThreads:BestAnswer');
-        $bestAnswerRepo->unselectBestAnswer($post);
+        if (!($bestAnswer = $thread->BestAnswer))
+        {
+            return $this->error(\XF::phrase(C::_('cant_unselect_this_post_is_not_the_best_answer')));
+        }
 
-        return $this->redirect($this->plugin('XF:Thread')->getPostLink($post), \XF::phrase('QT_best_answer_successfully_unselected'));
+        $bestAnswer->delete();
+
+        $thread->CMTV_QT_best_answer_id = 0;
+
+        if (!$thread->preSave())
+        {
+            return $this->error($thread->getErrors());
+        }
+
+        $thread->save();
+
+        $bestAnswerRepo = $this->getBestAnswerRepo();
+        $bestAnswerRepo->unpublishBestAnswerNewsFeed($post);
+
+        return $this->redirect($this->buildLink('posts', $post));
+    }
+
+    /**
+     * @return \CMTV\QuestionThreads\Repository\BestAnswer
+     */
+    protected function getBestAnswerRepo()
+    {
+        return $this->repository(C::__('BestAnswer'));
     }
 }

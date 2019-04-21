@@ -1,83 +1,47 @@
 <?php
 /**
- * Question Threads
- *
- * You CAN use/change/share this code.
+ * Question Threads xF2 addon by CMTV
  * Enjoy!
- *
- * Written by CMTV
- * Date: 14.03.2018
- * Time: 19:15
  */
 
-namespace QuestionThreads\Job;
+namespace CMTV\QuestionThreads\Job;
 
-use QuestionThreads\Repository\Thread;
+use CMTV\QuestionThreads\XF\Entity\Thread;
 use XF\Job\AbstractRebuildJob;
+
+use CMTV\QuestionThreads\Constants as C;
 
 class ConvertForumThreads extends AbstractRebuildJob
 {
     protected $defaultData = [
         'forum_id' => null,
-        'to' => null
+        'type' => null
     ];
-
-    protected function setupData(array $data)
-    {
-        $this->defaultData['forum_id'] = $data['forum_id'];
-        $this->defaultData['to'] = $data['to'];
-
-        return parent::setupData($data);
-    }
 
     protected function getNextIds($start, $batch)
     {
         $db = $this->app->db();
 
-        return $db->fetchAllColumn($db->limit("
-                SELECT `thread_id`
-                FROM `xf_thread`
-                WHERE `thread_id` > ? AND `node_id` = ?
-                ORDER BY `thread_id`
-        ", $batch), [$start, $this->defaultData['forum_id']]);
+        $result = $db->fetchAllColumn(
+            $db->limit("SELECT `thread_id` FROM `xf_thread` WHERE `thread_id` > ? AND `node_id` = ? ORDER BY `thread_id`", $batch),
+            [$start, $this->data['forum_id']]
+        );
+
+        return $result;
     }
 
     protected function rebuildById($id)
     {
-        /** @var \XF\Entity\Thread $thread */
+        /** @var Thread $thread */
         $thread = $this->app->finder('XF:Thread')->whereId($id)->fetchOne();
-
-        /** @var Thread $threadRepo */
-        $threadRepo = $this->app->repository('QuestionThreads:Thread');
-
-        switch($this->defaultData['to'])
-        {
-            case 'threads':
-                $threadRepo->convertQuestionToThread($thread);
-                break;
-            case 'questions':
-                $threadRepo->convertThreadToQuestion($thread);
-                break;
-        }
+        $thread->CMTV_QT_is_question = $this->data['type'] == 'questions_only';
+        $thread->save();
     }
 
     protected function getStatusType()
     {
-        return \XF::phrase('threads');
-    }
+        $phrase = $this->data['type'] == 'threads_only' ? 'questions_to_threads' : 'threads_to_questions';
 
-    public function getStatusMessage()
-    {
-        if($this->defaultData['to'] === 'thread')
-        {
-            $actionPhrase = \XF::phrase('QT_converting_to_threads');
-        }
-        else
-        {
-            $actionPhrase = \XF::phrase('QT_converting_to_questions');
-        }
-
-        $typePhrase = $this->getStatusType();
-        return sprintf('%s... %s (%s)', $actionPhrase, $typePhrase, $this->data['start']);
+        return \XF::phrase(C::_($phrase));
     }
 }

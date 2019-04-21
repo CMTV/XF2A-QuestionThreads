@@ -1,0 +1,122 @@
+/*.CMTV_QT
+{
+	&.questionMarkContainer
+	{
+		display: inline-block;
+		
+		padding-right: @xf-paddingSmall;
+
+		.questionMark
+		{			
+			width: 10px;
+			height: 10px;
+			
+			border: @xf-borderSize solid;
+			
+			position: relative;
+			top: -1px;
+						
+			&--thread_view
+			{
+				top: -3px;
+			}
+						
+			&--solved
+			{
+				background-color: @xf-CMTV_QT_question_mark_solved_color;
+				border-color: darken(@xf-CMTV_QT_question_mark_solved_color, 12%);
+			}
+			
+			&--unsolved
+			{
+				background-color: @xf-CMTV_QT_question_mark_unsolved_color;
+				border-color: darken(@xf-CMTV_QT_question_mark_unsolved_color, 12%);
+			}
+						
+			&--circle
+			{
+				border-radius: 50%;
+			}
+			
+			&--square
+			{
+				border-radius: 0;
+			}
+			
+			&--custom
+			{
+				.xf-CMTV_QT_question_mark_custom_styling();
+			}
+		}
+	}
+}*/
+
+.CMTV_QT
+{
+	&.questionMarkContainer
+	{
+		display: inline-block;
+		
+		.questionMark
+		{
+			&--thread_list
+			{
+				margin-right: @xf-paddingSmall;
+			}
+			
+			&.questionMark--shape.questionMark
+			{
+				&--thread_title
+				{
+					position: relative;
+					top: -2px;
+				}
+				
+				.xf-CMTV_QT_question_mark_shape_styling();
+			}
+			
+			&.questionMark--icon.questionMark
+			{
+				font-size: 14px;
+				
+				&--solved
+				{
+					color: @xf-CMTV_QT_question_mark_solved_color;
+				}
+				
+				&--unsolved
+				{
+					color: @xf-CMTV_QT_question_mark_unsolved_color;
+				}
+				
+				&--thread_title
+				{
+					position: relative;
+					top: -2px;
+				}
+			}
+			
+			&.questionMark--image.questionMark
+			{
+				width: 18px;
+				height: 18px;
+				
+				vertical-align: baseline;
+				
+				&--thread_list, &--thread_title
+				{
+					position: relative;
+					top: 2px;
+				}
+				
+				&--thread_title
+				{
+					width: 20px;
+					height: 20px;
+				}
+			}
+			
+			.xf-CMTV_QT_question_mark_extra_styling();
+		}
+	}
+}

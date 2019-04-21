@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <style_properties>
-  <style_property property_name="QT_best_answer_custom_user_block" group_name="questionThreads" title="Custom best answer user block background" description="If enabled, allows you to set CSS background property for best answer user block (where avatar, username and user info are located)." property_type="value" value_type="boolean" value_group="bestAnswerMessage" display_order="620">
+  <style_property property_name="CMTV_QT_best_answer_bg_color" group_name="CMTV_QT" title="Best answer background color" property_type="value" value_type="color" value_group="bestAnswer" display_order="310">
+    <value>"mix(lighten(@xf-CMTV_QT_question_mark_solved_color, 5%), @xf-contentBg, 10%)"</value>
+  </style_property>
+  <style_property property_name="CMTV_QT_best_answer_button_extra_styling" group_name="CMTV_QT" title="Best answer button [Extra]" description="Extra styling for whole best answer button" property_type="css" display_order="1020" css_components="extra">
+    <value>{
+    "extra": "// Select/Unselect best answer button colors\n\n&amp;--select\n{\n\tcolor: darken(@xf-CMTV_QT_question_mark_solved_color, 8%);\n}\n\n&amp;--unselect\n{\n\tcolor: @xf-CMTV_QT_question_mark_unsolved_color;\n}"
+}</value>
+  </style_property>
+  <style_property property_name="CMTV_QT_best_answer_color_user_details" group_name="CMTV_QT" title="Change background color of user details post block" property_type="value" value_type="boolean" value_group="bestAnswer" display_order="320">
     <value>0</value>
   </style_property>
-  <style_property property_name="QT_best_answer_indicator_css" group_name="questionThreads" title="Best answer message indicator" description="Usually a small token attached to the message block indicating that this message is the best answer" property_type="css" display_order="140" css_components="text,background,border,border_radius,padding,extra">
+  <style_property property_name="CMTV_QT_best_answer_count_message_user_info" group_name="CMTV_QT" title="Show best answer count in message user info block" property_type="value" value_type="boolean" value_group="bestAnswerCount" display_order="410">
+    <value>1</value>
+  </style_property>
+  <style_property property_name="CMTV_QT_best_answer_count_user_stats" group_name="CMTV_QT" title="Show best answer count in user profile stats" property_type="value" value_type="boolean" value_group="bestAnswerCount" display_order="400">
+    <value>1</value>
+  </style_property>
+  <style_property property_name="CMTV_QT_best_answer_indicator_styling" group_name="CMTV_QT" title="Best answer indicator" property_type="css" display_order="1060" css_components="text,background,border,border_radius,border_width_simple,border_color_simple,border_radius_simple,padding,extra">
     <value>{
     "font-size": "90%",
     "color": "contrast(@xf-paletteAccent2)",
-    "background-color": "@xf-QT_best_answer_mark_color",
+    "background-color": "@xf-CMTV_QT_question_mark_solved_color",
     "border-radius": "@xf-borderRadiusSmall",
     "padding-top": "1px",
     "padding-right": "4px",
@@ -15,95 +29,87 @@
     "padding-left": "4px"
 }</value>
   </style_property>
-  <style_property property_name="QT_best_answer_link_css" group_name="questionThreads" title="Best answer link" property_type="css" display_order="130" css_components="background,border,border_radius,padding,extra">
+  <style_property property_name="CMTV_QT_best_answer_mark_extra_styling" group_name="CMTV_QT" title="Best answer mark [Extra]" description="Extra styling for question mark of any type" property_type="css" display_order="1030" css_components="extra">
     <value>{
-    "padding-right": "3px"
+    "extra": "// Select/Unselect icon best answer mark colors\n\n&amp;.bestAnswerMark--icon\n{\n\t&amp;.bestAnswerMark\n\t{\n\t\t&amp;--select\n\t\t{\n\t\t\tcolor: darken(@xf-CMTV_QT_question_mark_solved_color, 8%);\n\t\t}\n\t\t\n\t\t&amp;--unselect\n\t\t{\n\t\t\tcolor: @xf-CMTV_QT_question_mark_unsolved_color;\n\t\t}\n\t}\n}"
 }</value>
   </style_property>
-  <style_property property_name="QT_best_answer_mark_color" group_name="questionThreads" title="Best answer mark color" description="This property defines the color of best answer mark icon." property_type="value" value_type="color" value_group="bestAnswerMark" display_order="510">
-    <value>"#00b500"</value>
+  <style_property property_name="CMTV_QT_best_answer_mark_shape_styling" group_name="CMTV_QT" title="Best answer mark [Shape]" description="The styling of best answer mark which type is set to &quot;Shape&quot;" property_type="css" display_order="1040" css_components="background,border,border_radius,padding,extra">
+    <value>{
+    "border-radius": "50%",
+    "extra": "width: 10px;\nheight: 10px;\n\n&amp;--select\n{\n\tbackground: @xf-CMTV_QT_question_mark_solved_color;\n}\n\n&amp;--unselect\n{\n\tbackground: @xf-CMTV_QT_question_mark_unsolved_color;\n}\n\n&amp;--thread_list, &amp;--thread_title\n{\n\tposition: relative;\n\ttop: -1px;\n}"
+}</value>
   </style_property>
-  <style_property property_name="QT_best_answer_mark_general_css" group_name="questionThreads" title="Best answer mark" description="Type CSS code that will be included to best answer mark regardless its type" property_type="css" display_order="100" css_components="background,border,border_radius,padding,extra">
-    <value>[]</value>
-  </style_property>
-  <style_property property_name="QT_best_answer_mark_icon" group_name="questionThreads" title="Best answer mark icon" description="Put FontAwesome icon code in this field. &lt;a href=&quot;https://fontawesome.com/v4.7.0/icons/&quot; target=&quot;_blank&quot;&gt;List of available icons&lt;/a&gt;." property_type="value" value_type="string" value_group="bestAnswerMark" display_order="530">
-    <value>"fa-diamond"</value>
-  </style_property>
-  <style_property property_name="QT_best_answer_mark_icon_css" group_name="questionThreads" title="Best answer mark [Icon]" property_type="css" display_order="110" css_components="extra">
-    <value>[]</value>
-  </style_property>
-  <style_property property_name="QT_best_answer_mark_image" group_name="questionThreads" title="Best answer mark image" property_type="value" value_type="string" value_group="bestAnswerMark" display_order="540">
-    <value>""</value>
-  </style_property>
-  <style_property property_name="QT_best_answer_mark_image_css" group_name="questionThreads" title="Best answer mark [Image]" property_type="css" display_order="120" css_components="extra">
-    <value>[]</value>
-  </style_property>
-  <style_property property_name="QT_best_answer_mark_type" group_name="questionThreads" title="Best answer mark type" property_type="value" value_type="radio" value_group="bestAnswerMark" display_order="500">
-    <value_parameters>icon={{ phrase('QT_icon') }}
+  <style_property property_name="CMTV_QT_best_answer_mark_type" group_name="CMTV_QT" title="Best answer mark type" property_type="value" value_type="radio" value_group="bestAnswerMark" display_order="200">
+    <value_parameters>shape={{ phrase('CMTV_QT_shape') }}
+icon={{ phrase('icon') }}
 image={{ phrase('image') }}</value_parameters>
     <value>"icon"</value>
   </style_property>
-  <style_property property_name="QT_best_answer_message_background_color" group_name="questionThreads" title="Best answer message background color" property_type="value" value_type="color" value_group="bestAnswerMessage" display_order="610">
-    <value>"#DEFFE2"</value>
-  </style_property>
-  <style_property property_name="QT_best_answer_message_css" group_name="questionThreads" title="Best answer message" property_type="css" display_order="150" css_components="text,background,border,border_radius,padding,extra">
+  <style_property property_name="CMTV_QT_best_answer_post_styling" group_name="CMTV_QT" title="Best answer post styling" property_type="css" display_order="1050" css_components="text,background,border,border_radius,border_width_simple,border_color_simple,border_radius_simple,padding,extra">
     <value>[]</value>
   </style_property>
-  <style_property property_name="QT_best_answer_message_type" group_name="questionThreads" title="Best answer message" description="Choose how best answer will differ from any other messages in thread." property_type="value" value_type="radio" value_group="bestAnswerMessage" display_order="600">
-    <value_parameters>messageBackground={{ phrase('QT_message_background') }}
-indicator={{ phrase('QT_indicator') }}</value_parameters>
-    <value>"messageBackground"</value>
+  <style_property property_name="CMTV_QT_best_answer_type" group_name="CMTV_QT" title="Best answer styling type" property_type="value" value_type="radio" value_group="bestAnswer" display_order="300">
+    <value_parameters>background={{ phrase('CMTV_QT_post_background_color') }}
+indicator={{ phrase('CMTV_QT_indicator') }}</value_parameters>
+    <value>"background"</value>
   </style_property>
-  <style_property property_name="QT_best_answer_user_block_background_color" group_name="questionThreads" title="Best answer user block background color" property_type="value" value_type="color" depends_on="QT_best_answer_custom_user_block" value_group="bestAnswerMessage" display_order="630">
-    <value>"#D1FFD6"</value>
+  <style_property property_name="CMTV_QT_best_answer_user_bg_color" group_name="CMTV_QT" title="Best answer user details background color" property_type="value" value_type="color" depends_on="CMTV_QT_best_answer_color_user_details" value_group="bestAnswer" display_order="330">
+    <value>"mix(lighten(@xf-CMTV_QT_question_mark_solved_color, 5%), @xf-contentAltBg, 15%)"</value>
   </style_property>
-  <style_property property_name="QT_icon_solved" group_name="questionThreads" title="Question mark solved icon" description="Put FontAwesome icon code in this field. &lt;a href=&quot;https://fontawesome.com/v4.7.0/icons/&quot; target=&quot;_blank&quot;&gt;List of available icons&lt;/a&gt;." property_type="value" value_type="string" value_group="questionMarkIcon" display_order="200">
-    <value>"fa-question-circle-o"</value>
-  </style_property>
-  <style_property property_name="QT_icon_unsolved" group_name="questionThreads" title="Question mark unsolved icon" description="Put FontAwesome icon code in this field. &lt;a href=&quot;https://fontawesome.com/v4.7.0/icons/&quot; target=&quot;_blank&quot;&gt;List of available icons&lt;/a&gt;." property_type="value" value_type="string" value_group="questionMarkIcon" display_order="210">
-    <value>"fa-question-circle-o"</value>
-  </style_property>
-  <style_property property_name="QT_image_solved" group_name="questionThreads" title="Question mark solved image" property_type="value" value_type="string" value_group="questionMarkImage" display_order="300">
-    <value>""</value>
-  </style_property>
-  <style_property property_name="QT_image_unsolved" group_name="questionThreads" title="Question mark unsolved image" property_type="value" value_type="string" value_group="questionMarkImage" display_order="310">
-    <value>""</value>
-  </style_property>
-  <style_property property_name="QT_question_mark_general_css" group_name="questionThreads" title="Question mark" description="Type CSS code that will be included to question mark regardless its type" property_type="css" display_order="10" css_components="background,border,border_radius,padding,extra">
+  <style_property property_name="CMTV_QT_question_mark_extra_styling" group_name="CMTV_QT" title="Question mark [Extra]" description="Extra styling for question mark of any type" property_type="css" display_order="1000" css_components="extra">
     <value>[]</value>
   </style_property>
-  <style_property property_name="QT_question_mark_icon_css" group_name="questionThreads" title="Question mark [Icon]" property_type="css" display_order="30" css_components="extra">
-    <value>[]</value>
-  </style_property>
-  <style_property property_name="QT_question_mark_image_css" group_name="questionThreads" title="Question mark [Image]" property_type="css" display_order="40" css_components="extra">
+  <style_property property_name="CMTV_QT_question_mark_shape_styling" group_name="CMTV_QT" title="Question mark [Shape]" description="Customize the look and feel of custom question mark" property_type="css" display_order="1010" css_components="background,border,border_radius,border_width_simple,border_color_simple,border_radius_simple,padding,extra">
     <value>{
-    "extra": "/* Use \"image-rendering: pixelated\" for pixelart images */"
+    "border-width": "@xf-borderSize",
+    "border-radius": "50%",
+    "extra": "width: 10px;\nheight: 10px;\n\n&amp;--solved\n{\n\tbackground-color: @xf-CMTV_QT_question_mark_solved_color;\n\tborder-color: darken(@xf-CMTV_QT_question_mark_solved_color, 12%);\n}\n\n&amp;--unsolved\n{\n\tbackground-color: @xf-CMTV_QT_question_mark_unsolved_color;\n\tborder-color: darken(@xf-CMTV_QT_question_mark_unsolved_color, 12%);\n}"
 }</value>
   </style_property>
-  <style_property property_name="QT_question_mark_shape_css" group_name="questionThreads" title="Question mark [Shape]" property_type="css" display_order="20" css_components="border,border_radius,border_width_simple,extra">
-    <value>{
-    "border-width": "1px",
-    "border-radius": "50%"
-}</value>
+  <style_property property_name="CMTV_QT_question_mark_solved_color" group_name="CMTV_QT" title="Question mark solved color" property_type="value" value_type="color" value_group="questionMark" display_order="20">
+    <value>"#00C900"</value>
   </style_property>
-  <style_property property_name="QT_question_mark_type" group_name="questionThreads" title="Question mark type" property_type="value" value_type="radio" value_group="questionMarkType" display_order="10">
-    <value_parameters>shape={{ phrase('QT_shape') }}
-icon={{ phrase('QT_icon') }}
+  <style_property property_name="CMTV_QT_question_mark_solved_icon" group_name="CMTV_QT" title="Question mark solved FA icon" description="Full Font Awesome icon code. Example: &lt;code&gt;far fa-question-circle&lt;/code&gt;. Only works when the type of question mark is &quot;Icon&quot;." property_type="value" value_type="string" value_group="questionMark" display_order="40">
+    <value>"fa-question"</value>
+  </style_property>
+  <style_property property_name="CMTV_QT_question_mark_solved_img" group_name="CMTV_QT" title="Question mark solved image" description="The path to the solved question mark image. Only works when the type of question mark is &quot;Image&quot;." property_type="value" value_type="string" value_group="questionMark" display_order="60">
+    <value>"styles/default/xenforo/reactions/emojione/haha.png"</value>
+  </style_property>
+  <style_property property_name="CMTV_QT_question_mark_type" group_name="CMTV_QT" title="Question mark type" property_type="value" value_type="radio" value_group="questionMark" display_order="10">
+    <value_parameters>shape={{ phrase('CMTV_QT_shape') }}
+icon={{ phrase('icon') }}
 image={{ phrase('image') }}</value_parameters>
     <value>"shape"</value>
   </style_property>
-  <style_property property_name="QT_shape_solved_color" group_name="questionThreads" title="Question mark solved color" description="This property defines the color of solved question mark shape and icon as well." property_type="value" value_type="color" depends_on="QT_question_mark_type" value_group="questionMarkShape" display_order="100">
-    <value>"#00CD18"</value>
+  <style_property property_name="CMTV_QT_question_mark_unsolved_color" group_name="CMTV_QT" title="Question mark unsolved color" property_type="value" value_type="color" value_group="questionMark" display_order="30">
+    <value>"#DC3838"</value>
   </style_property>
-  <style_property property_name="QT_shape_unsolved_color" group_name="questionThreads" title="Question mark unsolved color" description="This property defines the color of unsolved question mark shape and icon as well." property_type="value" value_type="color" value_group="questionMarkShape" display_order="110">
-    <value>"rgb(255, 0, 0)"</value>
+  <style_property property_name="CMTV_QT_question_mark_unsolved_icon" group_name="CMTV_QT" title="Question mark unsolved FA icon" description="Full Font Awesome icon code. Example: &lt;code&gt;far fa-question-circle&lt;/code&gt;. Only works when the type of question mark is &quot;Icon&quot;." property_type="value" value_type="string" value_group="questionMark" display_order="50">
+    <value>"@xf-CMTV_QT_question_mark_solved_icon"</value>
   </style_property>
-  <style_property property_name="QT_total_best_answers_positions" group_name="questionThreads" title="Show total best answers" description="Choose where the total best answers number will be displaying" property_type="value" value_type="template" display_order="0">
-    <value_parameters>template=QT_style_property_template_totalBestAnswersPositions
-type=array</value_parameters>
-    <value>{
-    "member_profile_page": "1",
-    "member_account_menu": "1"
-}</value>
+  <style_property property_name="CMTV_QT_question_mark_unsolved_img" group_name="CMTV_QT" title="Question mark unsolved image" description="The path to the unsolved question mark image. Only works when the type of question mark is &quot;Image&quot;." property_type="value" value_type="string" value_group="questionMark" display_order="70">
+    <value>"styles/default/xenforo/reactions/emojione/wow.png"</value>
+  </style_property>
+  <style_property property_name="CMTV_QT_questions_only_icon" group_name="CMTV_QT" title="Custom node icon for &quot;Questions only&quot; forums" property_type="value" value_type="boolean" value_group="questionsOnlyForums" display_order="500">
+    <value>1</value>
+  </style_property>
+  <style_property property_name="CMTV_QT_select_best_answer_mark_icon" group_name="CMTV_QT" title="Select best answer mark FA icon" description="Font Awesome icon code. Example: &lt;code&gt;far fa-question-circle&lt;/code&gt; or just &lt;code&gt;fa-plus&lt;/code&gt; (&lt;code&gt;far&lt;/code&gt; will be added automatically then). Only works when the type of best answer mark is &quot;Icon&quot;." property_type="value" value_type="string" value_group="bestAnswerMark" display_order="210">
+    <value>"fa-gem"</value>
+  </style_property>
+  <style_property property_name="CMTV_QT_select_best_answer_mark_img" group_name="CMTV_QT" title="Select best answer mark image" description="The path to the best mark image. Only works when the type of best mark is &quot;Image&quot;." property_type="value" value_type="string" value_group="bestAnswerMark" display_order="230">
+    <value>"styles/default/xenforo/reactions/emojione/like.png"</value>
+  </style_property>
+  <style_property property_name="CMTV_QT_solve_button_color" group_name="CMTV_QT" title="Solve button color" property_type="value" value_type="color" value_group="questionStatusButtons" display_order="100">
+    <value>"@xf-CMTV_QT_question_mark_solved_color"</value>
+  </style_property>
+  <style_property property_name="CMTV_QT_unselect_best_answer_mark_icon" group_name="CMTV_QT" title="Unselect best answer mark FA icon" description="Font Awesome icon code. Example: &lt;code&gt;far fa-question-circle&lt;/code&gt; or just &lt;code&gt;fa-plus&lt;/code&gt; (&lt;code&gt;far&lt;/code&gt; will be added automatically then). Only works when the type of best answer mark is &quot;Icon&quot;." property_type="value" value_type="string" value_group="bestAnswerMark" display_order="220">
+    <value>"fa-times"</value>
+  </style_property>
+  <style_property property_name="CMTV_QT_unselect_best_answer_mark_img" group_name="CMTV_QT" title="Unselect best answer mark image" description="The path to the best mark image. Only works when the type of best mark is &quot;Image&quot;." property_type="value" value_type="string" value_group="bestAnswerMark" display_order="240">
+    <value>"styles/default/xenforo/reactions/emojione/dislike.png"</value>
+  </style_property>
+  <style_property property_name="CMTV_QT_unsolve_button_color" group_name="CMTV_QT" title="Unsolve button color" property_type="value" value_type="color" value_group="questionStatusButtons" display_order="110">
+    <value>"@xf-CMTV_QT_question_mark_unsolved_color"</value>
   </style_property>
 </style_properties>

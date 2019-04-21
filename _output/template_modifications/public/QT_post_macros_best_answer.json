@@ -1,9 +1,0 @@
-{
-    "template": "post_macros",
-    "description": "Adding select/unselect best answer buttons",
-    "execution_order": 10,
-    "enabled": true,
-    "action": "str_replace",
-    "find": "<xf:if is=\"$post.canLike()\">",
-    "replace": "<xf:include template=\"QT_post_macros_best_answer\" />\n\n$0"
-}

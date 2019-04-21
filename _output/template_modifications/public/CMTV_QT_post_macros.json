@@ -1,0 +1,9 @@
+{
+    "template": "post_macros",
+    "description": "Adding best answer indicator",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<ul class=\"message-attribution-opposite message-attribution-opposite--list\">",
+    "replace": "$0\n\n<xf:include template=\"CMTV_QT_best_answer_indicator\" />"
+}

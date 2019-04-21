@@ -1,0 +1,13 @@
+<xf:if is="$post.canDisplaySelectBestAnswer() && $post.canSelectBestAnswer()">
+	<a href="{{ link('posts/selectBestAnswer', $post) }}" class="CMTV_QT bestAnswerButton bestAnswerButton--select">
+		<xf:macro name="mark" arg-state="select" arg-context="best_answer_button" template="CMTV_QT_best_answer_mark_macros" />
+		{{ phrase('CMTV_QT_best_answer') }}
+	</a>
+</xf:if>
+
+<xf:if is="$post.canDisplayUnselectBestAnswer() && $post.canUnselectBestAnswer()">
+	<a href="{{ link('posts/unselectBestAnswer', $post) }}" class="CMTV_QT bestAnswerButton bestAnswerButton--unselect">
+		<xf:macro name="mark" arg-state="unselect" arg-context="best_answer_button" template="CMTV_QT_best_answer_mark_macros" />
+		{{ phrase('CMTV_QT_not_best_answer') }}
+	</a>
+</xf:if>

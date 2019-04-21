@@ -1,0 +1,9 @@
+{
+    "template": "news_feed_item_thread_insert",
+    "description": "Changing default insert thread message when the type is question",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "\t{{ phrase('news_feed_thread_insert', {\n\t\t'username': username_link($user, false, {'defaultname': $newsFeed.username}),\n\t\t'threadTitle': '<a href=\"' . link('threads', $content) . '\">' . prefix('thread', $content) . $content.title . '</a>',\n\t\t'forumTitle': '<a href=\"' . link('forums', $content.Forum) . '\">' . $content.Forum.title . '</a>'\n\t}) }}",
+    "replace": "<xf:if is=\"$content.CMTV_QT_is_question\">\n\t{{ phrase('CMTV_QT_news_feed_question_insert', {\n\t\t'username': username_link($user, false, {'defaultname': $newsFeed.username}),\n\t\t'threadTitle': '<a href=\"' . link('threads', $content) . '\">' . prefix('thread', $content) . $content.title . '</a>',\n\t\t'forumTitle': '<a href=\"' . link('forums', $content.Forum) . '\">' . $content.Forum.title . '</a>'\n\t}) }}\n<xf:else />\n\t$0\n</xf:if>"
+}

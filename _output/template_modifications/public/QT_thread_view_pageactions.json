@@ -1,9 +1,0 @@
-{
-    "template": "thread_view",
-    "description": "Adding \"Solved/Unsolved\" page actions to question threads",
-    "execution_order": 10,
-    "enabled": true,
-    "action": "str_replace",
-    "find": "<xf:description meta=\"false\">",
-    "replace": "<xf:include template=\"QT_thread_view_pageactions\" />\n\n$0"
-}

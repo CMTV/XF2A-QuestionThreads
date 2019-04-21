@@ -1,0 +1,14 @@
+<xf:macro name="thread_marks" arg-context="!" arg-thread="!">
+	<xf:if is="$thread.CMTV_QT_is_question">
+		<xf:macro name="mark" template="CMTV_QT_question_mark_macros" 
+				  arg-context="{$context}" arg-state="{{ $thread.CMTV_QT_is_solved ? 'solved' : 'unsolved' }}" />
+		
+		<xf:set var="$bestAnswer" value="{$thread.BestAnswer}" />
+		
+		<xf:if is="$thread.CMTV_QT_is_solved && $bestAnswer">
+			<xf:macro name="mark_link" template="CMTV_QT_best_answer_mark_macros" 
+					  arg-context="{$context}" arg-state="select"
+					  arg-link="{{ link('posts', $bestAnswer.BestAnswerPost) }}" />
+		</xf:if>
+	</xf:if>
+</xf:macro>

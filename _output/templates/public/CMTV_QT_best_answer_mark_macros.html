@@ -1,0 +1,26 @@
+<xf:macro name="mark_link" arg-link="!" arg-context="!" arg-state="!">
+	<a href="{$link}" title="{{ phrase('CMTV_QT_best_answer') }}" class="CMTV_QT bestAnswerMarkContainer">
+		<xf:macro name="mark_inner" arg-context="{$context}" arg-state="{$state}" />
+	</a>
+</xf:macro>
+
+<xf:macro name="mark" arg-context="!" arg-state="!">
+	<div class="CMTV_QT bestAnswerMarkContainer">
+		<xf:macro name="mark_inner" arg-context="{$context}" arg-state="{$state}" />
+	</div>
+</xf:macro>
+
+<xf:macro name="mark_inner" arg-context="!" arg-state="!">
+	<xf:css src="CMTV_QT_best_answer_mark.less" />
+	
+	<xf:set var="$type" value="{{ property('CMTV_QT_best_answer_mark_type') }}" />
+	<xf:set var="$classes" value="CMTV_QT bestAnswerMark bestAnswerMark--{$context} bestAnswerMark--{$state} bestAnswerMark--{$type}" />
+	
+	<xf:if is="$type == 'icon'">
+		<xf:fa class="{$classes}" icon="{{ ($state == 'select') ? property('CMTV_QT_select_best_answer_mark_icon') : property('CMTV_QT_unselect_best_answer_mark_icon') }}"></xf:fa>
+	<xf:elseif is="$type == 'image'" />
+		<img class="{$classes}" src="{{ ($state == 'select') ? property('CMTV_QT_select_best_answer_mark_img') : property('CMTV_QT_unselect_best_answer_mark_img') }}" />
+	<xf:else />
+		<div class="{$classes}"></div>
+	</xf:if>
+</xf:macro>

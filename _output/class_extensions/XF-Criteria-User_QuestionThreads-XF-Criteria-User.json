@@ -1,6 +1,0 @@
-{
-    "from_class": "XF\\Criteria\\User",
-    "to_class": "QuestionThreads\\XF\\Criteria\\User",
-    "execute_order": 10,
-    "active": true
-}

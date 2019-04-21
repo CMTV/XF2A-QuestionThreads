@@ -1,0 +1,1 @@
+Show best answer count in message user info block

@@ -1,1 +1,0 @@
-<p>{sender} marked question you are watching solved at {board}.</p>

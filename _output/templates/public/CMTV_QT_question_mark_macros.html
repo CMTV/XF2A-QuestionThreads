@@ -1,0 +1,20 @@
+<xf:macro name="mark" arg-context="!" arg-state="!">
+	<div class="CMTV_QT questionMarkContainer" title="{{ ($state == 'solved') ? phrase('CMTV_QT_solved') : phrase('CMTV_QT_unsolved') }}">
+		<xf:macro name="mark_inner" arg-context="{$context}" arg-state="{$state}" />
+	</div>
+</xf:macro>
+
+<xf:macro name="mark_inner" arg-context="!" arg-state="!">
+	<xf:css src="CMTV_QT_question_mark.less" />
+	
+	<xf:set var="$type" value="{{ property('CMTV_QT_question_mark_type') }}" />
+	<xf:set var="$classes" value="CMTV_QT questionMark questionMark--{$context} questionMark--{$state} questionMark--{$type}" />
+	
+	<xf:if is="$type == 'image'">
+		<img class="{$classes}" src="{{ ($state == 'solved') ? property('CMTV_QT_question_mark_solved_img') : property('CMTV_QT_question_mark_unsolved_img') }}" />
+	<xf:elseif is="$type == 'icon'" />
+		<xf:fa class="{$classes}" icon="{{ ($state == 'solved') ? property('CMTV_QT_question_mark_solved_icon') : property('CMTV_QT_question_mark_unsolved_icon') }}"></xf:fa>
+	<xf:else />
+		<div class="{$classes}"></div>
+	</xf:if>
+</xf:macro>

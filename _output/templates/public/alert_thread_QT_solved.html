@@ -1,5 +1,0 @@
-<xf:macro template="QT_macros" name="question_mark" arg-thread="{$content}" arg-forceState="QT_solved" />
-{{ phrase('QT_x_marked_question_y_solved', {
-	'name': username_link($user, false, {'defaultname': $alert.username}),
-	'title': '<a href="' . link('threads', $content) . '" class="fauxBlockLink-blockLink">' . prefix('thread', $thread) . $content.title . '</a>'})
-}}

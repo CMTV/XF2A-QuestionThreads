@@ -1,0 +1,1 @@
+<p>{sender} selected the best answer of question you are watching at {board}.</p>

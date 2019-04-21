@@ -1,0 +1,13 @@
+{
+    "group_name": "CMTV_QT",
+    "title": "Question mark solved FA icon",
+    "description": "Full Font Awesome icon code. Example: <code>far fa-question-circle</code>. Only works when the type of question mark is \"Icon\".",
+    "property_type": "value",
+    "css_components": [],
+    "value_type": "string",
+    "value_parameters": "",
+    "depends_on": "",
+    "value_group": "questionMark",
+    "property_value": "fa-question",
+    "display_order": 40
+}

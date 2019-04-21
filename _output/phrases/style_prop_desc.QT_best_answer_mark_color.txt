@@ -1,1 +1,0 @@
-This property defines the color of best answer mark icon.

@@ -1,9 +1,0 @@
-{
-    "template": "post_edit",
-    "description": "Adding thread type switcher",
-    "execution_order": 10,
-    "enabled": true,
-    "action": "preg_replace",
-    "find": "/<xf:prefixinputrow[\\s\\S]+?\\/>/",
-    "replace": "$0\n\n<xf:include template=\"QT_post_edit_thread_type_switcher\" />"
-}

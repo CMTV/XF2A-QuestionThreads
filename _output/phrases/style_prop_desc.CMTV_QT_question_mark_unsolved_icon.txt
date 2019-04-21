@@ -1,0 +1,1 @@
+Full Font Awesome icon code. Example: <code>far fa-question-circle</code>. Only works when the type of question mark is "Icon".

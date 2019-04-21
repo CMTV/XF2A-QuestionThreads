@@ -1,0 +1,9 @@
+{
+    "template": "node_list_forum",
+    "description": "Custom node icon for \"Questions only\" forums",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "node--forum",
+    "replace": "$0 {{ ($node.Data.CMTV_QT_type == 'questions_only' && property('CMTV_QT_questions_only_icon')) ? 'node--questionsOnly ' : '' }}"
+}

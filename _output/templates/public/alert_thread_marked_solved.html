@@ -1,0 +1,6 @@
+<xf:macro name="mark" template="CMTV_QT_question_mark_macros" arg-context="alert" arg-state="solved" />
+
+{{ phrase('CMTV_QT_x_marked_question_y_as_solved', {
+	'name': username_link($user, false, {'defaultname': $alert.username}),
+	'title': '<a href="' . link('threads', $content) . '" class="fauxBlockLink-blockLink">' . prefix('thread', $content) . $content.title . '</a>'
+}) }}

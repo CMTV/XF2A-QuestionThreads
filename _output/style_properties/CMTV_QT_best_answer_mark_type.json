@@ -1,0 +1,13 @@
+{
+    "group_name": "CMTV_QT",
+    "title": "Best answer mark type",
+    "description": "",
+    "property_type": "value",
+    "css_components": [],
+    "value_type": "radio",
+    "value_parameters": "shape={{ phrase('CMTV_QT_shape') }}\nicon={{ phrase('icon') }}\nimage={{ phrase('image') }}",
+    "depends_on": "",
+    "value_group": "bestAnswerMark",
+    "property_value": "icon",
+    "display_order": 200
+}

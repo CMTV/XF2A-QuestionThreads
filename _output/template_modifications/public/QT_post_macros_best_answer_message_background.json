@@ -1,9 +1,0 @@
-{
-    "template": "post_macros",
-    "description": "Adding classes to best answer post in thread",
-    "execution_order": 10,
-    "enabled": true,
-    "action": "preg_replace",
-    "find": "/(<article.+class=\"message.+)(\")/",
-    "replace": "<xf:if is=\"$thread.QT_question && $thread.QT_best_answer_id === $post.post_id\">\n\t$1 <xf:trim><xf:macro template=\"QT_macros\" name=\"best_answer_classes\" /></xf:trim>$2\n\t<xf:else />\n\t$0\n</xf:if>"
-}

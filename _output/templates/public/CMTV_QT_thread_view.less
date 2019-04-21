@@ -1,0 +1,62 @@
+.CMTV_QT
+{
+	// Solve and Unsolve page action buttons
+	
+	&.button
+	{	
+		&--solve
+		{
+			background: @xf-CMTV_QT_solve_button_color;
+			.m-buttonBlockColorVariationSimple(@xf-CMTV_QT_solve_button_color);
+		}
+		
+		&--unsolve
+		{
+			background: @xf-CMTV_QT_unsolve_button_color;
+			.m-buttonBlockColorVariationSimple(@xf-CMTV_QT_unsolve_button_color);
+		}
+	}
+	
+	// Best answer
+
+	&.bestAnswer:not(.is-mod-selected).bestAnswer
+	{
+
+		&--background
+		{
+			.message-cell--main
+			{
+				background: @xf-CMTV_QT_best_answer_bg_color;
+			}
+			
+			.message-userArrow::after
+			{
+				border-right-color: @xf-CMTV_QT_best_answer_bg_color;
+			}
+		}
+		
+		&--colorUser
+		{
+			.message-cell--user
+			{
+				background: @xf-CMTV_QT_best_answer_user_bg_color;
+			}
+		}
+		
+		.xf-CMTV_QT_best_answer_post_styling();
+	}
+	
+	// Best answer button
+	
+	&.bestAnswerButton
+	{
+		.xf-CMTV_QT_best_answer_button_extra_styling();
+	}
+	
+	// Best answer indicator
+	
+	&.bestAnswerIndicator
+	{
+		.xf-CMTV_QT_best_answer_indicator_styling();
+	}
+}

@@ -1,0 +1,12 @@
+<!--[CMTV\QuestionThreads:stat_pairs:above_best_answers]-->
+<xf:if is="property('CMTV_QT_best_answer_count_user_stats')">
+	<dl class="pairs pairs--rows pairs--rows--centered fauxBlockLink">
+		<dt>{{ phrase('CMTV_QT_best_answers') }}</dt>
+		<dd>
+			<a href="{{ link('members/best-answers', $user) }}" class="fauxBlockLink-linkRow u-concealed">
+				{$user.CMTV_QT_best_answer_count|number}
+			</a>
+		</dd>
+	</dl>
+</xf:if>
+<!--[CMTV\QuestionThreads:stat_pairs:above_best_answers]-->
